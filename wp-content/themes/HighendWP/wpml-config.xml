@@ -1,0 +1,38 @@
+<wpml-config>
+	<admin-texts>
+		<key name="highend_options">
+			<key name="hb_ios_bookmark_title"/>
+			<key name="hb_top_header_info_text"/>
+			<key name="hb_top_header_map_text"/>
+			<key name="hb_top_header_link_txt"/>
+			<key name="hb_header_right_text"/>
+			<key name="hb_pre_footer_text"/>
+			<key name="hb_pre_footer_button_text"/>
+			<key name="hb_copyright_line_text"/>
+			<key name="hb_quick_contact_box_title"/>
+			<key name="hb_quick_contact_box_text"/>
+			<key name="hb_quick_contact_box_button_title"/>
+			<key name="hb_location_1_info"/>
+			<key name="hb_location_2_info"/>
+			<key name="hb_location_3_info"/>
+			<key name="hb_location_4_info"/>
+			<key name="hb_location_5_info"/>
+		</key>
+	</admin-texts>
+	<custom-types>
+		<custom-type translate="1">team</custom-type>
+		<custom-type translate="1">clients</custom-type>
+		<custom-type translate="1">faq</custom-type>
+		<custom-type translate="1">pricing_table</custom-type>
+		<custom-type translate="1">hb_testimonials</custom-type>
+		<custom-type translate="1">gallery</custom-type>
+		<custom-type translate="1">portfolio</custom-type>
+	</custom-types>
+	<taxonomies>
+		<taxonomy translate="1">faq_categories</taxonomy>
+		<taxonomy translate="1">client_categories</taxonomy>
+		<taxonomy translate="1">team_categories</taxonomy>
+		<taxonomy translate="1">portfolio_categories</taxonomy>
+		<taxonomy translate="1">gallery_categories</taxonomy>
+	</taxonomies>
+</wpml-config>

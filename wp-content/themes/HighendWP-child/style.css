@@ -1,0 +1,111 @@
+/*
+ Theme Name:   Highend Child
+ Theme URI:    http://preview.hb-themes.com/?theme=Highend
+ Description:  A Flexible, Powerful & Beautiful WordPress Theme by HB-Themes. Mobile ready and optimized for best performance. With the powerful engine and user friendly interface it will allow you to build outstanding websites quick and easy... It comes with Premium Plugins integrated into the theme.
+ Author:       HB-Themes
+ Author URI:   http://www.hb-themes.com
+ Template:     HighendWP
+ Version:      1.0.0
+ Tags:		   Responsive, Page-Builder, Drag&Drop, Clean, Modern, Corporate, Multi-Purpose, Multi-Color
+ Text Domain:  hbthemes
+*/
+
+@import url("../HighendWP/style.css");
+
+/* =Theme customization starts here
+-------------------------------------------------------------- */
+
+/*#main-nav { 
+    background-image: url(images/ManhattanKansas_r1.jpg); 
+    background-repeat: no-repeat;
+    background-position: center center;
+}*/
+#logo img {
+	max-height: none;
+	height: 125px;
+}
+
+@media screen and (max-width: 320px) {
+	#hb-header {
+		display: none !important;
+	}
+}
+
+.credits {
+	font-size: smaller !important;
+	font-weight: 900 !important;
+}
+
+.x-large {
+	font-size: x-large;
+	font-weight: 900 !important;
+	border-width: 4px !important;
+	border-color: black !important;
+}
+
+.hb-gallery-item-name {
+	font-size: 9pt !important;
+	font-weight: 900 !important;
+	border: none !important;
+	padding: 0;
+}
+
+.hb-gal-standard-count {
+	visibility: hidden !important;
+}
+
+.hb-gal-standard-description {
+	border: none !important;
+	padding-top: 20px !important;
+}
+
+.noborder {
+	border: none;
+	padding: 0;
+}
+
+.amount {
+	color: red !important;
+}
+
+.special {
+	color: white !important;
+}
+
+.page-id-99 #hb-header {
+	display: none;
+}
+
+.page-id-99 #copyright-wrapper {
+	display: none;
+}
+
+.page-id-99 #contact-button {
+	display: none;
+}
+
+div#whiteText h1 {
+	color: white !important;
+}
+
+div#whiteText p {
+	color: white !important;
+}
+
+.episodeHead {
+	font-size: x-large;
+	font-weight: 900 !important;
+	border-bottom: 1px solid red;
+	padding-bottom: 5px;
+}
+
+.episodeHeadWhiteText {
+	font-size: xx-large;
+	color: white;
+	font-weight: 900 !important;
+	text-transform: uppercase;
+	border-bottom: 1px solid red;
+	padding-bottom: 5px;
+}
+
+/*#slider-section { background: transparent; }*/
