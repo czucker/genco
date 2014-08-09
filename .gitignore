@@ -2,7 +2,7 @@
 wp-content/backup/*
 wp-content/cache/*
 wp-content/upgrade/*
-wp-content/uploads/*
+# wp-content/uploads/*
 sitemap.*
 wp-config.php
  
