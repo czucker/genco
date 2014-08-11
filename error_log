@@ -1,0 +1,9 @@
+[11-Aug-2014 16:42:05 UTC] PHP Warning:  Creating default object from empty value in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[11-Aug-2014 17:01:14 UTC] PHP Parse error:  syntax error, unexpected end of file in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP-child/functions.php on line 88
+[11-Aug-2014 17:01:24 UTC] PHP Parse error:  syntax error, unexpected end of file in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP-child/functions.php on line 88
+[11-Aug-2014 17:01:56 UTC] PHP Parse error:  syntax error, unexpected end of file in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP-child/functions.php on line 88
+[11-Aug-2014 17:01:58 UTC] PHP Parse error:  syntax error, unexpected end of file in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP-child/functions.php on line 88
+[11-Aug-2014 17:06:09 UTC] PHP Fatal error:  Cannot redeclare hb_pagination_ajax() (previously declared in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP-child/functions.php:10) in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP/functions/pagination-ajax.php on line 80
+[11-Aug-2014 17:12:16 UTC] PHP Parse error:  syntax error, unexpected '<' in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP-child/functions.php on line 8
+[11-Aug-2014 17:12:59 UTC] PHP Fatal error:  Cannot redeclare hb_pagination_ajax() (previously declared in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP-child/functions.php:10) in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP/functions/pagination-ajax.php on line 80
+[11-Aug-2014 20:29:54 UTC] PHP Warning:  Creating default object from empty value in /home7/whenshit/public_html/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15

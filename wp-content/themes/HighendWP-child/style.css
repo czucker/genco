@@ -15,6 +15,7 @@
 /* =Theme customization starts here
 -------------------------------------------------------------- */
 
+
 /*#main-nav { 
     background-image: url(images/ManhattanKansas_r1.jpg); 
     background-repeat: no-repeat;
@@ -25,17 +26,19 @@
 	height: 125px;
 }
 
-@media screen and (max-width: 320px) {
+/*@media screen and (max-width: 320px) {
 	#hb-header {
 		display: none !important;
 	}
-}
+}*/
 
+/* Custom style for credits on individual episode pages */
 .credits {
 	font-size: smaller !important;
 	font-weight: 900 !important;
 }
 
+/* Extra large type style */
 .x-large {
 	font-size: x-large;
 	font-weight: 900 !important;
@@ -64,6 +67,7 @@
 	padding: 0;
 }
 
+/* Product amount red text */
 .amount {
 	color: red !important;
 }
@@ -108,4 +112,25 @@ div#whiteText p {
 	padding-bottom: 5px;
 }
 
-/*#slider-section { background: transparent; }*/
+/* Fix hover issue on overlays and ajax buttons */
+.load-more-text a:hover,
+.single .pagination a:hover,
+.page-links a:hover {
+    color: #FFF !important;
+}
+
+/* Change widget title to U&lc, bold and negative space below */
+h4.widget-title {
+	text-transform: capitalize !important;
+	font-weight: bold !important;
+	margin-bottom: 5px !important;
+	border-bottom-style: solid;
+	border-width: 2px;
+	padding-bottom: 5px
+}
+
+/* Add space above news widget elements */
+.cat-post-item {
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}
