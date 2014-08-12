@@ -119,8 +119,9 @@ div#whiteText p {
     color: #FFF !important;
 }
 
-/* Change widget title to U&lc, bold and negative space below */
+/* Change widget title to U&lc, bold, add underline and negative space below */
 h4.widget-title {
+	font-size: 20pt !important;
 	text-transform: capitalize !important;
 	font-weight: bold !important;
 	margin-bottom: 5px !important;
@@ -130,9 +131,10 @@ h4.widget-title {
 }
 
 /* Change product widget title to U&lc and bold
-ul.product_list_widget {
-	text-transform: lowercase !important;
-	font-weight: bold !important;
+.widget-item.woocommerce .product_list_widget a
+{
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
 }
 
 /* Add space above news widget elements */
