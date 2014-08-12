@@ -129,6 +129,12 @@ h4.widget-title {
 	padding-bottom: 5px
 }
 
+/* Change product widget title to U&lc and bold
+ul.product_list_widget {
+	text-transform: lowercase !important;
+	font-weight: bold !important;
+}
+
 /* Add space above news widget elements */
 .cat-post-item {
 	padding-top: 10px !important;
