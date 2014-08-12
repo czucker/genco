@@ -5,5 +5,3 @@ function myshortcode_title( ){
 }
 add_shortcode( 'page_title', 'myshortcode_title' );
 ?>
-
-
