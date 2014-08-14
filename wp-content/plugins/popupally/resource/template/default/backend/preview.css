@@ -1,0 +1,125 @@
+.clear-sxzw {clear: both; height:0px; width: 100%;}
+.popupally-outer-sxzw{
+width:650px;
+background-color:#FFFFFF;
+-webkit-box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+-moz-box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+.popupally-inner-sxzw{overflow:visible;height:auto;padding:20px;text-align:center;}
+.popupally-inner-sxzw .content-sxzw {
+text-align: center;
+vertical-align: middle;
+width:100%;
+box-sizing:border-box;
+-moz-box-sizing:border-box;
+}
+.popupally-inner-sxzw .desc-sxzw {
+font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+font-size: 28px;
+line-height: 30px;
+font-weight: bold;
+margin: 0 0 10px 0;
+box-sizing:border-box;
+-moz-box-sizing:border-box;
+cursor:pointer;
+}
+.popupally-inner-sxzw .popupally-center-sxzw .content-sxzw input[type="text"].field-sxzw {
+display:block;
+padding:15px 12px;
+margin:0 auto 10px auto;
+width:100%;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 16px;
+line-height: 21px;
+border: 1px solid #d4d3d3;
+background: #f6f6f6;
+-webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.67),inset 0 1px 3px rgba(5,5,5,0.13);
+-moz-box-shadow: 0 1px 0 rgba(255,255,255,0.67),inset 0 1px 3px rgba(5,5,5,0.13);
+box-shadow: 0 1px 0 rgba(255,255,255,0.67),inset 0 1px 3px rgba(5,5,5,0.13);
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+box-sizing:border-box;
+-moz-box-sizing:border-box;
+height:auto;
+}
+.popupally-inner-sxzw .popupally-center-sxzw .content-sxzw input[type="button"].submit-sxzw,
+.popupally-inner-sxzw .popupally-center-sxzw .content-sxzw input[type="submit"].submit-sxzw {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 22px;
+line-height:27px;
+background-color: #00C98D;
+border-style: solid;
+border-width: 1pt;
+border-color:#C0C0C0;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+color: white;
+text-shadow: 0 0.1em 0.3em rgba(0,0,0,0.3);
+cursor: pointer;
+-webkit-border-radius: 3pt;
+-moz-border-radius: 3pt;
+border-radius: 3pt;
+width:100%;
+padding:15px 0;
+margin: 10px auto;
+box-sizing:border-box;
+-moz-box-sizing:border-box;
+height:auto;
+background-image:none;
+}
+.popupally-inner-sxzw .privacy-sxzw{
+font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+font-size:14px;
+line-height:14px;
+margin:10px 0;
+padding:0;
+box-sizing:border-box;
+-moz-box-sizing:border-box;
+}
+.popupally-inner-sxzw .logo-row-sxzw {
+	margin: 20px 0;
+}
+.popupally-inner-sxzw .logo-img-sxzw {
+	height: 120px;
+	margin: 0 20px 0 0;
+	float: left;
+}
+.popupally-inner-sxzw .logo-text-sxzw {
+	height: 100%;
+	width: 100%;
+	vertical-align: top;
+text-align: left;
+font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+font-size: 24px;
+line-height: 28px;
+margin:0;
+padding:0;
+box-sizing:border-box;
+-moz-box-sizing:border-box;
+}
+@media (max-width: 768px) {
+	.popupally-outer-sxzw{width:480px;}
+	.popupally-inner-sxzw .desc-sxzw{font-size:24px;line-height:26px;}
+	.popupally-inner-sxzw .field-sxzw{padding:10px 10px;font-size: 12px;line-height: 18px;margin-bottom:7px;}
+	.popupally-inner-sxzw .submit-sxzw{font-size: 18px;padding:10px 0;margin-top:8px;margin-bottom:8px;}
+	.popupally-inner-sxzw .privacy-sxzw{font-size:10px;line-height:10px;}
+	.popupally-inner-sxzw .logo-row-sxzw {margin:15px 0;}
+	.popupally-inner-sxzw .logo-img-sxzw {height:80px;margin:0 15px 0 0;}
+	.popupally-inner-sxzw .logo-text-sxzw {font-size:20px;line-height:22px;}
+}
+@media (max-width: 520px) {
+	.popupally-outer-sxzw{width:300px;}
+	.popupally-inner-sxzw .desc-sxzw{font-size:18px;line-height:20px;}
+	.popupally-inner-sxzw .field-sxzw{padding:10px 6px;font-size: 10px;line-height: 14px;margin-bottom:5px;}
+	.popupally-inner-sxzw .submit-sxzw{font-size: 16px;padding:8px 0;margin-top:4px;margin-bottom:4px;}
+	.popupally-inner-sxzw .privacy-sxzw{font-size:8px;line-height:8px;}
+	.popupally-inner-sxzw .logo-row-sxzw{margin:10px 0;}
+	.popupally-inner-sxzw .logo-img-sxzw{height:60px;margin:0 10px 0 0;}
+	.popupally-inner-sxzw .logo-text-sxzw{font-size:12px;line-height:14px;}
+}

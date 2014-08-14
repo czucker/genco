@@ -1,7 +1,5 @@
 <?php
-// Post title shortcode
-function myshortcode_title( ){
-   return get_the_title();
+add_filter('get_the_excerpt', 'do_my_shortcode_in_excerpt');
+function do_my_shortcode_in_excerpt($excerpt) {
+    return do_shortcode(wp_trim_words(get_the_content(), 55));
 }
-add_shortcode( 'page_title', 'myshortcode_title' );
-?>
