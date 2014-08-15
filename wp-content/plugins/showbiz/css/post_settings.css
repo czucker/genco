@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+/*  This file will be loaded outside the showbiz plugin for post editing */
+
+
+.showbiz_settings li .setting_text,
+.showbiz_settings li .setting_input,
+.showbiz_settings li .setting_unit{
+	display:block;
+	float:left;
+}
+
+.showbiz_settings li .setting_text{
+	min-width:120px;
+	padding-right:4px;
+	corsor:default;
+	text-align:left;
+}
+
+.showbiz_settings li .setting_text.text_short{
+	min-width:60px;
+}
+
+.textbox_small{
+	width:60px !important;
+}

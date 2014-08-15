@@ -1,0 +1,45 @@
+
+.inp-maintenance-body {
+	height:110px;
+}
+
+.pt-option-extra-links .menu-item-handle {
+	width:94%;
+}
+
+.pt-option-extra-links .rhl-inp-showon label,
+.pt-option-extra-links .rhl-inp-link-label label,
+.pt-option-extra-links .rhl-inp-link-url label,
+.pt-option-extra-links .rhl-inp-link-target label {
+	width:65px;
+	display:inline-block;
+}
+
+.pt-option-extra-links .rhl-inp-showon-options {
+	width:270px;
+	display: inline-block;
+}
+
+.rhl-inp-showon-options-item {
+	width:48%;
+	display: inline-block;
+}
+
+.pt-option-extra-links input[type=text] {
+	width:270px;
+	display:inline-block;
+}
+
+.pt-option-extra-links .option-content {
+
+}
+
+.pt-option-extra-links .form-lostpassword .not-show-on-non-custom,
+.pt-option-extra-links .form-login .not-show-on-non-custom,
+.pt-option-extra-links .form-register .not-show-on-non-custom{
+	display:none;
+}
+
+.pt-option-extra-links .notshown {
+	display:none;
+}

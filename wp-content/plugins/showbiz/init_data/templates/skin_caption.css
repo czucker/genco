@@ -1,0 +1,29 @@
+/**************************************
+
+	STYLE SETTINGS FOR CAPTION SKIN
+
+***************************************/
+
+
+[itemid] .mediaholder 							{	background-color:#fff;border:none;padding:5px;
+													border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;
+												}
+[itemid] .showbiz-title.go-to-top              	{   margin-top:-50px;}
+[itemid] .revactive .showbiz-title.go-to-top   	{   margin-top:-5px;}
+
+
+[itemid] .showbiz-title,
+[itemid] .showbiz-title a,
+[itemid] .showbiz-title a:visited,
+[itemid] .showbiz-title a:hover               	{   font-weight:600; font-size:14px;
+                                                    text-transform:uppercase;
+                                                    font-family: 'Open Sans', sans-serif;
+													color:#fff;
+												}
+													
+[itemid] .pt40                                  {   padding-top:40px;  }
+
+[itemid] .showbiz-title .greenbg			{	background-color:#366300; padding:2px 10px;}
+[itemid] .showbiz-title .redbg				{	background-color:#b2170a; padding:2px 10px;}
+[itemid] .showbiz-title .bluebg				{	background-color:#1d628a; padding:2px 10px;}
+[itemid] .showbiz-title .blackbg			{	background-color:#000; padding:2px 10px;}

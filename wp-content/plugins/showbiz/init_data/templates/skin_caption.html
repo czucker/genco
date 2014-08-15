@@ -1,0 +1,36 @@
+<!-- SPECIAL CLASSES:
+go-to-top -> Moves Caption to the Top Position after Hover,
+reveal_wrapper -> The Hidden Content which is shown after click on openme,
+openme, closeme -> The open , close icon in for show/hide the Hidden Content,
+reveal_opener -> The Wrapper for the open/close Buttons,
+show_on_hover -> Show the reveal_opener only if mouse is hovering the teaser
+has been used. See Documentation for More Info
+-->
+
+	<!-- THE MEDIA HOLDER -->
+	<div class="mediaholder">
+		<div class="mediaholder_innerwrap">
+			<img alt="" src="[showbiz_image]">
+		</div>
+	</div><!-- END OF MEDIA HOLDER -->
+
+
+	<!-- ANIMATED HEADING INFORMATION, ALWAYS VISIBLE -->
+	<h4 class="showbiz-title go-to-top"><div class="[showbiz_color]"><a href="[showbiz_link]">[showbiz_title]</a></div></h4>
+
+	<!-- REVEAL CONTAINER (SINGLE MODE) -->
+	<div class="reveal_container">
+
+		<!-- THE REVEAL CONTENT, ONLY IN DETAIL MODE VISIBLE -->
+		<div class="reveal_wrapper">
+			<p class="pt40">[showbiz_excerpt]</p>
+		</div>
+
+	</div><!-- END OF REVEAL CONTAINER -->
+
+
+	<!-- THE REVEAL OPEN/CLOSE BUTTON - ONLY VISIBLE ON HOVER, DEFAULT STYLE -->
+	<a class="reveal_opener show_on_hover">
+		<span class="openme">+</span>
+		<span class="closeme">-</span>
+	</a>

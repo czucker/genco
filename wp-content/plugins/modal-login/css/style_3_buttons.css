@@ -1,0 +1,84 @@
+.plugin {
+ height: 225px !important;
+ width:100%;
+ padding: 0 2% 0;
+}
+
+.provider {
+    float: left;
+    margin-right: 4%;
+    overflow: hidden;
+    width: 43%;
+}
+
+.plugin #providers .provider {
+ width:225px;
+ margin-bottom:2px;
+}
+
+.plugin #providers .provider .name {
+ display: none;
+}
+.plugin #providers .provider .button {
+/* background: url("http://cdn.oneall.com/img/api/socialize/providers/button/sprite_link_200_30.png") no-repeat scroll 0 0 transparent;*/
+/*background: url("images/modal-login-sprite1.png") no-repeat;*/
+background: url("images/social-networks-style3-sprites.png") no-repeat;
+ height: 44px;
+ width: 208px;
+}
+
+.plugin #providers .provider #button_facebook {
+ background-position: 0 0px ;
+}
+
+.plugin #providers .provider #button_google {
+ background-position: 0 -148px ;
+}
+
+.plugin #providers .provider #button_twitter {
+ background-position: 0 -49px ;
+}
+
+.plugin #providers .provider #button_yahoo {
+  background-position:0 -198px;
+}
+
+.plugin #providers .provider #button_linkedin {
+  background-position: 0 -98px ;
+}
+
+.plugin #providers .provider #button_github {
+  background-position: 0 -445px ;
+}
+
+.plugin #providers .provider #button_foursquare {
+  background-position: 0 -297px ;
+}
+
+.plugin #providers .provider #button_paypal{
+  background-position: 0 -248px ;
+}
+
+.plugin #providers .provider #button_wordpress{
+  background-position: 0 -346px ;
+}
+
+.plugin #providers .provider #button_blogger {
+  background-position: 0 -395px ;
+}
+
+.plugin #providers .provider #button_livejournal {
+  background-position:0 -594px;
+}
+
+.plugin #providers .provider #button_windowslive {
+  background-position:0 -494px;
+}
+
+.plugin #providers .provider #button_steam {
+  background-position:0 -545px;
+}
+
+.plugin #providers .provider #button_stackexchange {
+  background-position:0 -642px;
+}

@@ -1,3 +1,6 @@
+# BEGIN RHL
+
+# END RHL
 
 # BEGIN WordPress
 <IfModule mod_rewrite.c>

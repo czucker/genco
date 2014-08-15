@@ -1,0 +1,49 @@
+.otw-cs-admin_content{
+	overflow: hidden;
+	width: 99%;
+	margin-top: 10px;
+}
+.otw-cs-admin_content .updated{
+	margin: 0px;
+}
+.otw-cs-layout-selection{
+}
+.otw-cs-admin_content i{
+	font-size: 11px;
+}
+.otw-cs-layout-type{
+	list-style-type: none;
+	overflow: hidden;
+	margin: 0px;
+}
+.otw-cs-layout-type li{
+	float: left;
+	margin: 0 5px;
+}
+.otw-cs-layout-type li img{
+	border: 3px solid #DEDEDE;
+	border-radius: 3px 3px 3px 3px;
+	cursor: pointer;
+}
+.otw-cs-layout-type li img.otw-selected{
+	border: 3px solid #AAAAAA;
+}
+.otw-cs-sidebar-dropdown{
+	clear: both;
+	overflow: hidden;
+}
+.otw-cs-content{
+	overflow: hidden;
+}
+.otw-cs-content div.otw-form-control label{
+	width: 240px;
+}
+.otw-cs-content div.otw-form-control span.otw-form-hint{
+	margin: 5px 0 10px 257px;
+}
+.otw_cs_delimiter{
+	border-top: 1px solid #d1d1d1;
+	clear: both;
+	margin-bottom: 10px;
+	height: 1px;
+}

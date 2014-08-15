@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+	<fields>
+			<fieldset name="general" label="General Settings">
+
+				<field name="hide_if_no_image"
+					   type="radio"
+					   default="off"
+					   label="Hide Entry On Missing Image"
+					   description="Hide all Entrys if no Featured Image/Image was found">
+						  <option value="on" text="On"></option>
+						  <option value="off" text="Off"></option>
+				</field>
+
+				<field name="force_full_width"
+					   type="radio"
+					   default="off"
+					   label="Force Full Width"
+					   description="Force Showbiz to be Full Width">
+						  <option value="on" text="On"></option>
+						  <option value="off" text="Off"></option>
+				</field>
+
+
+				<field name="enable_wc"
+					   type="radio"
+					   default="on"
+					   label="Enable Woocommerce Options"
+					   description="Turn on/off all the woocommerce output functionality">
+						  <option value="on" text="On"></option>
+						  <option value="off" text="Off"></option>
+				</field>
+			</fieldset>
+
+			<fieldset name="general" label="Scroll Settings">
+
+				<field name="navigation_mode"
+					   type="list"
+					   default="default"
+					   label="Scrolling Modes"
+					   description="Standard - all the special modes below are off. || Drag And Scroll: the full markup can be draged and scroller by holding the container with the mouse. || Page Scroll: by clicking left/right the slider with the current visible amount of entries will be slide to the left/right. || Carousel: Allows an endless slide through the entries">
+						  <option value="default" text="Standard"></option>
+						  <option value="drag" text="Drag And Scroll"></option>
+						  <option value="all" text="Page Scroll"></option>
+						  <option value="carousel" text="Carousel"></option>
+				</field>
+
+				<field name="closeOtherOverlays"
+					   type="radio"
+					   default="off"
+					   label="Auto Close Opened Details"
+					   description="If this set to 'on' than clickin a Reveal opener button will close first all other opened details within the same Teaser and open the clicked one. default value is 'off'">
+						  <option value="on" text="On"></option>
+						  <option value="off" text="Off"></option>
+				</field>
+
+				<field name="rewindFromEnd"
+					   type="radio"
+					   default="off"
+					   label="Rewind From End"
+					   description="If end of the slide has been reached it rewinds to the first / last postions. Use this to make endless AutoScroll possible. Note: If the navigation mode set to 'Carousel', then this option will be disabled. ">
+						  <option value="on" text="On"></option>
+						  <option value="off" text="Off"></option>
+				</field>
+
+				<field type="control"
+					   parent="navigation_mode"
+					   ctype="disable"
+					   child="rewindFromEnd"
+					   value="carousel"
+				/>
+
+				<field name="autoPlay"
+					   type="radio"
+					   default="on"
+					   label="Auto Play"
+					   description="turn auto scroll on / off -> if Drag and Scroll is activated, auto scroll stops at the last slide">
+						  <option value="on" text="On"></option>
+						  <option value="off" text="Off"></option>
+				</field>
+
+				<field name="scrollOrientation"
+					   type="radio"
+					   default="left"
+					   label="Scroll Orientation"
+					   description="choose wether to scroll left or right if Auto Play is activated ">
+						  <option value="left" text="Left"></option>
+						  <option value="right" text="Right"></option>
+				</field>
+
+				<field name="delay"
+					   type="text"
+					   default="3000"
+					   label="Delay"
+					   unit="ms"
+					   description="AutoScroll Delay between two scrolls. Can be: 1000ms - 10000ms. (1 sec till 10sec can be any number).">
+				</field>
+
+				<field type="control"
+					   parent="autoPlay"
+					   ctype="enable"
+					   child="delay"
+					   value="on"
+				/>
+
+				<field type="control"
+					   parent="autoPlay"
+					   ctype="enable"
+					   child="scrollOrientation"
+					   value="on"
+				/>
+
+				<field name="speed"
+					   type="text"
+					   default="300"
+					   label="Speed"
+					   unit="ms"
+					   description="The speed of the slide moves (200 - 600)">
+				</field>
+
+				<field name="easing"
+					   type="list"
+					   default="Power1.easeOut"
+					   label="Easing"
+					   description="The easing of the transition">
+						<option value="Linear.easeNone" text="None"></option>
+						<option value="Power0.easeIn" text="Power0.easeIn (linear)"></option>
+						<option value="Power0.easeInOut" text="Power0.easeInOut (linear)"></option>
+						<option value="Power0.easeOut" text="Power0.easeOut (linear)"></option>
+						<option value="Power1.easeIn" text="Power1.easeIn"></option>
+						<option value="Power1.easeInOut" text="Power1.easeInOut"></option>
+						<option value="Power1.easeOut" text="Power1.easeOut"></option>
+						<option value="Power2.easeIn" text="Power2.easeIn"></option>
+						<option value="Power2.easeInOut" text="Power2.easeInOut"></option>
+						<option value="Power2.easeOut" text="Power2.easeOut"></option>
+						<option value="Power3.easeIn" text="Power3.easeIn"></option>
+						<option value="Power3.easeInOut" text="Power3.easeInOut"></option>
+						<option value="Power3.easeOut" text="Power3.easeOut"></option>
+						<option value="Power4.easeIn" text="Power4.easeIn"></option>
+						<option value="Power4.easeInOut" text="Power4.easeInOut"></option>
+						<option value="Power4.easeOut" text="Power4.easeOut"></option>
+						<option value="Quad.easeIn" text="Quad.easeIn"></option>
+						<option value="Quad.easeInOut" text="Quad.easeInOut"></option>
+						<option value="Quad.easeOut" text="Quad.easeOut"></option>
+						<option value="Cubic.easeIn" text="Cubic.easeIn"></option>
+						<option value="Cubic.easeInOut" text="Cubic.easeInOut"></option>
+						<option value="Cubic.easeOut" text="Cubic.easeOut"></option>
+						<option value="Quart.easeIn" text="Quart.easeIn"></option>
+						<option value="Quart.easeInOut" text="Quart.easeInOut"></option>
+						<option value="Quart.easeOut" text="Quart.easeOut"></option>
+						<option value="Quint.easeIn" text="Quint.easeIn"></option>
+						<option value="Quint.easeInOut" text="Quint.easeInOut"></option>
+						<option value="Quint.easeOut" text="Quint.easeOut"></option>
+						<option value="Strong.easeIn" text="Strong.easeIn"></option>
+						<option value="Strong.easeInOut" text="Strong.easeInOut"></option>
+						<option value="Strong.easeOut" text="Strong.easeOut"></option>
+						<option value="Back.easeIn" text="Back.easeIn"></option>
+						<option value="Back.easeInOut" text="Back.easeInOut"></option>
+						<option value="Back.easeOut" text="Back.easeOut"></option>
+						<option value="Bounce.easeIn" text="Bounce.easeIn"></option>
+						<option value="Bounce.easeInOut" text="Bounce.easeInOut"></option>
+						<option value="Bounce.easeOut" text="Bounce.easeOut"></option>
+						<option value="Circ.easeIn" text="Circ.easeIn"></option>
+						<option value="Circ.easeInOut" text="Circ.easeInOut"></option>
+						<option value="Circ.easeOut" text="Circ.easeOut"></option>
+						<option value="Elastic.easeIn" text="Elastic.easeIn"></option>
+						<option value="Elastic.easeInOut" text="Elastic.easeInOut"></option>
+						<option value="Elastic.easeOut" text="Elastic.easeOut"></option>
+						<option value="Expo.easeIn" text="Expo.easeIn"></option>
+						<option value="Expo.easeInOut" text="Expo.easeInOut"></option>
+						<option value="Expo.easeOut" text="Expo.easeOut"></option>
+						<option value="Sine.easeIn" text="Sine.easeIn"></option>
+						<option value="Sine.easeInOut" text="Sine.easeInOut"></option>
+						<option value="Sine.easeOut" text="Sine.easeOut"></option>
+						<option value="SlowMo.ease" text="SlowMo.ease"></option>
+				</field>
+
+
+
+
+
+
+			</fieldset>
+
+			<fieldset name="navigation" label="Navigation">
+
+
+				<field name="navigation_type"
+					   type="list"
+					   default="template"
+					   label="Navigation Type"
+					   description="Choose the navigation visual from the template or a custom navigation buttons.">
+						  <option value="template" text="From Navigation Template"></option>
+						  <option value="custom" text="Custom Buttons"></option>
+						  <option value="none" text="None"></option>
+				</field>
+
+				<field name="nav_template_id"
+					   type="list"
+					   default=""
+					   label="Navigation Template"
+					   description="The template that set the look navigation buttons">
+						  <option value="none" text="None"></option>
+						  <option value="none2" text="None2"></option>
+				</field>
+
+				<field name="nav_position"
+					   type="radio"
+					   default="top"
+					   label="Navigation Position"
+					   description="Choose the navigation position: on the top or on the bottom.">
+						  <option value="top" text="Top"></option>
+						  <option value="bottom" text="Bottom"></option>
+				</field>
+
+
+				<field type="control"
+					   parent="navigation_type"
+					   ctype="enable"
+					   child="nav_template_id"
+					   value="template"
+				/>
+
+				<field type="control"
+					   parent="navigation_type"
+					   ctype="enable"
+					   child="nav_position"
+					   value="template"
+				/>
+
+					<field type="bulk_control_start"
+						   parent="navigation_type"
+						   ctype="enable"
+						   value="custom"
+					/>
+
+				<field name="left_buttonid"
+					   type="text"
+					   default=""
+					   class="normal"
+					   label="Left Button ID"
+					   description="The id of custom navigation left button. Example: carousel_left_button">
+				</field>
+
+				<field name="right_buttonid"
+					   type="text"
+					   class="normal"
+					   default=""
+					   label="Right Button ID"
+					   description="The id of custom navigation right button. Example: carousel_right_button">
+				</field>
+
+				<field type="bulk_control_end"></field>
+
+			</fieldset>
+
+			<fieldset name="visible_items" label="Visible Items">
+
+				<field name="text1"
+					   type="statictext"
+					   label="Defines how many Entry is visible in the different Responsive levels. The Reponsive  levels (4 level!) are the following (the size of the Surrounding container and not the Browser !!!!)">
+				</field>
+
+				<field type="hr"></field>
+
+				<field name="visible_items_1"
+					   type="text"
+					   default="4"
+					   label="Num. Visible Items on 980px &gt; "
+					   description="Number of visible items on more than 980px container width.">
+				</field>
+
+				<field name="visible_items_2"
+					   type="text"
+					   default="3"
+					   label="Num. Visible Items 768px-980px "
+					   description="Number of visible items between 768px and 980px container width.">
+				</field>
+
+				<field name="visible_items_3"
+					   type="text"
+					   default="2"
+					   label="Num. Visible Items 420px-768px "
+					   description="Number of visible items between 420px and 768px container width.">
+				</field>
+
+				<field name="visible_items_4"
+					   type="text"
+					   default="1"
+					   label="Num. Visible Items &lt; 420px "
+					   description="Number of visible items below 420px container width.">
+				</field>
+
+
+			</fieldset>
+
+			<!--fieldset name="visible_items" label="Media Max Height">
+
+				<field name="text2"
+					   type="statictext"
+					   label="Defines how height the mediaholder_innerwrap container can have depending on the Responsive levels.The Reponsive  levels (4 level!) are the following (the size of the Surrounding container and not the Browser !!!!) 0 means no Limit!">
+				</field>
+
+				<field type="hr"></field>
+
+				<field name="media_height_1"
+					   type="text"
+					   default="0"
+					   label="Media Height on 980px &gt; "
+					   description="Height of media holder on more than 980px container width.">
+				</field>
+
+				<field name="media_height_2"
+					   type="text"
+					   default="0"
+					   label="Media Height on 768px-980px "
+					   description="Height of media holder between 768px and 980px container width.">
+				</field>
+
+				<field name="media_height_3"
+					   type="text"
+					   default="0"
+					   label="Media Height on 420px-768px "
+					   description="Height of media holder between 420px and 768px container width.">
+				</field>
+
+				<field name="media_height_4"
+					   type="text"
+					   default="0"
+					   label="Media Height on &lt; 420px "
+					   description="Height of media holder below 420px container width.">
+				</field>
+
+
+			</fieldset-->
+
+			<!--  OFFSETS -->
+
+			<fieldset name="offsets" label="Offsets">
+
+				<field name="custom_offset_control"
+					   type="radio"
+					   default="false"
+					   label="Offset &amp; Space between entries"
+					   description="Set custom Offset &amp; Spacings between each entry">
+						  <option value="true" text="Yes"></option>
+						  <option value="false" text="No"></option>
+				</field>
+
+				<field name="custom_offset"
+					   type="text"
+					   label="Offset &amp; Space"
+					   default="0"
+					   unit="px"
+					   description="The custom Offset &amp; Spacings between each entry"></field>
+
+
+				<field type="control"
+					   ctype="disable"
+					   parent="custom_offset_control"
+					   child="custom_offset"
+					   value="false"></field>
+
+
+
+				<field name="heightOffsetBottom"
+					   type="text"
+					   default="0"
+					   label="Height Offset Bottom"
+					   description="Increase/decrease the height of the container (padding-bottom). Use it in case you add shadows / borders to entries. The overflow container padding can be adjusted with this value to be able to see the shadows on entries. default value is 0."
+					   unit="px">
+				</field>
+
+				<field name="entrySizeOffset"
+					   type="text"
+					   default="0"
+					   label="Entry Size Offset"
+					   description="Reduce the width per entries. Dont need to adjust till entries fits always wll within the container. Default Value is 0"
+					   unit="px">
+				</field>
+
+				<field name="conteainerOffsetRight"
+					   type="text"
+					   default="0"
+					   label="Container Offset Right"
+					   description="Create a right padding and reduce the LI tag widths. Dont need to change till entries fits well in the surrounding container. Default value is 0"
+					   unit="px">
+				</field>
+
+			</fieldset>
+
+			<fieldset name="position" label="Position">
+
+				<field name="position"
+					   type="list"
+					   default="center"
+					   label="Position on the page"
+					   description="The position of the slider on the page, (float:left, float:right, margin:0px auto;)">
+						  <option value="left" text="Left"></option>
+						  <option value="center" text="Center"></option>
+						  <option value="right" text="Right"></option>
+				</field>
+
+				<field name="margin_top"
+					   type="text"
+					   label="Margin Top"
+					   default="0"
+					   unit="px"
+					   description="The top margin of the slider wrapper div"></field>
+
+				<field name="margin_bottom"
+					   type="text"
+					   label="Margin Bottom"
+					   default="0"
+					   unit="px"
+					   description="The bottom margin of the slider wrapper div"></field>
+
+				<field name="margin_left"
+					   type="text"
+					   label="Margin Left"
+					   default="0"
+					   unit="px"
+					   description="The left margin of the slider wrapper div"></field>
+
+				<field name="margin_right"
+					   type="text"
+					   label="Margin Right"
+					   default="0"
+					   unit="px"
+					   description="The right margin of the slider wrapper div"></field>
+
+				<field name="clear_both"
+					   type="radio"
+					   default="false"
+					   label="Add Clear:Both"
+					   description="Add clear:both div after the slider. This will make all the content after the slider to go down line.">
+						  <option value="true" text="Yes"></option>
+						  <option value="false" text="No"></option>
+				</field>
+
+				<field type="control"
+					   ctype="disable"
+					   parent="position"
+					   child="margin_left"
+					   value="center"></field>
+
+				<field type="control"
+					   ctype="disable"
+					   parent="position"
+					   child="margin_right"
+					   value="center"></field>
+
+			</fieldset>
+
+			<fieldset name="lazyload" label="Lazy Load Settings">
+
+				<field name="enable_lazy_load"
+					   type="radio"
+					   default="off"
+					   label="Use Lazy Load"
+					   description="Use Lazy Loading for all img tags inside slider">
+						  <option value="on" text="On"></option>
+						  <option value="off" text="Off"></option>
+				</field>
+
+				<field name="lazy_load_height"
+					   type="text"
+					   label="Placeholder Height"
+					   default="100"
+					   unit="px"
+					   description="The height of the empty image while the real image is not yet loaded"></field>
+
+				<field name="lazy_load_image"
+					   type="image_library"
+					   label="Placholder Image"
+					   default=""
+					   description="Shows this image/gif while the real image is loaded"></field>
+
+				<field type="control"
+					   ctype="disable"
+					   parent="enable_lazy_load"
+					   child="lazy_load_height"
+					   value="off"></field>
+			</fieldset>
+
+			<fieldset name="troubleshooting" label="Troubleshooting">
+
+				<field name="jquery_noconflict"
+					   type="list"
+					   default="off"
+					   label="JQuery No Conflict Mode"
+					   description="Turns on / off jquery noconflict mode. You can play with this option when you have some javascript conflicts.">
+						  <option value="on" text="On"></option>
+						  <option value="off" text="Off"></option>
+				</field>
+
+				<field name="js_to_body"
+					   type="radio"
+					   default="false"
+					   label="Put JS Includes To Body"
+					   description="Putting the js to body (in addition to head) is good for fixing some javascript conflicts of type: TypeError: jQuery('#showbiz_1_1').show().showbizpro is not a function">
+						  <option value="true" text="Yes"></option>
+						  <option value="false" text="No"></option>
+				</field>
+
+				<field name="output_type"
+					   type="list"
+					   default="none"
+					   label="Output Filters Protection"
+					   description="Activate a protection against wordpress output filters that adds html blocks to the shortcode output like P and BR">
+						  <option value="none" text="None"></option>
+						  <option value="compress" text="By Compressing Output"></option>
+						  <option value="echo" text="By Echo Output"></option>
+				</field>
+
+				<field name="debug_mode"
+					   type="radio"
+					   default="false"
+					   label="Debug Mode"
+					   description="Allow to show output together with error messages">
+						  <option value="true" text="Yes"></option>
+						  <option value="false" text="No"></option>
+				</field>
+
+	<!--
+				<field name="disable_stuck_functions"
+					   type="checkbox"
+					   default="false"
+					   label="Disable WP Stuck Functions"
+					   description="Some wp functions like get_the_excerpt() may stuck and throw a memory exchosted error. If you see that the showbiz stucking your website, please turn on this option.">
+				</field>
+ 	-->
+			</fieldset>
+
+		</fields>

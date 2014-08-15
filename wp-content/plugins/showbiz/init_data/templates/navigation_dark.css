@@ -1,0 +1,11 @@
+[itemid] .showbiz-navigation						{	margin-bottom:20px;}
+
+[itemid] .sb-navigation-left.notclickable:hover,
+[itemid] .sb-navigation-right.notclickable:hover,
+[itemid] .sb-navigation-left,
+[itemid] .sb-navigation-right,
+[itemid] .sb-navigation-play						{	background:#555; border:1px solid #919191; border:1px solid #333;
+  														border-radius: 0px; -moz-border-radius: 0px;-webkit-border-radius: 0px; }
+[itemid] .sb-navigation-left:hover,
+[itemid] .sb-navigation-right:hover,
+[itemid] .sb-navigation-play:hover					{	background:#333}

@@ -1,0 +1,32 @@
+
+.modal {
+	z-index:11050;
+}
+
+.modal-backdrop {
+	z-index:11040;
+}
+
+.modal-open .dropdown-menu {
+  z-index: 12050;
+}
+
+.modal-open .dropdown.open {
+  *z-index: 12050;
+}
+
+.modal-open .popover {
+  z-index: 12060;
+}
+
+.modal-open .tooltip {
+  z-index: 12070;
+}
+
+.tooltip {
+  z-index: 11020;
+}
+
+.popover {
+  z-index: 11010;
+}

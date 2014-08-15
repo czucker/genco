@@ -1,0 +1,10 @@
+@media only screen and (max-width : 480px), screen and (max-height : 320px) {
+
+#rh-modal-login.modal {
+	max-width:450px;
+	width:100%;
+	margin-left:-50%;
+	margin-top:-50%;
+}
+
+}

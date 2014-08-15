@@ -1,0 +1,14 @@
+/*** WHITE NAV BUTTONS ***/
+[itemid] .showbiz-navigation						{	margin-bottom:20px;}
+
+[itemid] .sb-navigation-left,
+[itemid] .sb-navigation-right,
+[itemid] .sb-navigation-play						{	background:#fff; border:1px solid #d5d5d5; }
+
+[itemid] .showbiz-navigation i						{	color:#777;   }
+
+[itemid] .sb-navigation-left:hover,
+[itemid] .sb-navigation-right:hover					{	border:1px solid #b5b5b5;}
+
+[itemid] .sb-navigation-left.notclickable:hover,
+[itemid] .sb-navigation-right.notclickable:hover	{	border:1px solid #d5d5d5;}

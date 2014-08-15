@@ -1,0 +1,47 @@
+/********************************************
+
+	STYLE SETTINGS FOR THE WOO SKIN
+
+*********************************************/
+
+
+[itemid] li							{	margin-right:20px;  }
+
+[itemid]  .mediaholder 				{	background-color:#d5d5d5;border:1px solid #b9b9b9;										
+										border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;
+										padding:7px;
+									}
+
+[itemid]  .hovercover				{	background:rgba(0,0,0,0.5);  }
+
+
+[itemid]  .rating-text				{	font-family: 'Open Sans', sans-serif; font-size:11px; color:#999; line-height:25px;}
+[itemid]  .rating-stars				{	width:69px;height:13px;margin-right:10px; vertical-align: middle; margin-top:-2px;}
+[itemid]  hr						{	border:none; border-top:1px solid #d5d5d5;margin-top:4px;margin-bottom:8px;}
+
+[itemid]  .sb-price,
+[itemid] .amount,
+[itemid] .product.woocommerce span  {	line-height: 26px;vertical-align: top;
+										padding-top:0;font-size:22px; font-weight:700; 
+										margin-right:15px; color:#b1749d; font-family: 'Open Sans', sans-serif;
+									}
+
+[itemid]  .showbiz-button,
+[itemid]  .add_to_cart_button,
+	{
+				                            padding:4px 15px !important;
+				                            color:#777 !important;
+				                            text-shadow:1px 1px 0px #fff;
+				                            font-size:12px; line-height:27px;
+				                            margin-top:0;
+				                            white-space: nowrap;
+				                            text-decoration: none !important;
+				                            vertical-align: middle;
+				                     }
+
+[itemid] .product.woocommerce		{   border:none !important; padding:0 !important; text-align: center !important;}
+[itemid] .product.woocommerce small	{	line-height: 26px;vertical-align: top;
+										padding-top:0;font-size:16px; font-weight:700; 
+										margin-right:15px; color:#b1749d; font-family: 'Open Sans', sans-serif;
+  										text-decoration: line-through;
+									}

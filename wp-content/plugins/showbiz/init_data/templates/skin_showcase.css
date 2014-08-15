@@ -1,0 +1,81 @@
+/**************************************
+
+	STYLE SETTINGS FOR SHOWCASE SKIN
+
+***************************************/
+
+[itemid]  ul li			        	{	margin-right:20px; position:relative; box-sizing:border-box; -moz-box-sizing:border-box;
+										background:#f5f5f5;}
+
+[itemid]  ul li .innerwrapper		{	border:1px solid #e8e8e8; padding-top:10px; box-sizing:border-box; -moz-box-sizing:border-box;}
+
+[itemid] .tofullwidth .reveal_wrapper {	background: #f5f5f5; border:1px solid #e8e8e8; }
+
+[itemid] .detailholder				{	padding:30px 20px;}
+
+[itemid] .mediaholder img			{	width:100%; padding:0px 10px;
+                                        box-sizing:border-box;
+                                        -moz-box-sizing:border-box;
+                                        -webkit-box-sizing:border-box}
+
+[itemid] .mediaholder_innerwrap		{	text-align: center;  }
+
+[itemid] .showbiz-title,
+[itemid] .showbiz-title a,
+[itemid] .showbiz-title a:visited,
+[itemid] .showbiz-title a:hover	   	{	color:#555; font-family: 'Open Sans', sans-serif;
+                                        font-size:14px; text-transform:uppercase;
+                                        text-decoration: none; font-weight:700;}
+
+[itemid] .showbiz p					{	font-size:13px; line-height:22px; color:#777;
+                                                        font-family: 'Open Sans', sans-serif; position:relative;}
+[itemid] .showbiz p.orange		  	{	color:#ff6c00;}
+[itemid] .showbiz p.bigger		   	{	font-size:17px; line-height:20px;}
+[itemid] .showbiz p.bolder	        {	font-weight:700;}
+[itemid] h4.showbiz-title           {  margin-bottom:0px !important;}
+[itemid] .showbiz-title.large,
+[itemid] .showbiz-title.large a,
+[itemid] .showbiz-title.large a:visited,
+[itemid] .showbiz-title.large a:hover	{	font-size:20px; line-height:25px; font-weight:800;margin-top:0px;}
+
+[itemid] .showbiz-price .number        	{	color:#555; font-family: 'Open Sans', sans-serif; font-size:50px; font-weight: 800;}
+[itemid] .showbiz-price .currency	  	{	color:#555; font-family: 'Open Sans', sans-serif; font-size:35px; font-weight: 400;}
+
+
+[itemid] .reveal_container				{	width: 20px;                                            
+                                            bottom: 0px;
+                                            right: 0px;
+  											top:auto;
+  											left:auto;
+  											-webkit-transition: all 0s ease-out;
+											-moz-transition: all 0s ease-out;
+											-o-transition: all 0s ease-out;
+											-ms-transition: all 0s ease-out;
+											transition-delay: 0.3s;
+											-webkit-transition-delay: 0.3s;
+											-moz-transition-delay: 0.3s;
+										}
+
+[itemid] .reveal_container.revactive	{	width: 100%;
+                                            height: 100%;
+                                            bottom: auto;
+                                            right: auto;
+  											top:0px;
+  											left:0px;
+  											transition-delay: 0s;
+											-webkit-transition-delay: 0s;
+											-moz-transition-delay: 0s;
+											-webkit-transition: all 0s ease-out;
+											-moz-transition: all 0s ease-out;
+											-o-transition: all 0s ease-out;
+											-ms-transition: all 0s ease-out;
+  											
+										}
+
+[itemid] .reveal_opener                 {   background-color:#e5e5e5;
+                                            border-radius:3px 0px 0px 0px;
+                                            -moz-border-radius:3px 0px 0px 0px;
+                                            -webkit-border-radius:3px 0px 0px 0px;
+										}
+[itemid] .reveal_opener .openme    		{ 	padding:6px;}
+[itemid] .reveal_opener .closeme    	{ 	padding:7px 9px;}

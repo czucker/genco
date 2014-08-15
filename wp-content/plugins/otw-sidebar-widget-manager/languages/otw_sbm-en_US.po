@@ -1,0 +1,1365 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Sidebar & Widget Manager v3.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-11-18 22:57:35+0000\n"
+"Last-Translator: support@otwthemes.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: include/otw_editor_dialog.php:23
+#@ otw_sbm
+msgid "Please select a sidebar from the dropdown list"
+msgstr ""
+
+#: include/otw_editor_dialog.php:26
+#: include/otw_labels/otw_sbm_form_object.labels.php:66
+#: include/otw_labels/otw_sbm_shortcode_object.labels.php:8
+#@ otw_sbm
+msgid "Select sidebar"
+msgstr ""
+
+#: include/otw_editor_dialog.php:34
+#: include/otw_labels/otw_sbm_form_object.labels.php:38
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:38
+#: include/otw_labels/otw_sbm_shortcode_object.labels.php:2
+#: include/otw_sbm_pcm_columns_dialog.php:9
+#: include/otw_sidebar_action.php:94
+#@ otw_sbm
+msgid "Cancel"
+msgstr ""
+
+#: include/otw_editor_dialog.php:35
+#: include/otw_labels/otw_sbm_form_object.labels.php:61
+#: include/otw_labels/otw_sbm_shortcode_object.labels.php:3
+#: include/otw_sbm_pcm_columns_dialog.php:12
+#@ otw_sbm
+msgid "Insert"
+msgstr ""
+
+#: include/otw_editor_dialog.php:38
+#@ otw_sbm
+msgid "There are no available sidebars"
+msgstr ""
+
+#: include/otw_list_sidebars.php:9
+#@ otw_sbm
+msgid "Title"
+msgstr ""
+
+#: include/otw_list_sidebars.php:10
+#: include/otw_manage_sidebar.php:240
+#: include/otw_sidebar_action.php:84
+#@ otw_sbm
+msgid "Description"
+msgstr ""
+
+#: include/otw_list_sidebars.php:11
+#: include/otw_manage_sidebar.php:204
+#: include/otw_sidebar_action.php:80
+#@ otw_sbm
+msgid "Status"
+msgstr ""
+
+#: include/otw_list_sidebars.php:12
+#@ otw_sbm
+msgid "ShortCode"
+msgstr ""
+
+#: include/otw_list_sidebars.php:38
+#@ otw_sbm
+msgid "Available Custom Sidebars"
+msgstr ""
+
+#: include/otw_list_sidebars.php:73
+#@ otw_sbm
+msgid "Deactivate"
+msgstr ""
+
+#: include/otw_list_sidebars.php:77
+#@ otw_sbm
+msgid "Activate"
+msgstr ""
+
+#: include/otw_list_sidebars.php:86
+#, php-format
+#@ otw_sbm
+msgid "Edit &#8220;%s&#8221;"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:15
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:15
+#: include/otw_list_sidebars.php:89
+#@ otw_sbm
+msgid "Edit"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:12
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:12
+#: include/otw_list_sidebars.php:90
+#@ otw_sbm
+msgid "Delete"
+msgstr ""
+
+#: include/otw_list_sidebars.php:104
+#: include/otw_manage_sidebar.php:207
+#@ otw_sbm
+msgid "Active"
+msgstr ""
+
+#: include/otw_list_sidebars.php:107
+#: include/otw_manage_sidebar.php:208
+#@ otw_sbm
+msgid "Inactive"
+msgstr ""
+
+#: include/otw_list_sidebars.php:110
+#@ otw_sbm
+msgid "Unknown"
+msgstr ""
+
+#: include/otw_list_sidebars.php:128
+#@ otw_sbm
+msgid "No custom sidebars found."
+msgstr ""
+
+#: include/otw_manage_sidebar.php:18
+#@ otw_sbm
+msgid "Create New Sidebar"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:38
+#@ otw_sbm
+msgid "Edit Sidebar"
+msgstr ""
+
+#: include/otw_components/otw_content_sidebars/views/content_sidebars_default.php:16
+#: include/otw_manage_sidebar.php:136
+#: include/otw_widget_dialog.php:259
+#: include/otw_widget_dialog.php:260
+#@ default
+#@ otw_sbm
+msgid "Click to toggle"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:201
+#@ otw_sbm
+msgid "The name is how it appears on your site."
+msgstr ""
+
+#: include/otw_manage_sidebar.php:213
+#@ otw_sbm
+msgid "Replace Existing SideBar"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:229
+#@ otw_sbm
+msgid "Replace existing sidebar. It will be replaced only for selected templates from the right column."
+msgstr ""
+
+#: include/otw_manage_sidebar.php:233
+#@ otw_sbm
+msgid "Widget Alignment"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:235
+#@ otw_sbm
+msgid "Vertical (WP default)"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:236
+#@ otw_sbm
+msgid "Horizontal"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:242
+#@ otw_sbm
+msgid "Short description for your reference at the admin panel."
+msgstr ""
+
+#: include/otw_manage_sidebar.php:245
+#@ otw_sbm
+msgid "Save Sidebar"
+msgstr ""
+
+#: include/otw_process_actions.php:27
+#: include/otw_process_actions.php:46
+#: include/otw_process_actions.php:89
+#: include/otw_sidebar_action.php:56
+#@ otw_sbm
+msgid "Invalid sidebar"
+msgstr ""
+
+#: include/otw_process_actions.php:160
+#@ otw_sbm
+msgid "Please type valid sidebar title"
+msgstr ""
+
+#: include/otw_process_actions.php:164
+#@ otw_sbm
+msgid "Please select status"
+msgstr ""
+
+#: include/otw_sbm_core.php:975
+#@ otw_sbm
+msgid "Sidebar & Widget Manager - Widgetize page"
+msgstr ""
+
+#: include/otw_sbm_core.php:996
+#@ otw_sbm
+msgid "Widgetize this page:"
+msgstr ""
+
+#: include/otw_sbm_core.php:997
+#@ otw_sbm
+msgid "1) Create your column layout in a few clicks"
+msgstr ""
+
+#: include/otw_sbm_core.php:998
+#@ otw_sbm
+msgid "2) Insert the sidebars you have created with the Sidebar & Widget Manager"
+msgstr ""
+
+#: include/otw_sbm_core.php:999
+#@ otw_sbm
+msgid "Unlimited Rows, Columns and Sidebars. No coding."
+msgstr ""
+
+#: include/otw_sbm_core.php:1006
+#@ otw_sbm
+msgid "Are you sure you want to delete this entire row?"
+msgstr ""
+
+#: include/otw_sbm_core.php:1007
+#@ otw_sbm
+msgid "Are you sure you want to delete this item?"
+msgstr ""
+
+#: include/otw_sbm_core.php:1008
+#: otw_sidebar_manager.php:147
+#@ otw_sbm
+msgid "Add Sidebar"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:18
+#@ otw_sbm
+msgid "1. Select the number of columns for that row from the dropdown."
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:19
+#@ otw_sbm
+msgid "2. Then select the type of columns you want to have."
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:20
+#@ otw_sbm
+msgid "3. Click \"Insert\" button"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:25
+#@ otw_sbm
+msgid "Columns"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:27
+#: include/otw_sbm_pcm_columns_dialog.php:29
+#@ otw_sbm
+msgid "Number of columns..."
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:30
+#@ otw_sbm
+msgid "1 column"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:31
+#@ otw_sbm
+msgid "2 columns"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:32
+#@ otw_sbm
+msgid "3 columns"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:33
+#@ otw_sbm
+msgid "4 columns"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:34
+#@ otw_sbm
+msgid "5 columns"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:35
+#@ otw_sbm
+msgid "6 columns"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:45
+#@ otw_sbm
+msgid "To be able to insert the row you need to have a full row of columns."
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:46
+#@ otw_sbm
+msgid ""
+"For example if you have selected 4 columns from the dropdown you need to select as many columns as needed to fill a FULL row.<br /><br />\n"
+"\t\t\t\tThose are correct:<br />\n"
+"\t\t\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;4 columns = 1/4 + 1/4 + 1/4 + 1/4<br />\n"
+"\t\t\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;4 columns = 1/4 + 1/4 + 2/4<br />\n"
+"\t\t\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;4 columns = 2/4 + 2/4<br />\n"
+"\t\t\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;4 columns = 1/4 + 3/4<br />\n"
+"\t\t\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;4 columns = 4/4"
+msgstr ""
+
+#: include/otw_sbm_pcm_columns_dialog.php:53
+#@ otw_sbm
+msgid ""
+"Those are incorrect:<br />\n"
+"\t\t\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;4 columns != 1/4 + 1/4 (!= means not equal)<br />\n"
+"\t\t\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;4 columns != 3/4<br />\n"
+"\t\t\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;4 columns != 1/4 + 1/2"
+msgstr ""
+
+#: include/otw_sidebar_action.php:23
+#@ otw_sbm
+msgid "Delete Sidebar"
+msgstr ""
+
+#: include/otw_sidebar_action.php:24
+#@ otw_sbm
+msgid "Please confirm to delete the sidebar"
+msgstr ""
+
+#: include/otw_sidebar_action.php:28
+#@ otw_sbm
+msgid "Activate Sidebar"
+msgstr ""
+
+#: include/otw_sidebar_action.php:29
+#@ otw_sbm
+msgid "Please confirm to activate the sidebar"
+msgstr ""
+
+#: include/otw_sidebar_action.php:33
+#@ otw_sbm
+msgid "Deactivate Sidebar"
+msgstr ""
+
+#: include/otw_sidebar_action.php:34
+#@ otw_sbm
+msgid "Please confirm to deactivate the sidebar"
+msgstr ""
+
+#: include/otw_sidebar_action.php:39
+#@ otw_sbm
+msgid "Invalid sidebar action"
+msgstr ""
+
+#: include/otw_sidebar_action.php:93
+#@ otw_sbm
+msgid "Confirm"
+msgstr ""
+
+#: include/otw_sidebar_options.php:109
+#: otw_sidebar_manager.php:148
+#@ otw_sbm
+msgid "Plugin Options"
+msgstr ""
+
+#: include/otw_sidebar_options.php:120
+#@ otw_sbm
+msgid "Enable widgets management"
+msgstr ""
+
+#: include/otw_sidebar_options.php:121
+#@ otw_sbm
+msgid "Control every single widgets visibility on different pages, post, categories, tags, custom post types and taxonomies. When widget control is enabled it will add a button called Set Visibility at the bottom of each widgets panel (Appearance -> Widgets).  You can choose where is the widget displayed on or hidden from."
+msgstr ""
+
+#: include/otw_sidebar_options.php:190
+#@ otw_sbm
+msgid "Save Options"
+msgstr ""
+
+#: include/otw_widget_dialog.php:17
+#@ otw_sbm
+msgid "Invalid sidebar or widget"
+msgstr ""
+
+#: include/otw_widget_dialog.php:248
+#@ otw_sbm
+msgid "A selected page template includes all pages using that template."
+msgstr ""
+
+#: include/otw_widget_dialog.php:249
+#@ otw_sbm
+msgid "Template hierarchy Page includes all pages."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:16
+#: include/otw_labels/otw_sbm_form_object.labels.php:53
+#: otw_sidebar_manager.php:15
+#: otw_sidebar_manager.php:28
+#: otw_sidebar_manager.php:39
+#: otw_sidebar_manager.php:44
+#@ otw_sbm
+msgid "Pages"
+msgstr ""
+
+#: otw_sidebar_manager.php:15
+#@ otw_sbm
+msgid "All pages"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:17
+#: include/otw_labels/otw_sbm_form_object.labels.php:54
+#: otw_sidebar_manager.php:16
+#: otw_sidebar_manager.php:29
+#: otw_sidebar_manager.php:40
+#: otw_sidebar_manager.php:45
+#@ otw_sbm
+msgid "Posts"
+msgstr ""
+
+#: otw_sidebar_manager.php:16
+#@ otw_sbm
+msgid "All posts"
+msgstr ""
+
+#: otw_sidebar_manager.php:17
+#@ otw_sbm
+msgid "All posts from category"
+msgstr ""
+
+#: otw_sidebar_manager.php:17
+#@ otw_sbm
+msgid "All categories"
+msgstr ""
+
+#: otw_sidebar_manager.php:18
+#@ otw_sbm
+msgid "All tags"
+msgstr ""
+
+#: otw_sidebar_manager.php:22
+#@ otw_sbm
+msgid "Template Hierarchy"
+msgstr ""
+
+#: otw_sidebar_manager.php:22
+#@ otw_sbm
+msgid "All templates"
+msgstr ""
+
+#: otw_sidebar_manager.php:23
+#@ otw_sbm
+msgid "Page Templates"
+msgstr ""
+
+#: otw_sidebar_manager.php:23
+#@ otw_sbm
+msgid "All page templates"
+msgstr ""
+
+#: otw_sidebar_manager.php:24
+#@ otw_sbm
+msgid "Archives"
+msgstr ""
+
+#: otw_sidebar_manager.php:24
+#@ otw_sbm
+msgid "All archives"
+msgstr ""
+
+#: otw_sidebar_manager.php:290
+#: otw_sidebar_manager.php:299
+#@ otw_sbm
+msgid "All "
+msgstr ""
+
+#: otw_sidebar_manager.php:145
+#@ otw_sbm
+msgid "Sidebars and Widgets"
+msgstr ""
+
+#: otw_sidebar_manager.php:146
+#@ otw_sbm
+msgid "Sidebars"
+msgstr ""
+
+#: otw_sidebar_manager.php:149
+#@ otw_sbm
+msgid "Set up widget appearance"
+msgstr ""
+
+#: otw_sidebar_manager.php:150
+#@ otw_sbm
+msgid "Manage widget"
+msgstr ""
+
+#: include/otw_list_sidebars.php:20
+#@ otw_sbm
+msgid "Sidebar saved."
+msgstr ""
+
+#: include/otw_list_sidebars.php:21
+#@ otw_sbm
+msgid "Sidebar deleted."
+msgstr ""
+
+#: include/otw_list_sidebars.php:22
+#@ otw_sbm
+msgid "Sidebar activated."
+msgstr ""
+
+#: include/otw_list_sidebars.php:23
+#@ otw_sbm
+msgid "Sidebar deactivated."
+msgstr ""
+
+#: include/otw_list_sidebars.php:39
+#@ otw_sbm
+msgid "Add New"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:113
+#@ otw_sbm
+msgid "Back To Available Sidebars"
+msgstr ""
+
+#: include/otw_sbm_core.php:746
+#@ otw_sbm
+msgid "Daily"
+msgstr ""
+
+#: include/otw_sbm_core.php:746
+#@ otw_sbm
+msgid "Monthly"
+msgstr ""
+
+#: include/otw_sbm_core.php:746
+#@ otw_sbm
+msgid "Yearly"
+msgstr ""
+
+#: include/otw_sbm_core.php:763
+#@ otw_sbm
+msgid "Home"
+msgstr ""
+
+#: include/otw_sbm_core.php:764
+#@ otw_sbm
+msgid "Front Page"
+msgstr ""
+
+#: include/otw_sbm_core.php:765
+#@ otw_sbm
+msgid "Error 404 Page"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:142
+#: include/otw_sbm_core.php:766
+#: include/otw_sbm_core.php:1671
+#: include/otw_widget_dialog.php:265
+#@ otw_sbm
+msgid "Search"
+msgstr ""
+
+#: include/otw_sbm_core.php:767
+#@ otw_sbm
+msgid "Date"
+msgstr ""
+
+#: include/otw_sbm_core.php:768
+#@ otw_sbm
+msgid "Author"
+msgstr ""
+
+#: include/otw_sbm_core.php:769
+#@ otw_sbm
+msgid "Category"
+msgstr ""
+
+#: include/otw_sbm_core.php:770
+#@ otw_sbm
+msgid "Tag"
+msgstr ""
+
+#: include/otw_sbm_core.php:771
+#@ otw_sbm
+msgid "Taxonomy"
+msgstr ""
+
+#: include/otw_sbm_core.php:772
+#@ otw_sbm
+msgid "Archive"
+msgstr ""
+
+#: include/otw_sbm_core.php:773
+#@ otw_sbm
+msgid "Singular"
+msgstr ""
+
+#: include/otw_sbm_core.php:774
+#@ otw_sbm
+msgid "Attachment"
+msgstr ""
+
+#: include/otw_sbm_core.php:775
+#@ otw_sbm
+msgid "Page"
+msgstr ""
+
+#: include/otw_sbm_core.php:1000
+#@ otw_sbm
+msgid "Insert Row"
+msgstr ""
+
+#: include/otw_sidebar_action.php:64
+#@ otw_sbm
+msgid "Back To List Of Sidebars"
+msgstr ""
+
+#: include/otw_sidebar_options.php:97
+#@ otw_sbm
+msgid "Options saved"
+msgstr ""
+
+#: include/otw_functions.php:242
+#@ otw_sbm
+msgid "WPML plugin language"
+msgstr ""
+
+#: include/otw_functions.php:243
+#@ otw_sbm
+msgid "All WPML plugin languages"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:199
+#: include/otw_sidebar_action.php:76
+#@ otw_sbm
+msgid "Sidebar title"
+msgstr ""
+
+#: include/otw_process_actions.php:223
+#@ otw_sbm
+msgid "DB Error: "
+msgstr ""
+
+#: include/otw_sbm_core.php:1550
+#@ default
+msgid "Not Logged in"
+msgstr ""
+
+#: include/otw_sbm_core.php:1565
+#@ otw_sbm
+msgid "Logged in as "
+msgstr ""
+
+#: otw_sidebar_manager.php:18
+#@ otw_sbm
+msgid "All posts from tag"
+msgstr ""
+
+#: otw_sidebar_manager.php:25
+#@ otw_sbm
+msgid "User roles/Logged in as"
+msgstr ""
+
+#: otw_sidebar_manager.php:25
+#@ otw_sbm
+msgid "All roles"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:162
+#: include/otw_widget_dialog.php:285
+#: otw_sidebar_manager.php:303
+#@ otw_sbm
+msgid "All"
+msgstr ""
+
+#: otw_sidebar_manager.php:303
+#@ otw_sbm
+msgid "from taxonomy"
+msgstr ""
+
+#: include/otw_functions.php:248
+#@ otw_sbm
+msgid "bbPress pages"
+msgstr ""
+
+#: include/otw_functions.php:249
+#@ otw_sbm
+msgid "All bbPress pages"
+msgstr ""
+
+#: include/otw_functions.php:254
+#@ otw_sbm
+msgid "BuddyPress pages"
+msgstr ""
+
+#: include/otw_functions.php:255
+#@ otw_sbm
+msgid "All BuddyPress pages"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:2
+#: include/otw_labels/otw_sbm_form_object.labels.php:39
+#@ otw_sbm
+msgid "Select default or custom settings"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:3
+#: include/otw_labels/otw_sbm_form_object.labels.php:40
+#@ otw_sbm
+msgid "Default means that you want to apply the default settings for the OTW Content sidebars set in the left WP menu. Custom measns the settings will apply form what you set bellow."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:4
+#: include/otw_labels/otw_sbm_form_object.labels.php:41
+#@ otw_sbm
+msgid "OTW Sidebars Configuration"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:5
+#: include/otw_labels/otw_sbm_form_object.labels.php:42
+#@ otw_sbm
+msgid "Choose sidebar configuration."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:6
+#: include/otw_labels/otw_sbm_form_object.labels.php:43
+#@ otw_sbm
+msgid "OTW Primary Sidebar"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:7
+#: include/otw_labels/otw_sbm_form_object.labels.php:44
+#@ otw_sbm
+msgid "Choose what sidebar should be displayed as OTW Primary sidebar."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:8
+#: include/otw_labels/otw_sbm_form_object.labels.php:45
+#@ otw_sbm
+msgid "OTW Secondary Sidebar"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:9
+#: include/otw_labels/otw_sbm_form_object.labels.php:46
+#@ otw_sbm
+msgid "OTW Primary Sidebar Width"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:10
+#: include/otw_labels/otw_sbm_form_object.labels.php:47
+#@ otw_sbm
+msgid "Choose the width for your Primary sidebar in columns. The whole content area including sidebars is 24 columns."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:11
+#: include/otw_labels/otw_sbm_form_object.labels.php:48
+#@ otw_sbm
+msgid "OTW Secondary Sidebar Width"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:12
+#: include/otw_labels/otw_sbm_form_object.labels.php:49
+#@ otw_sbm
+msgid "Choose the width for your Secondary sidebar in columns. The whole content area including sidebars is 24 columns."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:13
+#: include/otw_labels/otw_sbm_form_object.labels.php:50
+#@ otw_sbm
+msgid "OTW Content Sidebars are positions that you can set and use to add sidebars to your pages/posts. Bellow you set the defaults for you post and pages. If you want a different configuration for a certain page or post you can override defaults from the OTW Content Sidebar metabox when you edit that page or post."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:14
+#: include/otw_labels/otw_sbm_form_object.labels.php:51
+#@ otw_sbm
+msgid "default settings for OTW Content Sidebars"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:15
+#: include/otw_labels/otw_sbm_form_object.labels.php:52
+#@ otw_sbm
+msgid "Save Default Settings"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:18
+#: include/otw_labels/otw_sbm_form_object.labels.php:55
+#@ otw_sbm
+msgid "OTW Content Sidebars"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:19
+#: include/otw_labels/otw_sbm_form_object.labels.php:56
+#@ otw_sbm
+msgid "Default settings saved!"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:20
+#: include/otw_labels/otw_sbm_form_object.labels.php:57
+#@ otw_sbm
+msgid "none"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:21
+#: include/otw_labels/otw_sbm_form_object.labels.php:58
+#@ otw_sbm
+msgid "default"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:22
+#: include/otw_labels/otw_sbm_form_object.labels.php:59
+#@ otw_sbm
+msgid "Default"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_content_sidebars_object.labels.php:23
+#: include/otw_labels/otw_sbm_form_object.labels.php:60
+#@ otw_sbm
+msgid "Custom"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:2
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:2
+#@ otw_sbm
+msgid "Save"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:3
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:3
+#@ otw_sbm
+msgid "Save current page as Template"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:4
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:4
+#@ otw_sbm
+msgid "Quick Load Template"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:5
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:5
+#: include/otw_labels/otw_sbm_shortcode_object.labels.php:10
+#@ otw_sbm
+msgid "Close"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:6
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:6
+#@ otw_sbm
+msgid "Empty Row"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:7
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:7
+#@ otw_sbm
+msgid "Add Column"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:8
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:8
+#@ otw_sbm
+msgid "Please type template name"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:9
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:9
+#@ otw_sbm
+msgid "Content Row"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:10
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:10
+#@ otw_sbm
+msgid "Add"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:11
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:11
+#@ otw_sbm
+msgid "Clone"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:13
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:13
+#@ otw_sbm
+msgid "Decrease width"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:14
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:14
+#@ otw_sbm
+msgid "Increase width"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:16
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:16
+#@ otw_sbm
+msgid "Add item"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:17
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:17
+#@ otw_sbm
+msgid "Add column"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:18
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:18
+#@ otw_sbm
+msgid "The row is already full."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:19
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:19
+#@ otw_sbm
+msgid "Please confirm to remove the row"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:20
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:20
+#@ otw_sbm
+msgid "Please confirm to remove the column"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:21
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:21
+#@ otw_sbm
+msgid "Update"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:22
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:22
+#@ otw_sbm
+msgid "Modify"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:23
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:23
+#@ otw_sbm
+msgid "Please confirm to remove the shortcode"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:24
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:24
+#@ otw_sbm
+msgid "Row with columns"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:25
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:25
+#@ otw_sbm
+msgid " is not valid"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:26
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:26
+#@ otw_sbm
+msgid "Can not add column "
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:27
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:27
+#@ otw_sbm
+msgid "Can not replace "
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:28
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:28
+#@ otw_sbm
+msgid " with "
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:29
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:29
+#@ otw_sbm
+msgid "OTW Grid Manager"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:30
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:30
+#@ otw_sbm
+msgid "Info"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:31
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:31
+#@ otw_sbm
+msgid "Add Row"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:32
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:32
+#@ otw_sbm
+msgid "Templates"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:33
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:33
+#@ otw_sbm
+msgid "Add some rows and columns in the rows. Then you will be able to add items (actual content) in the columns.<br />You can clone every row or column with all content in it by clicking the Clone button for each row/column.<br />Once you build your layout you can save it so you can use it for another page."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:34
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:34
+#@ otw_sbm
+msgid "Choose column type"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:35
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:35
+#@ otw_sbm
+msgid "Advanced settings"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:36
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:36
+#@ otw_sbm
+msgid "Mobile Grid"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:37
+#: include/otw_labels/otw_sbm_grid_manager_object.labels.php:37
+#@ otw_sbm
+msgid "The grid has two modes of adapting for small displays like phones.<br />The first requires no work at all - the grid will linearize on a small device so your columns stack vertically (all in one column). If you don’t know what you are doing leave it as is and it should be all fine.<br />The other mode can take your existing grid elements and attach them to a six column phone grid. This means you can have 1, 2 or 3 columns on mobile devices. Note that you need to have all columns in a given row set up correctly in order to make it work.<br />Here is an example of two columns in a row.<br />This is correct: 1/2 +1/2<br />This is incorrect: 2/3 + 1/2 because it is more than a full row<br />This is incorrect: 1/3 + 1/3 because it doesn’t make a full row."
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:62
+#: include/otw_labels/otw_sbm_shortcode_object.labels.php:4
+#@ otw_sbm
+msgid "Options"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:63
+#: include/otw_labels/otw_sbm_shortcode_object.labels.php:5
+#@ otw_sbm
+msgid "Preview"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:64
+#: include/otw_labels/otw_sbm_shortcode_object.labels.php:6
+#@ otw_sbm
+msgid "Custom Options"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:65
+#: include/otw_labels/otw_sbm_shortcode_object.labels.php:7
+#@ otw_sbm
+msgid "Invalid shortcode"
+msgstr ""
+
+#: include/otw_labels/otw_sbm_form_object.labels.php:67
+#: include/otw_labels/otw_sbm_shortcode_object.labels.php:9
+#@ otw_sbm
+msgid "Sidebar is required field"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:146
+#: include/otw_widget_dialog.php:269
+#@ otw_sbm
+msgid "reset"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:149
+#: include/otw_widget_dialog.php:272
+#@ otw_sbm
+msgid "Order"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:160
+#: include/otw_widget_dialog.php:283
+#@ otw_sbm
+msgid "Show"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:163
+#: include/otw_widget_dialog.php:286
+#@ otw_sbm
+msgid "All Selected"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:164
+#: include/otw_widget_dialog.php:287
+#@ otw_sbm
+msgid "All Unselected"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:170
+#: include/otw_widget_dialog.php:294
+#@ otw_sbm
+msgid "Select All"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:172
+#: include/otw_widget_dialog.php:296
+#@ otw_sbm
+msgid "Unselect All"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:175
+#: include/otw_widget_dialog.php:299
+#@ otw_sbm
+msgid "items are"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:175
+#: include/otw_widget_dialog.php:299
+#@ otw_sbm
+msgid "item is"
+msgstr ""
+
+#: include/otw_manage_sidebar.php:175
+#: include/otw_widget_dialog.php:299
+#@ otw_sbm
+msgid "selected"
+msgstr ""
+
+#: include/otw_sbm_core.php:1668
+#@ otw_sbm
+msgid "Forums"
+msgstr ""
+
+#: include/otw_sbm_core.php:1669
+#@ otw_sbm
+msgid "Topics no reply"
+msgstr ""
+
+#: include/otw_sbm_core.php:1670
+#@ otw_sbm
+msgid "Topics popular"
+msgstr ""
+
+#: include/otw_sbm_core.php:1672
+#@ otw_sbm
+msgid "User pages"
+msgstr ""
+
+#: include/otw_sbm_core.php:1733
+#@ otw_sbm
+msgid "page"
+msgstr ""
+
+#: include/otw_sbm_core.php:1736
+#@ otw_sbm
+msgid "pages"
+msgstr ""
+
+#: include/otw_sbm_core.php:2320
+#: include/otw_sbm_core.php:2335
+#: include/otw_sbm_core.php:2340
+#: include/otw_sbm_core.php:2347
+#@ otw_sbm
+msgid "Alphabetically: A-Z"
+msgstr ""
+
+#: include/otw_sbm_core.php:2321
+#: include/otw_sbm_core.php:2336
+#: include/otw_sbm_core.php:2341
+#: include/otw_sbm_core.php:2348
+#@ otw_sbm
+msgid "Alphabetically: Z-A"
+msgstr ""
+
+#: include/otw_sbm_core.php:2322
+#: include/otw_sbm_core.php:2342
+#: include/otw_sbm_core.php:2349
+#@ otw_sbm
+msgid "Latest created"
+msgstr ""
+
+#: include/otw_sbm_core.php:2323
+#: include/otw_sbm_core.php:2343
+#: include/otw_sbm_core.php:2350
+#@ otw_sbm
+msgid "Oldest created"
+msgstr ""
+
+#: include/otw_sbm_core.php:2324
+#: include/otw_sbm_core.php:2344
+#@ otw_sbm
+msgid "Latest Modified"
+msgstr ""
+
+#: include/otw_sbm_core.php:2325
+#: include/otw_sbm_core.php:2345
+#@ otw_sbm
+msgid "Oldest Modified"
+msgstr ""
+
+#: include/otw_sbm_items_by_type.php:290
+#: include/otw_sbm_items_by_type.php:337
+#@ otw_sbm
+msgid "First"
+msgstr ""
+
+#: include/otw_sbm_items_by_type.php:293
+#: include/otw_sbm_items_by_type.php:340
+#@ otw_sbm
+msgid "Previous"
+msgstr ""
+
+#: include/otw_sbm_items_by_type.php:299
+#: include/otw_sbm_items_by_type.php:346
+#@ otw_sbm
+msgid "Next"
+msgstr ""
+
+#: include/otw_sbm_items_by_type.php:302
+#: include/otw_sbm_items_by_type.php:349
+#@ otw_sbm
+msgid "Last"
+msgstr ""
+
+#: include/otw_sbm_items_by_type.php:307
+#: include/otw_sbm_items_by_type.php:354
+#@ otw_sbm
+msgid "Items on Page"
+msgstr ""
+
+#: include/otw_sidebar_options.php:124
+#@ otw_sbm
+msgid "Items per page default"
+msgstr ""
+
+#: include/otw_sidebar_options.php:137
+#@ otw_sbm
+msgid "This is the default number of items to show in the lists when you add/eddit sidebars and set widget visibility."
+msgstr ""
+
+#: include/otw_sidebar_options.php:140
+#@ otw_sbm
+msgid "Show Insert Sidebar Shortcode button in the editor for"
+msgstr ""
+
+#: include/otw_sidebar_options.php:151
+#@ otw_sbm
+msgid "Show OTW Grid Manger metabox in"
+msgstr ""
+
+#: include/otw_sidebar_options.php:162
+#@ otw_sbm
+msgid "Show OTW Content Sidebars metabox in"
+msgstr ""
+
+#: include/otw_sidebar_options.php:174
+#@ otw_sbm
+msgid "Enable old grid"
+msgstr ""
+
+#: include/otw_sidebar_options.php:175
+#@ otw_sbm
+msgid "This will enable the old grid system interface and css classes used in plugin versions before 3.0. This option will be available for some time and then we will move to the new grid only. This is to make sure that all users have time to switch to the new grid system."
+msgstr ""
+
+#: include/otw_sidebar_options.php:178
+#@ otw_sbm
+msgid "New sidebar settings"
+msgstr ""
+
+#: include/otw_sidebar_options.php:179
+#@ otw_sbm
+msgid "The following are the default settings for a new sidebar created with this plugin. Note that these will not affect any sidebar replacing an existing theme sidebar. The settings for such sidebars come from the theme. We do that to make sure the replaced sidebar will have the exact same styles as the original one."
+msgstr ""
+
+#: include/otw_widget_dialog.php:25
+#@ otw_sbm
+msgid "Requested not registered sidebar |"
+msgstr ""
+
+#: include/otw_widget_dialog.php:38
+#@ otw_sbm
+msgid "Requested widget is not assinged to this sidebar |"
+msgstr ""
+
+#: otw_sidebar_manager.php:19
+#@ otw_sbm
+msgid "Categories archives"
+msgstr ""
+
+#: otw_sidebar_manager.php:19
+#@ otw_sbm
+msgid "All categories archives"
+msgstr ""
+
+#: otw_sidebar_manager.php:20
+#@ otw_sbm
+msgid "Tags archives"
+msgstr ""
+
+#: otw_sidebar_manager.php:20
+#@ otw_sbm
+msgid "All tags archives"
+msgstr ""
+
+#: otw_sidebar_manager.php:21
+#@ otw_sbm
+msgid "Author archives"
+msgstr ""
+
+#: otw_sidebar_manager.php:21
+#@ otw_sbm
+msgid "All author archives"
+msgstr ""
+
+#: otw_sidebar_manager.php:30
+#: otw_sidebar_manager.php:41
+#: otw_sidebar_manager.php:46
+#@ otw_sbm
+msgid "Custom Post Types"
+msgstr ""
+
+#: otw_sidebar_manager.php:33
+#@ otw_sbm
+msgid "HTML to be placed before every widget."
+msgstr ""
+
+#: otw_sidebar_manager.php:34
+#@ otw_sbm
+msgid "HTML to be placed after every widget."
+msgstr ""
+
+#: otw_sidebar_manager.php:35
+#@ otw_sbm
+msgid "HTML to be placed before every widget title."
+msgstr ""
+
+#: otw_sidebar_manager.php:36
+#@ otw_sbm
+msgid "HTML to be placed after every widget title."
+msgstr ""
+
+#: otw_sidebar_manager.php:299
+#@ otw_sbm
+msgid "archives"
+msgstr ""
+
+#: otw_sidebar_manager.php:324
+#@ otw_sbm
+msgid "OTW Sidebar"
+msgstr ""
+
+#: templates/otw-full-width-page.php:32
+#@ otw_sbm
+msgid "Sorry, nothing to display."
+msgstr ""
+

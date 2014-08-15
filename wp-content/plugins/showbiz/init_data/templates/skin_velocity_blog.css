@@ -1,0 +1,74 @@
+/********************************************
+
+	STYLE SETTINGS FOR THE VELOCITY BLOG SKIN
+
+*********************************************/
+
+[itemid].showbiz-container{
+	max-width:1170px;
+	min-width:300px;
+}
+
+[itemid] .showbiz-title				{
+                                        margin-top:10px;
+                                        text-align:center;
+                                    }
+
+[itemid] .showbiz-title,
+[itemid] .showbiz-title a,
+[itemid] .showbiz-title a:visited,
+[itemid] .showbiz-title a:hover		{
+                                            color:#111;
+                                            font-family: 'Open Sans', sans-serif;
+                                            font-size:18px;
+ 											line-height: 22px;
+                                            text-transform:none;
+                                            text-decoration: none;
+                                            font-weight:300;
+                                    }
+
+[itemid] .showbiz-description		{
+                                        margin-top:7px;
+                                        text-align:center;
+                                        font-size:13px;
+                                        line-height:22px;
+                                        color:#aaa;
+                                        font-family: 'Open Sans', sans-serif;
+
+                                    }
+[itemid] .showbiz-description a, 
+[itemid] .showbiz-description a:visited	{ color: #aaa; }
+ 
+[itemid] .showbiz-description a:hover	{ color: #aaa; }
+
+[itemid]  .detailholder				{   border: 1px solid #e5e5e5;
+  border-top: 0;
+-webkit-border-bottom-right-radius: 5px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomright: 5px;
+-moz-border-radius-bottomleft: 5px;
+border-bottom-right-radius: 5px;
+border-bottom-left-radius: 5px;
+  padding: 20px; 
+  padding-top: 11px;
+  padding-bottom: 19px;
+  box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;
+}
+
+[itemid]  .mediaholder 				{	
+                                      -webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius: 0;
+                                       -webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+                                       
+                                    }
+
+[itemid]  .hovercover				{	background:rgba(0,0,0,0.5);  }
+
+[itemid] li:hover .mediaholder img  {	
+                                    }

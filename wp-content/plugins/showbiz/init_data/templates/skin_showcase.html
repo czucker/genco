@@ -1,0 +1,66 @@
+<!-- SPECIAL CLASSES:
+go-to-top -> Moves Caption to the Top Position after Hover,
+tofullwidth -> opens the Reveal (hidden container) to fullwidth
+reveal_wrapper -> The Hidden Content which is shown after click on openme,
+openme, closeme -> The open , close icon in for show/hide the Hidden Content,
+reveal_opener -> The Wrapper for the open/close Buttons,
+show_on_hover -> Show the reveal_opener only if mouse is hovering the teaser
+heightadjuster -> Reveal Container will fit with best height always
+table -> display:table setting
+table-cell -> display:table-cell setting
+onethird -> makes a 33% width of table cell
+has been used. See Documentation for More Info
+-->
+
+<!-- THE MEDIA HOLDER HERE -->
+<div class="mediaholder ">
+	<div class="mediaholder_innerwrap">
+		<img alt="" src="[showbiz_image]">
+	</div>
+</div><!-- END OF MEDIA CONTAINER -->
+
+<!-- SOME ALWAYS VISIBLE CONTENT -->
+<div class="detailholder">
+  <h4 class="showbiz-title txt-center"><a href="[showbiz_link]">[showbiz_title]</a></h4>
+	<div class="divide5"></div>
+	<p class="txt-center">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.</p>
+</div><!-- END OF DEATIL CONTAINER -->
+
+<!-- THE REVEAL CONTAINER - OPENING IN FULLWIDTH -->
+<div class="reveal_container tofullwidth">
+
+	<!-- THE REVEL HIDDEN / VISIBLE CONTAINER -->
+	<div class="reveal_wrapper">
+		<!-- THE HEIGHT ADJUSTER CONTAINER -->
+		<div class="heightadjuster table">
+
+			<!-- TABLE CONSTRUCT FOR LEFT / RIGHT CONTENTS -->
+			<div class="table-cell onethird">
+					<img alt="" src="[showbiz_image]" width="100%">
+			</div>
+
+			<!-- CONTENT IN TABLE -->
+			<div class="table-cell pl20">
+              <h3 class="showbiz-title large"><a href="[showbiz_link]">[showbiz_title]</a></h3>
+				<div class="divide20"></div>
+				<p>[showbiz_excerpt]</p>
+				<div class="divide20"></div>
+				<p class="orange bigger bolder">Special Offer:</p>
+				<div class="showbiz-price">
+                  <span class="currency">$</span>
+                  <span class="number">[showbiz_price]</span>
+                </div>
+				<div class="divide20"></div>
+                <a class="showbiz-button">Purchase Now</a>
+			</div><!-- END OF CONTENT  -->
+
+		</div><!-- END OF HEIGHT ADJUSTER CONTAINER -->
+	</div><!-- END OF REVEAL HIDDEN/VISIBLE CONTAINER -->
+
+	<!-- THE CLOSER / OPENER FUNCTION -->
+	<a class="reveal_opener">
+		<span class="openme">+</span>
+		<span class="closeme">-</span>
+	</a><!-- END OF CLOSER / OPENER -->
+
+</div><!-- END OF THE REVEAL CONTAINER -->

@@ -1,0 +1,64 @@
+.btn_blogger-sign-in, .btn_facebook-sign-in, .btn_foursquare-sign-in, .btn_github-sign-in, .btn_google_plus-sign-in, .btn_linkedin-sign-in, .btn_openid-sign-in, .btn_paypal-sign-in, .btn_twitter-sign-in, .btn_wordpress-sigin-in{
+	background: url(modal-login-sprite1.png) no-repeat;
+}
+
+.btn_blogger-sign-in{
+	background-position: 0 -444px ;
+	width: 190px;
+	height: 36px;
+}
+
+.btn_facebook-sign-in{
+	background-position: 0 -47px ;
+	width: 190px;
+	height: 36px;
+}
+
+.btn_foursquare-sign-in{
+	background-position: 0 -348px ;
+	width: 190px;
+	height: 36px;
+}
+
+.btn_github-sign-in{
+	background-position: 0 -301px ;
+	width: 190px;
+	height: 36px;
+}
+
+.btn_google_plus-sign-in{
+	background-position: 0 -98px ;
+	width: 190px;
+	height: 36px;
+}
+
+.btn_linkedin-sign-in{
+	background-position: 0 -146px ;
+	width: 190px;
+	height: 36px;
+}
+
+.btn_openid-sign-in{
+	background-position: 0 -251px ;
+	width: 190px;
+	height: 36px;
+}
+
+.btn_paypal-sign-in{
+	background-position: 0 -199px ;
+	width: 190px;
+	height: 36px;
+}
+
+.btn_twitter-sign-in{
+	background-position: 0 0;
+	width: 190px;
+	height: 36px;
+}
+
+.btn_wordpress-sigin-in{
+	background-position: 0 -396px ;
+	width: 190px;
+	height: 36px;
+}
+

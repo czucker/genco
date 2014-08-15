@@ -1,0 +1,36 @@
+div.otw-sidebar-horizontal{
+	width: 100%;
+	float: left;
+}
+div.otw-sidebar-horizontal div.widget{
+	float: left;
+	clear: none !important;
+}
+div.sbm-onecol-one{width:100%;}
+div.sbm-twocol-one{width:49%;}
+div.sbm-threecol-one{width:30.66%;}
+div.sbm-threecol-two{width:65.33%;}
+div.sbm-threecol-one{width:32%;}
+div.sbm-threecol-two{width:66%;}
+div.sbm-fourcol-one{width:23.5%;}
+div.sbm-fourcol-two{width:48%;}
+div.sbm-fourcol-three{width:74.5%;}
+div.sbm-fivecol-one{width:18.4%;}
+div.sbm-fivecol-two{width:38.8%;}
+div.sbm-fivecol-three{width:59.2%;}
+div.sbm-fivecol-four{width:79.6%;}
+div.sbm-sixcol-one{width:15%;}
+div.sbm-sixcol-two{width:32%;}
+div.sbm-sixcol-three{width:49%;}
+div.sbm-sixcol-four{width:66%;}
+div.sbm-sixcol-five{width:83%;}
+div.sbm-onecol-one,div.sbm-twocol-one,div.sbm-threecol-one,div.sbm-threecol-two,div.sbm-fourcol-one,div.sbm-fourcol-two,div.sbm-fourcol-three,div.sbm-fivecol-one,div.sbm-fivecol-two,div.sbm-fivecol-three,div.sbm-fivecol-four,div.sbm-sixcol-one,div.sbm-sixcol-two,div.sbm-sixcol-three,div.sbm-sixcol-four,div.sbm-sixcol-five{
+	float:left;
+	position:relative;
+	display:block;
+	margin:10px 2% 10px 0;
+}
+div.last{
+	clear:right !important;
+	margin-right:0 !important;
+}

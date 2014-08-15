@@ -1,0 +1,75 @@
+/**************************************
+
+	STYLE SETTINGS FOR LIGHT SKIN
+
+***************************************/
+
+[itemid].showbiz-container	{
+                            	max-width:1210px;
+                              	min-width:300px;
+                         	 }
+
+[itemid] .showbiz-title		{
+                              	margin-top:10px;
+                                text-align:center;
+                            }
+
+[itemid] .showbiz-videosrc	{	width:100%;min-height:100px;max-height:250px;height:100%; }
+
+[itemid] .showbiz-title,
+[itemid] .showbiz-title a,
+[itemid] .showbiz-title a:visited,
+[itemid] .showbiz-title a:hover	{
+                                color:#555;
+                                font-family: 'Open Sans', sans-serif;
+                                font-size:14px;
+                                text-transform:uppercase;
+                                text-decoration: none;
+                                font-weight:700;
+                                        margin-bottom:0px !important;
+                        }
+
+[itemid] .showbiz-description{
+                                margin-top:10px;
+                                text-align:center;
+                                font-size:13px;
+                                line-height:22px;
+                                color:#777;
+                                font-family: 'Open Sans', sans-serif;
+                            }
+
+[itemid]  ul li {
+                                margin-right:20px;                              
+
+                          }
+
+
+[itemid]  .detailholder	{
+                                background-color:#f5f5f5;
+                                padding:10px 20px 10px;
+                                border-radius:0px 0px 6px 6px;
+                                -moz-border-radius:0px 0px 6px 6px;
+                                -webkit-border-radius:0px 0px 6px 6px;
+								border-left: 1px solid #e8e8e8;
+								border-right: 1px solid #e8e8e8;
+								border-bottom: 1px solid #e8e8e8;
+                            }
+
+[itemid]  .mediaholder_innerwrap  {
+                                border-radius:6px 6px 0px 0px;
+                                -moz-border-radius:6px 6px 0px 0px;
+                                -webkit-border-radius:6px 6px 0px 0px;
+                                }
+
+[itemid]  .hovercover	{
+                                background:rgba(0,168,255,0.75);
+                                border-radius:6px 6px 0px 0px;
+                                -moz-border-radius:6px 6px 0px 0px;
+                                -webkit-border-radius:6px 6px 0px 0px;
+                      }
+
+[itemid]  .reveal_wrapper	{
+                                border-radius:6px;
+                                -moz-border-radius:6px;
+                                -webkit-border-radius:6px;
+                                }
