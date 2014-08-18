@@ -1,5 +1,9 @@
 <?php
-add_filter('get_the_excerpt', 'do_my_shortcode_in_excerpt');
-function do_my_shortcode_in_excerpt($excerpt) {
-    return do_shortcode(wp_trim_words(get_the_content(), 55));
+function my_highend_child_theme_setup() {
+   remove_shortcode( 'blog_carousel' );
+   add_shortcode( 'blog_carousel', 'my_highend_blog_carousel' );
 }
+function my_highend_blog_carousel( $atts, $content = null ) {
+    $output .= '<p>' . get_the_excerpt() . '</p>';
+}
+?>

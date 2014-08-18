@@ -1088,8 +1088,8 @@ function hb_blog_carousel_shortcode($params = array(), $content = null) {
 		}
 
 		$output .= '<div class="blog-list-item-excerpt">';
-		$output .= '<p>' . get_the_excerpt() . '</p>';
-		//$output .= '<p>' . wp_trim_words( strip_shortcodes( get_the_content() ) , $excerpt_length , NULL) . '</p>';
+		//$output .= '<p>' . get_the_excerpt() . '</p>';
+		$output .= '<p>' . wp_trim_words( strip_shortcodes( get_the_content() ) , $excerpt_length , NULL) . '</p>';
 		if ( $read_more == "yes" )
 			$output .= '<a href="' . get_permalink() . '" class="simple-read-more">Read More</a>';
 		$output .= '</div>';
