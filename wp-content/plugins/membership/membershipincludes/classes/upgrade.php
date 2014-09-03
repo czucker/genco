@@ -1,41 +1,129 @@
 <?php
 
-function M_Upgrade($from = false) {
+function M_get_charset_collate() {
+	global $wpdb;
+	$charset_collate = '';
+	if ( !empty( $wpdb->charset ) ) {
+		$charset_collate = " DEFAULT CHARACTER SET " . $wpdb->charset;
+	}
+	if ( !empty( $wpdb->collate ) ) {
+		$charset_collate .= " COLLATE " . $wpdb->collate;
+	}
 
-	switch($from) {
+	return $charset_collate;
+}
 
+function M_Upgrade( $from = false ) {
+	switch ( $from ) {
+		default:
+		case 0:
+			M_Createtables();
 		case 1:
-		case 2:		M_Alterfor2();
+		case 2:
+			M_Alterfor2();
 
-		case 3:		M_Alterfor3();
+		case 3:
+			M_Alterfor3();
 
 		case 4:
-		case 5:		M_Alterfor4();
+		case 5:
+			M_Alterfor4();
 
-		case 6:		M_Alterfor5();
+		case 6:
+			M_Alterfor5();
 
-		case 7:		M_Alterfor6();
+		case 7:
+			M_Alterfor6();
 
 		case 8:
 		case 9:
-					M_Alterfor10();
+			M_Alterfor10();
 
-		case 10:	M_Alterfor11();
+		case 10:
+			M_Alterfor11();
 
-		case 11:	M_Alterfor12();
+		case 11:
+			M_Alterfor12();
 
 		case 12:
-		case 13:	M_Alterfor14();
+		case 13:
+			M_Alterfor14();
 
-					break;
+		case 14:
+			M_Alterfor15();
 
-		case false:	M_Createtables();
-					break;
+		case 15:
+		case 16:
+		case 17:
+			M_Alterfor16();
 
-		default:	M_Createtables();
-					break;
+		case 18:
+		case 19:
+		case 20:
+			M_Alterfor18();
+			M_repair_tables( false );
+			break;
+	}
+}
+/**
+ * Convert Membership tables charset and collate.
+ *
+ * Fix to convert membership tables to default charset and collate defined in wp-config.php.
+ * Before this version, a bug was not considering charset and collate.
+ *
+ */
+function M_Alterfor18() {
+	global $wpdb;
+
+	if ( defined( 'M_LITE' ) ) {
+		return;
+	}
+	$charset_collate = '';
+	if ( !empty( $wpdb->charset ) ) {
+		$charset_collate = $wpdb->charset;
+	}
+	if ( !empty( $wpdb->collate ) ) {
+		$charset_collate .= " COLLATE {$wpdb->collate}";
 	}
 
+	$tables = array(
+			membership_db_prefix( $wpdb, 'communications' ),
+			membership_db_prefix( $wpdb, 'coupons' ),
+			membership_db_prefix( $wpdb, 'levelmeta' ),
+			membership_db_prefix( $wpdb, 'membership_levels' ),
+			membership_db_prefix( $wpdb, 'membership_news' ),
+			membership_db_prefix( $wpdb, 'member_payments' ),
+			membership_db_prefix( $wpdb, 'membership_relationships' ),
+			membership_db_prefix( $wpdb, 'membership_rules' ),
+			membership_db_prefix( $wpdb, 'subscriptions' ),
+			membership_db_prefix( $wpdb, 'subscriptionmeta' ),
+			membership_db_prefix( $wpdb, 'subscriptions_levels' ),
+			membership_db_prefix( $wpdb, 'subscription_transaction' ),
+			membership_db_prefix( $wpdb, 'pings' ),
+			membership_db_prefix( $wpdb, 'ping_history' ),
+			membership_db_prefix( $wpdb, 'urlgroups' ),
+	);
+	if( ! empty( $charset_collate ) )
+	{
+		foreach ( $tables as $table )
+		{
+			$wpdb->query( "ALTER TABLE $table CONVERT TO CHARACTER SET $charset_collate" );
+		}
+	}
+}
+function M_Alterfor16() {
+	global $wpdb;
+
+	$table = membership_db_prefix( $wpdb, 'subscriptions' );
+	$show = $wpdb->get_var( 'SHOW CREATE TABLE ' . $table );
+	if ( stripos( (string)$show, 'order_num' ) === false ) {
+		$wpdb->query( "ALTER TABLE {$table} ADD `order_num` INT NOT NULL DEFAULT 0" );
+	}
+}
+
+function M_Alterfor15() {
+	global $wpdb;
+	$wpdb->query( "ALTER TABLE " . membership_db_prefix( $wpdb, 'communications' ) . " ADD `sub_id` BIGINT  NULL  DEFAULT NULL  AFTER `id`;" );
 }
 
 function M_Alterfor14() {
@@ -49,6 +137,8 @@ function M_Alterfor14() {
 
 function M_Alterfor12() {
 	global $wpdb;
+
+	$charset_collate = M_get_charset_collate();
 
 	$sql = "CREATE TABLE IF NOT EXISTS `" . membership_db_prefix($wpdb, 'coupons') . "` (
 	  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -65,7 +155,7 @@ function M_Alterfor12() {
 	  `coupon_apply_to` varchar(20) DEFAULT NULL,
 	  PRIMARY KEY (`id`),
 	  KEY `couponcode` (`couponcode`)
-	)";
+	) $charset_collate;";
 
 	$wpdb->query( $sql );
 
@@ -91,6 +181,8 @@ function M_Alterfor10() {
 function M_Alterfor6() {
 	global $wpdb;
 
+	$charset_collate = M_get_charset_collate();
+
 	$sql = "ALTER TABLE " . membership_db_prefix($wpdb, 'membership_relationships') . " ADD `usinggateway` varchar(50) NULL DEFAULT 'admin'  AFTER `order_instance`;";
 	$wpdb->query( $sql );
 
@@ -112,7 +204,7 @@ function M_Alterfor6() {
 		`paymentmade` datetime default NULL,
 		`paymentexpires` datetime default NULL,
 		PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -121,13 +213,15 @@ function M_Alterfor6() {
 function M_Alterfor5() {
 	global $wpdb;
 
+	$charset_collate = M_get_charset_collate();
+
 	$sql = "CREATE TABLE IF NOT EXISTS `" . membership_db_prefix($wpdb, 'pings') . "` (
 	  	`id` bigint(20) NOT NULL auto_increment,
 		`pingname` varchar(250) default NULL,
 		`pinginfo` text,
 		`pingtype` varchar(10) default NULL,
 		PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -139,7 +233,7 @@ function M_Alterfor5() {
 		`ping_return` text,
 		PRIMARY KEY  (`id`),
 		KEY `ping_id` (`ping_id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -151,7 +245,7 @@ function M_Alterfor5() {
 		`meta_stamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
 		PRIMARY KEY  (`id`),
 		UNIQUE KEY `level_id` (`level_id`,`meta_key`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -163,13 +257,15 @@ function M_Alterfor5() {
 		`meta_stamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
 		PRIMARY KEY  (`id`),
 		UNIQUE KEY `sub_id` (`sub_id`,`meta_key`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 }
 
 function M_Alterfor4() {
 	global $wpdb;
+
+	$charset_collate = M_get_charset_collate();
 
 	$sql = "CREATE TABLE IF NOT EXISTS `" . membership_db_prefix($wpdb, 'urlgroups') . "` (
 	  `id` bigint(20) NOT NULL auto_increment,
@@ -178,12 +274,13 @@ function M_Alterfor4() {
 	  `isregexp` int(11) default '0',
 	  `stripquerystring` int(11) default '0',
 	  PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
 	$sql = "CREATE TABLE IF NOT EXISTS `" . membership_db_prefix($wpdb, 'communications') . "` (
 	  `id` bigint(11) NOT NULL auto_increment,
+	  `sub_id` bigint(20) DEFAULT NULL,
 	  `subject` varchar(250) default NULL,
 	  `message` text,
 	  `periodunit` int(11) default NULL,
@@ -193,7 +290,7 @@ function M_Alterfor4() {
 	  `active` int(11) default '0',
 	  `periodstamp` bigint(20) default '0',
 	  PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 }
@@ -233,6 +330,8 @@ function M_Createtables() {
 
 	global $wpdb;
 
+	$charset_collate = M_get_charset_collate();
+
 	$sql = "CREATE TABLE IF NOT EXISTS `" . membership_db_prefix($wpdb, 'membership_levels') . "` (
 	  `id` bigint(20) NOT NULL auto_increment,
 	  `level_title` varchar(250) default NULL,
@@ -240,7 +339,7 @@ function M_Createtables() {
 	  `level_active` int(11) default '0',
 	  `level_count` bigint(20) default '0',
 	  PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -258,7 +357,7 @@ function M_Createtables() {
 		KEY `user_id` (`user_id`),
 		KEY `sub_id` (`sub_id`),
 		KEY `usinggateway` (`usinggateway`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -271,7 +370,7 @@ function M_Createtables() {
 	  PRIMARY KEY  (`level_id`,`rule_ive`,`rule_area`),
 	  KEY `rule_area` (`rule_area`),
 	  KEY `rule_ive` (`rule_ive`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -284,7 +383,7 @@ function M_Createtables() {
 	  `sub_description` text,
 	  `sub_pricetext` varchar(200) DEFAULT NULL,
 	  PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -299,7 +398,7 @@ function M_Createtables() {
 		`level_period_unit` varchar(1) default 'd',
 		KEY `sub_id` (`sub_id`),
 		KEY `level_id` (`level_id`)
-		);";
+		) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -321,7 +420,7 @@ function M_Createtables() {
 	  PRIMARY KEY  (`transaction_ID`),
 	  KEY `transaction_gateway` (`transaction_gateway`),
 	  KEY `transaction_subscription_ID` (`transaction_subscription_ID`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -332,12 +431,13 @@ function M_Createtables() {
 	  `isregexp` int(11) default '0',
 	  `stripquerystring` int(11) default '0',
 	  PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
 	$sql = "CREATE TABLE IF NOT EXISTS `" . membership_db_prefix($wpdb, 'communications') . "` (
 	  `id` bigint(11) NOT NULL auto_increment,
+	  `sub_id` bigint(20) DEFAULT NULL,
 	  `subject` varchar(250) default NULL,
 	  `message` text,
 	  `periodunit` int(11) default NULL,
@@ -347,7 +447,7 @@ function M_Createtables() {
 	  `active` int(11) default '0',
 	  `periodstamp` bigint(20) default '0',
 	  PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -358,7 +458,7 @@ function M_Createtables() {
 		`pinginfo` text,
 		`pingtype` varchar(10) default NULL,
 		PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -370,7 +470,7 @@ function M_Createtables() {
 		`ping_return` text,
 		PRIMARY KEY  (`id`),
 		KEY `ping_id` (`ping_id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -382,7 +482,7 @@ function M_Createtables() {
 		`meta_stamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
 		PRIMARY KEY  (`id`),
 		UNIQUE KEY `level_id` (`level_id`,`meta_key`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -394,7 +494,7 @@ function M_Createtables() {
 		`meta_stamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
 		PRIMARY KEY  (`id`),
 		UNIQUE KEY `sub_id` (`sub_id`,`meta_key`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -407,7 +507,7 @@ function M_Createtables() {
 		`paymentmade` datetime default NULL,
 		`paymentexpires` datetime default NULL,
 		PRIMARY KEY  (`id`)
-	);";
+	) $charset_collate;";
 
 	$wpdb->query($sql);
 
@@ -426,7 +526,7 @@ function M_Createtables() {
 	  `coupon_apply_to` varchar(20) DEFAULT NULL,
 	  PRIMARY KEY (`id`),
 	  KEY `couponcode` (`couponcode`)
-	)";
+	) $charset_collate;";
 
 	$wpdb->query( $sql );
 
@@ -436,6 +536,8 @@ function M_Createtables() {
 function M_Create_single_table( $name ) {
 
 	global $wpdb;
+
+	$charset_collate = M_get_charset_collate();
 
 	switch( $name ) {
 
@@ -447,7 +549,7 @@ function M_Create_single_table( $name ) {
 					  `level_active` int(11) default '0',
 					  `level_count` bigint(20) default '0',
 					  PRIMARY KEY  (`id`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'membership_relationships'):
@@ -465,7 +567,7 @@ function M_Create_single_table( $name ) {
 						KEY `user_id` (`user_id`),
 						KEY `sub_id` (`sub_id`),
 						KEY `usinggateway` (`usinggateway`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'membership_rules'):
@@ -478,7 +580,7 @@ function M_Create_single_table( $name ) {
 					  PRIMARY KEY  (`level_id`,`rule_ive`,`rule_area`),
 					  KEY `rule_area` (`rule_area`),
 					  KEY `rule_ive` (`rule_ive`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'subscriptions'):
@@ -490,7 +592,7 @@ function M_Create_single_table( $name ) {
 					  `sub_count` bigint(20) default '0',
 					  `sub_description` text,
 					  PRIMARY KEY  (`id`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'subscriptions_levels'):
@@ -505,7 +607,7 @@ function M_Create_single_table( $name ) {
 						`level_period_unit` varchar(1) default 'd',
 						KEY `sub_id` (`sub_id`),
 						KEY `level_id` (`level_id`)
-						);";
+						) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'subscription_transaction'):
@@ -527,7 +629,7 @@ function M_Create_single_table( $name ) {
 					  PRIMARY KEY  (`transaction_ID`),
 					  KEY `transaction_gateway` (`transaction_gateway`),
 					  KEY `transaction_subscription_ID` (`transaction_subscription_ID`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'urlgroups'):
@@ -538,12 +640,13 @@ function M_Create_single_table( $name ) {
 					  `isregexp` int(11) default '0',
 					  `stripquerystring` int(11) default '0',
 					  PRIMARY KEY  (`id`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'communications'):
 					$sql = "CREATE TABLE IF NOT EXISTS `" . membership_db_prefix($wpdb, 'communications') . "` (
 					  `id` bigint(11) NOT NULL auto_increment,
+					  `sub_id` bigint(20) DEFAULT NULL,
 					  `subject` varchar(250) default NULL,
 					  `message` text,
 					  `periodunit` int(11) default NULL,
@@ -553,7 +656,7 @@ function M_Create_single_table( $name ) {
 					  `active` int(11) default '0',
 					  `periodstamp` bigint(20) default '0',
 					  PRIMARY KEY  (`id`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'pings'):
@@ -564,7 +667,7 @@ function M_Create_single_table( $name ) {
 						`pinginfo` text,
 						`pingtype` varchar(10) default NULL,
 						PRIMARY KEY  (`id`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'ping_history'):
@@ -576,7 +679,7 @@ function M_Create_single_table( $name ) {
 						`ping_return` text,
 						PRIMARY KEY  (`id`),
 						KEY `ping_id` (`ping_id`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'levelmeta'):
@@ -588,7 +691,7 @@ function M_Create_single_table( $name ) {
 						`meta_stamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
 						PRIMARY KEY  (`id`),
 						UNIQUE KEY `level_id` (`level_id`,`meta_key`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'subscriptionmeta'):
@@ -600,7 +703,7 @@ function M_Create_single_table( $name ) {
 						`meta_stamp` timestamp NULL default NULL on update CURRENT_TIMESTAMP,
 						PRIMARY KEY  (`id`),
 						UNIQUE KEY `sub_id` (`sub_id`,`meta_key`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'member_payments'):
@@ -613,7 +716,7 @@ function M_Create_single_table( $name ) {
 						`paymentmade` datetime default NULL,
 						`paymentexpires` datetime default NULL,
 						PRIMARY KEY  (`id`)
-					);";
+					) $charset_collate;";
 					break;
 
 		case membership_db_prefix($wpdb, 'coupons'):
@@ -632,7 +735,7 @@ function M_Create_single_table( $name ) {
 					  `coupon_apply_to` varchar(20) DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  KEY `couponcode` (`couponcode`)
-					)";
+					) $charset_collate;";
 					break;
 
 	}
@@ -642,30 +745,37 @@ function M_Create_single_table( $name ) {
 }
 
 function M_add_possible_missing_fields( $table, $name, $type, $after, $key = false ) {
-
 	global $wpdb;
 
-	switch($name) {
-		case 'usinggateway':	$defaults = $name . " " . $type . " default 'admin' AFTER " . $after;
-								$sql = "ALTER TABLE " . $table . " ADD COLUMN " . $defaults;
-								$wpdb->query( $sql );
-								// Add the key
-								$sql = "ALTER TABLE " . $table . " ADD INDEX  (`" . $name . "`)";
-								$wpdb->query( $sql );
-								break;
+	switch ( $name ) {
+		case 'usinggateway':
+			$defaults = $name . " " . $type . " default 'admin' AFTER " . $after;
+			$sql = "ALTER TABLE " . $table . " ADD COLUMN " . $defaults;
+			$wpdb->query( $sql );
+			// Add the key
+			$sql = "ALTER TABLE " . $table . " ADD INDEX  (`" . $name . "`)";
+			$wpdb->query( $sql );
+			break;
 
-		default:				$defaults = $name . " " . $type . " AFTER " . $after;
-								$sql = "ALTER TABLE " . $table . " ADD COLUMN " . $defaults;
-								$wpdb->query( $sql );
-								if($key) {
-									$sql = "ALTER TABLE " . $table . " ADD INDEX  (`" . $name . "`)";
-									$wpdb->query( $sql );
-								}
-								break;
+		default:
+			$defaults = $name . " " . $type . " AFTER " . $after;
+			$sql = "ALTER TABLE " . $table . " ADD COLUMN " . $defaults;
+			$wpdb->query( $sql );
+			if ( $key ) {
+				$sql = "ALTER TABLE " . $table . " ADD INDEX  (`" . $name . "`)";
+				$wpdb->query( $sql );
+			}
+			break;
 	}
-
 }
 
+function M_repair_field_type ( $table, $name, $type ) {
+	global $wpdb;
+
+	$sql = "ALTER TABLE $table MODIFY $name $type";
+	$wpdb->query( $sql );
+
+}
 
 function M_verify_tables() {
 
@@ -716,24 +826,23 @@ function M_verify_tables() {
 
 }
 
-function M_repair_tables() {
-
+function M_repair_tables( $print = true ) {
 	global $wpdb;
 
 	$tables = M_build_database_structure();
-
+	$html = '';
 	foreach( $tables as $name => $fields ) {
 
-		echo "<p>" . __('Checking table : ', 'membership') . $name . " - ";
+		$html .= "<p>" . __('Checking table : ', 'membership') . $name . " - ";
 
 		$sql = "SHOW TABLES LIKE '{$name}';";
 		$t = $wpdb->get_var( $sql );
 
 		if($t == $name) {
-			echo "<span style='color: green;'>" . __('Ok', 'membership') . "</span>";
-			echo "</p>";
+			$html .= "<span style='color: green;'>" . __('Ok', 'membership') . "</span>";
+			$html .= "</p>";
 
-			echo "<p>" . __('Checking fields in table : ', 'membership') . $name . " - ";
+			$html .= "<p>" . __('Checking fields in table : ', 'membership') . $name . " - ";
 
 			$sql = "SHOW COLUMNS FROM {$name};";
 			$t = $wpdb->get_results( $sql );
@@ -741,41 +850,57 @@ function M_repair_tables() {
 			$pfield = '';
 			foreach( $fields as $fieldname => $type ) {
 				$found = false;
-				echo "<br/>" . $fieldname . " - ";
+				$incorrect_type = false;
+				$html .= "<br/>" . $fieldname . " - ";
 				foreach($t as $dbf) {
 					//print_r($dbf);
 					if($dbf->Field == $fieldname && $dbf->Type == $type) {
 						$found = true;
 						break;
 					}
+					//Column Field found, but with incorrect data type
+					if($dbf->Field == $fieldname && $dbf->Type != $type) {
+						$incorrect_type = true;
+						break;
+					}
 				}
 				if($found) {
-					echo "<span style='color: green;'>" . __('Ok', 'membership') . "</span>";
+					$html .= "<span style='color: green;'>" . __('Ok', 'membership') . "</span>";
 				} else {
+					if( $incorrect_type ) {
+						M_repair_field_type( $name, $fieldname, $type );
+					} else {
+						M_add_possible_missing_fields( $name, $fieldname, $type, $pfield );
+					}
 
-					M_add_possible_missing_fields( $name, $fieldname, $type, $pfield );
-
-					echo "<span style='color: red;'>" . __('Fixed', 'membership') . "</span>";
+					$html .= "<span style='color: red;'>" . __('Fixed', 'membership') . "</span>";
 				}
 				$pfield = $fieldname;
 			}
 
-			echo "</p>";
+			$html .= "</p>";
 
 		} else {
 
 			M_Create_single_table( $name );
 
-			echo "<span style='color: red;'>" . __('Fixed', 'membership') . "</span>";
-			echo "</p>";
+			$html .= "<span style='color: red;'>" . __('Fixed', 'membership') . "</span>";
+			$html .= "</p>";
 		}
 
 	}
 
+	// $html .= "<p>" . __('Cleaning up empty subscription/level relationships : ', 'membership');
+	// $wpdb->delete( MEMBERSHIP_TABLE_RELATIONS, array( 'sub_id' => 0 ), array( '%d' ) );
+	// $wpdb->delete( MEMBERSHIP_TABLE_RELATIONS, array( 'level_id' => 0 ), array( '%d' ) );
+	// $html .= "<span style='color: green;'>" . __('Ok', 'membership') . "</span></p>";
+
+	if( $print ) {
+		echo $html;
+	}
 }
 
 function M_build_database_structure() {
-
 	global $wpdb;
 
 	$bi = 'bigint(20)';
@@ -798,124 +923,151 @@ function M_build_database_structure() {
 	$ts = 'timestamp';
 	$dc = 'decimal(11,2)';
 
-	$structure = array( membership_db_prefix($wpdb, 'membership_levels') => array(	'id'	=>			$bi,
-																					'level_title'	=>	$v250,
-																					'level_slug'	=>	$v250,
-																					'level_active'	=>	$i,
-																					'level_count'	=>	$bi
-																				),
-						membership_db_prefix($wpdb, 'membership_relationships')	=>	array(	'rel_id'	=>	$bi,
-																							'user_id'	=>	$bi,
-																							'sub_id'	=>	$bi,
-																							'level_id'	=>	$bi,
-																							'startdate'	=>	$d,
-																							'updateddate'	=>	$d,
-																							'expirydate'	=>	$d,
-																							'order_instance'	=>	$bi,
-																							'usinggateway'	=>	$v50
-																				),
-						membership_db_prefix($wpdb, 'membership_rules')	=> array(	'level_id'	=>	$bi,
-																					'rule_ive'	=>	$v20,
-																					'rule_area'	=>	$v20,
-																					'rule_value'	=>	$t,
-																					'rule_order'	=>	$i
-																				),
-						membership_db_prefix($wpdb, 'subscriptions')	=>	array(	'id'	=>	$bi,
-																					'sub_name'	=>	$v200,
-																					'sub_active'	=>	$i,
-																					'sub_public'	=>	$i,
-																					'sub_count'		=>	$bi,
-																					'sub_description'	=>	$t,
-																					'sub_pricetext'	=> $v200
-																					),
-						membership_db_prefix($wpdb, 'subscriptions_levels')	=>	array(	'sub_id'	=>	$bi,
-																						'level_id'	=>	$bi,
-																						'level_period'	=>	$i,
-																						'sub_type'	=>	$v20,
-																						'level_price'	=>	$dc,
-																						'level_currency'	=>	$v5,
-																						'level_order'	=>	$bi,
-																						'level_period_unit'	=>	$v1
-																					),
-						membership_db_prefix($wpdb, 'subscription_transaction')	=>	array(	'transaction_ID'	=>	$biu,
-																							'transaction_subscription_ID'	=>	$bi,
-																							'transaction_user_ID'	=>	$bi,
-																							'transaction_sub_ID'	=>	$bi,
-																							'transaction_paypal_ID'	=>	$v30,
-																							'transaction_payment_type'	=>	$v20,
-																							'transaction_stamp'	=>	$bi35,
-																							'transaction_total_amount'	=>	$bi,
-																							'transaction_currency'	=>	$v35,
-																							'transaction_duedate'	=>	$jd,
-																							'transaction_gateway'	=>	$v50,
-																							'transaction_note'		=>	$t,
-																							'transaction_expires'	=>	$d
-																					),
-						membership_db_prefix($wpdb, 'urlgroups')	=>	array(	'id'	=>	$bi,
-																				'groupname'	=>	$v250,
-																				'groupurls'	=>	$t,
-																				'isregexp'	=>	$i,
-																				'stripquerystring'	=>	$i
-																			),
-						membership_db_prefix($wpdb, 'communications')	=>	array(	'id'	=>	$bi11,
-																					'subject'	=>	$v250,
-																					'message'	=>	$t,
-																					'periodunit'	=>	$i,
-																					'periodtype'	=>	$v5,
-																					'periodprepost'	=>	$v5,
-																					'lastupdated'	=>	$ts,
-																					'active'		=>	$i,
-																					'periodstamp'	=>	$bi
-																					),
-						membership_db_prefix($wpdb, 'pings')	=>	array(	'id'	=>	$bi,
-																			'pingname'	=>	$v250,
-																			'pingurl'	=>	$v250,
-																			'pinginfo'	=>	$t,
-																			'pingtype'	=>	$v10
-																		),
-						membership_db_prefix($wpdb, 'ping_history')	=>	array(	'id'	=>	$bi,
-																				'ping_id'	=>	$bi,
-																				'ping_sent'	=>	$ts,
-																				'ping_info'	=>	$t,
-																				'ping_return'	=>	$t
-																		),
-						membership_db_prefix($wpdb, 'levelmeta')	=>	array(	'id'	=>	$bi,
-																				'level_id'	=>	$bi,
-																				'meta_key'	=>	$v250,
-																				'meta_value'	=>	$t,
-																				'meta_stamp'	=>	$ts
-																		),
-						membership_db_prefix($wpdb, 'subscriptionmeta')	=>	array( 	'id'	=>	$bi,
-																					'sub_id'	=>	$bi,
-																					'meta_key'	=>	$v250,
-																					'meta_value'	=>	$t,
-																					'meta_stamp'	=>	$ts
-																			),
-						membership_db_prefix($wpdb, 'member_payments')	=>	array(	'id'	=>	$bi11,
-																					'member_id'	=>	$bi,
-																					'sub_id'	=>	$bi,
-																					'level_id'	=>	$bi,
-																					'level_order'	=>	$i,
-																					'paymentmade'	=>	$d,
-																					'paymentexpires'	=>	$d
-																			),
-						membership_db_prefix($wpdb, 'coupons') => array(	'id'	=>	$biu,
-																			'site_id'	=> $bi,
-																			'couponcode'	=> $v250,
-																			'discount'	=> $dc,
-																			'discount_type'	=> $v5,
-																			'discount_currency'	=> $v5,
-																			'coupon_startdate'	=>	$d,
-																			'coupon_enddate'	=> $d,
-																			'coupon_sub_id'	=> $bi,
-																			'coupon_uses'	=> $i,
-																			'coupon_used'	=> $i,
-																			'coupon_apply_to' => $v20
-																			)
-						);
+	$structure = array(
+		membership_db_prefix( $wpdb, 'membership_levels' ) => array(
+			'id'           => $bi,
+			'level_title'  => $v250,
+			'level_slug'   => $v250,
+			'level_active' => $i,
+			'level_count'  => $bi,
+		),
+
+		membership_db_prefix( $wpdb, 'membership_relationships' ) => array(
+			'rel_id'         => $bi,
+			'user_id'        => $bi,
+			'sub_id'         => $bi,
+			'level_id'       => $bi,
+			'startdate'      => $d,
+			'updateddate'    => $d,
+			'expirydate'     => $d,
+			'order_instance' => $bi,
+			'usinggateway'   => $v50,
+		),
+
+		membership_db_prefix( $wpdb, 'membership_rules' ) => array(
+			'level_id'   => $bi,
+			'rule_ive'   => $v20,
+			'rule_area'  => $v20,
+			'rule_value' => $t,
+			'rule_order' => $i,
+		),
+
+		membership_db_prefix( $wpdb, 'subscriptions' ) => array(
+			'id'              => $bi,
+			'sub_name'        => $v200,
+			'sub_active'      => $i,
+			'sub_public'      => $i,
+			'sub_count'       => $bi,
+			'sub_description' => $t,
+			'sub_pricetext'   => $v200,
+			'order_num'       => $i,
+		),
+
+		membership_db_prefix( $wpdb, 'subscriptions_levels' ) => array(
+			'sub_id'            => $bi,
+			'level_id'          => $bi,
+			'level_period'      => $i,
+			'sub_type'          => $v20,
+			'level_price'       => $dc,
+			'level_currency'    => $v5,
+			'level_order'       => $bi,
+			'level_period_unit' => $v1,
+		),
+
+		membership_db_prefix( $wpdb, 'subscription_transaction' ) => array(
+			'transaction_ID'              => $biu,
+			'transaction_subscription_ID' => $bi,
+			'transaction_user_ID'         => $bi,
+			'transaction_sub_ID'          => $bi,
+			'transaction_paypal_ID'       => $v30,
+			'transaction_payment_type'    => $v20,
+			'transaction_stamp'           => $bi35,
+			'transaction_total_amount'    => $bi,
+			'transaction_currency'        => $v35,
+			'transaction_duedate'         => $jd,
+			'transaction_gateway'         => $v50,
+			'transaction_note'            => $t,
+			'transaction_expires'         => $d,
+		),
+
+		membership_db_prefix( $wpdb, 'urlgroups' ) => array(
+			'id'               => $bi,
+			'groupname'        => $v250,
+			'groupurls'        => $t,
+			'isregexp'         => $i,
+			'stripquerystring' => $i,
+		),
+
+		membership_db_prefix( $wpdb, 'communications' ) => array(
+			'id'            => $bi11,
+			'sub_id'        => $bi,
+			'subject'       => $v250,
+			'message'       => $t,
+			'periodunit'    => $i,
+			'periodtype'    => $v5,
+			'periodprepost' => $v5,
+			'lastupdated'   => $ts,
+			'active'        => $i,
+			'periodstamp'   => $bi,
+		),
+
+		membership_db_prefix( $wpdb, 'pings' ) => array(
+			'id'       => $bi,
+			'pingname' => $v250,
+			'pingurl'  => $v250,
+			'pinginfo' => $t,
+			'pingtype' => $v10,
+		),
+
+		membership_db_prefix( $wpdb, 'ping_history' ) => array(
+			'id'          => $bi,
+			'ping_id'     => $bi,
+			'ping_sent'   => $ts,
+			'ping_info'   => $t,
+			'ping_return' => $t,
+		),
+
+		membership_db_prefix( $wpdb, 'levelmeta' ) => array(
+			'id'         => $bi,
+			'level_id'   => $bi,
+			'meta_key'   => $v250,
+			'meta_value' => $t,
+			'meta_stamp' => $ts,
+		),
+
+		membership_db_prefix( $wpdb, 'subscriptionmeta' ) => array(
+			'id'         => $bi,
+			'sub_id'     => $bi,
+			'meta_key'   => $v250,
+			'meta_value' => $t,
+			'meta_stamp' => $ts,
+		),
+
+		membership_db_prefix( $wpdb, 'member_payments' ) => array(
+			'id'             => $bi11,
+			'member_id'      => $bi,
+			'sub_id'         => $bi,
+			'level_id'       => $bi,
+			'level_order'    => $i,
+			'paymentmade'    => $d,
+			'paymentexpires' => $d,
+		),
+
+		membership_db_prefix( $wpdb, 'coupons' ) => array(
+			'id'                => $biu,
+			'site_id'           => $bi,
+			'couponcode'        => $v250,
+			'discount'          => $dc,
+			'discount_type'     => $v5,
+			'discount_currency' => $v5,
+			'coupon_startdate'  => $d,
+			'coupon_enddate'    => $d,
+			'coupon_sub_id'     => $bi,
+			'coupon_uses'       => $i,
+			'coupon_used'       => $i,
+			'coupon_apply_to'   => $v20,
+		)
+	);
 
 	return $structure;
-
 }
-
-?>

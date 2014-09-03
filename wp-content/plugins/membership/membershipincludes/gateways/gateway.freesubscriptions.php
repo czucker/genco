@@ -1,12 +1,12 @@
 <?php
 /*
 Addon Name: Free subscriptions gateway
-Author: Barry (Incsub)
-Author URI: http://caffeinatedb.com
+Author: Incsub
+Author URI: http://premium.wpmudev.org
 Gateway ID: freesubscriptions
 */
 
-class freesubscriptions extends M_Gateway {
+class freesubscriptions extends Membership_Gateway {
 
 	var $gateway = 'freesubscriptions';
 	var $title = 'Free Subscriptions';
@@ -14,35 +14,28 @@ class freesubscriptions extends M_Gateway {
 
 	var $defaultmessage = "<h2>Completed: Thank you for signing up</h2>\n<p>\nYour subscription to our site is now set up and you should be able to visit the members only content.\n</p>\n";
 
-	function freesubscriptions() {
-
-		if(M_is_gateway_active('paypalsolo')) {
+	public function __construct() {
+		if ( !is_null( self::get_gateway( 'paypalsolo' ) ) ) {
 			return;
 		}
 
-		parent::M_Gateway();
+		parent::__construct();
 
-		add_action('M_gateways_settings_' . $this->gateway, array(&$this, 'mysettings'));
+		add_action( 'M_gateways_settings_' . $this->gateway, array( &$this, 'mysettings' ) );
 
 		// If I want to override the transactions output - then I can use this action
-		add_action('M_gateways_transactions_' . $this->gateway, array(&$this, 'mytransactions'));
+		//add_action( 'M_gateways_transactions_' . $this->gateway, array( &$this, 'mytransactions' ) );
 
-		if($this->is_active()) {
+		if ( $this->is_active() ) {
 			// Subscription form gateway
-			add_action('membership_purchase_button', array(&$this, 'display_subscribe_button'), 1, 3);
-			add_filter( 'membership_subscription_form_subscription_process', array(&$this, 'signup_free_subscription'), 10, 2 );
+			add_action( 'membership_purchase_button', array( &$this, 'display_subscribe_button' ), 1, 3 );
+			add_filter( 'membership_subscription_form_subscription_process', array( &$this, 'signup_free_subscription' ), 10, 2 );
 		}
-
-
-
 	}
 
-	function mytransactions() {
-
-		echo '<div class="tablenav">';
-		echo '</div>';
-
-		echo "<p>" . __('No transactions data for the Free gateway','membership') . "</p>";
+	protected function _render_transactions( $type = 'past' ) {
+		echo '<div class="tablenav"></div>';
+		echo "<p>" . __( 'No transactions data for the Free gateway', 'membership' ) . "</p>";
 	}
 
 	function mysettings() {
@@ -65,19 +58,21 @@ class freesubscriptions extends M_Gateway {
 		<?php
 	}
 
-	function build_custom($user_id, $sub_id, $amount) {
-
+	function build_custom( $user_id, $sub_id, $amount, $fromsub_id = false ) {
 		$custom = '';
 
-		//fake:user:sub:key
-
 		$custom = time() . ':' . $user_id . ':' . $sub_id . ':';
-		$key = md5('MEMBERSHIP' . $amount);
+		$key = md5( 'MEMBERSHIP' . $amount );
 
 		$custom .= $key;
 
-		return $custom;
+		if ( $fromsub_id === false ) {
+			$fromsub_id = filter_input( INPUT_GET, 'from_subscription', FILTER_VALIDATE_INT );
+		}
 
+		$custom .= ":" . absint( $fromsub_id );
+
+		return $custom;
 	}
 
 	function not_yet_display_upgrade_button($subscription, $pricing, $user_id, $fromsub_id = false) {
@@ -112,7 +107,7 @@ class freesubscriptions extends M_Gateway {
 		}
 
 		// create_subscription
-		$member = new M_Membership($user_id);
+		$member = Membership_Plugin::factory()->get_member($user_id);
 		if($member) {
 			$member->create_subscription($sub_id, $this->gateway);
 		}
@@ -136,29 +131,29 @@ class freesubscriptions extends M_Gateway {
 
 	}
 
-	function single_free_button($pricing, $subscription, $user_id, $norepeat = false) {
-
+	function single_free_button( $pricing, $subscription, $user_id, $norepeat = false ) {
 		global $M_options;
 
-		if(empty($M_options['paymentcurrency'])) {
+		if ( empty( $M_options['paymentcurrency'] ) ) {
 			$M_options['paymentcurrency'] = 'USD';
 		}
 
 		$form = '';
 
 		$form .= '<form action="' . M_get_returnurl_permalink() . '" method="post">';
-		$form .=  wp_nonce_field('free-sub_' . $subscription->sub_id(), "_wpnonce", true, false);
-		$form .=  "<input type='hidden' name='gateway' value='" . $this->gateway . "' />";
+		$form .= wp_nonce_field( 'free-sub_' . $subscription->sub_id(), "_wpnonce", true, false );
+		$form .= "<input type='hidden' name='gateway' value='" . $this->gateway . "' />";
 		$form .= '<input type="hidden" name="action" value="subscriptionsignup" />';
-		$form .= '<input type="hidden" name="custom" value="' . $this->build_custom($user_id, $subscription->id, '0') .'">';
+		$form .= '<input type="hidden" name="custom" value="' . $this->build_custom( $user_id, $subscription->id, '0' ) . '">';
 
-		$button = get_option( $this->gateway . "_payment_button", 'https://www.paypal.com/en_US/i/btn/btn_subscribe_LG.gif' );
+		$button = get_option( $this->gateway . "_payment_button", '' );
+		$form .= empty( $button )
+			? '<input type="submit" class="button ' . apply_filters( 'membership_subscription_button_color', 'blue' ) . '" value="' . __( 'Sign Up', 'membership' ) . '" />'
+			: '<input type="image" name="submit" border="0" src="' . $button . '" alt="PayPal - The safer, easier way to pay online">';
 
-		$form .= '<input type="image" name="submit" border="0" src="' . $button . '" alt="PayPal - The safer, easier way to pay online">';
 		$form .= '</form>';
 
 		return $form;
-
 	}
 
 	function build_subscribe_button($subscription, $pricing, $user_id) {
@@ -195,7 +190,7 @@ class freesubscriptions extends M_Gateway {
 		echo "<input type='hidden' name='subscription' value='" . $subscription->sub_id() . "' />";
 		echo "<input type='hidden' name='user' value='" . $user_id . "' />";
 		echo "<input type='hidden' name='fromsub_id' value='" . $fromsub_id . "' />";
-		echo "<input type='submit' name='submit' value=' " . __('Upgrade', 'membership') . " ' class='button blue' />";
+		echo "<input type='submit' name='submit' value=' " . __('Upgrade', 'membership') . " ' class='button " . apply_filters('membership_subscription_button_color', 'blue') . "' />";
 		echo "</form>";
 	}
 
@@ -232,6 +227,4 @@ class freesubscriptions extends M_Gateway {
 
 }
 
-M_register_gateway('freesubscriptions', 'freesubscriptions');
-
-?>
+Membership_Gateway::register_gateway( 'freesubscriptions', 'freesubscriptions' );

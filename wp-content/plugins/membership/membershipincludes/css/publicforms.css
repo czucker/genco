@@ -8,7 +8,7 @@
   margin: 0;
   border: 0;
 }
-#membership-wrapper legend {
+.membership-page-header, #membership-wrapper legend {
   display: block;
   width: 100%;
   padding: 0;
@@ -258,3 +258,9 @@
 #membership-wrapper .alert-error .alert-heading {
   color: #b94a48;
 }
+#membership-wrapper .bottombar input[type="submit"] {
+	margin-bottom: 0;
+}
+
+
+/* 331762-1409676849-au */

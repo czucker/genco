@@ -639,7 +639,7 @@ class M_Tutorial {
 
 	function admin_url( $extend = false ) {
 		// ready for if site has network interface
-		if( (function_exists('is_plugin_active_for_network') && is_plugin_active_for_network('membership/membership.php')) && (defined('MEMBERSHIP_GLOBAL_TABLES') && MEMBERSHIP_GLOBAL_TABLES === true)) {
+		if( (function_exists('is_plugin_active_for_network') && is_plugin_active_for_network('membership/membershippremium.php')) && (defined('MEMBERSHIP_GLOBAL_TABLES') && MEMBERSHIP_GLOBAL_TABLES === true)) {
 			return network_admin_url( $extend );
 		} else {
 			return admin_url( $extend );

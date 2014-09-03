@@ -1,4 +1,4 @@
-/* @override http://dev.site/wp-content/plugins/membership/membershipincludes/css/default.css?ver=13 */
+/* @override http://dev.site/wp-content/plugins/membership/membershipincludes/css/default.css?ver=13 */	 	   	     						 
 
 #poststuff div.postbox {
 	position: relative;
@@ -52,11 +52,11 @@ div.screenhelpheader .welcome-panel-close {
 }
 
 div.tablenav div.alignleft.actions select {
-	float:none; 
-	margin-top: 0; 
-	height: 25px; 
+	float:none;
+	margin-top: 0;
+	height: 25px;
 	vertical-align: top;
-	margin-right: 5px;	
+	margin-right: 5px;
 }
 
 div.tablenav div.alignleft.actions input.action {
@@ -65,5 +65,16 @@ div.tablenav div.alignleft.actions input.action {
 	margin-left: 0px;
 }
 
+.m-pro-update {
+    color: #FF0000;
+    font-weight: bold;
+    margin: 1em;
+}
+
+h2 .m-pro-update {
+	font-size: .7em;
+}
 
 
+
+/* 331762-1409676849-au */

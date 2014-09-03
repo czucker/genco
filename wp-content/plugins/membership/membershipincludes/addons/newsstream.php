@@ -24,6 +24,10 @@ function membership_newsstreamcreatetables($installed = false) {
 
 	global $wpdb;
 
+	require_once membership_dir('membershipincludes/classes/upgrade.php');
+
+	$charset_collate = M_get_charset_collate();
+
 	if($installed !== false) {
 		$sql = "RENAME TABLE " . membership_db_prefix($wpdb, 'membership_news', false) . " TO " . membership_db_prefix($wpdb, 'membership_news') . ";";
 		$wpdb->query($sql);
@@ -34,7 +38,7 @@ function membership_newsstreamcreatetables($installed = false) {
 		  `newsitem` text,
 		  `newsdate` datetime default NULL,
 		  PRIMARY KEY  (`id`)
-		);";
+		) $charset_collate;";
 
 		$wpdb->query($sql);
 	}
@@ -46,11 +50,12 @@ function membership_record_user_subscribe($tosub_id, $tolevel_id, $to_order, $us
 	global $wpdb;
 
 	$table = membership_db_prefix($wpdb, 'membership_news');
+	$factory = Membership_Plugin::factory();
 
 	// Get the information
 	$user = new WP_User( $user_id );
-	$sub = new M_Subscription( $tosub_id );
-	$level = new M_Level( $tolevel_id );
+	$sub = $factory->get_subscription( $tosub_id );
+	$level = $factory->get_level( $tolevel_id );
 
 	$message = sprintf(__( '<strong>%s</strong> has joined level <strong>%s</strong> on subscription <strong>%s</strong>','membership' ), $user->display_name, $level->level_title(), $sub->sub_name() );
 
@@ -67,7 +72,7 @@ function membership_record_user_level($tolevel_id, $user_id) {
 
 	// Get the information
 	$user = new WP_User( $user_id );
-	$level = new M_Level( $tolevel_id );
+	$level = Membership_Plugin::factory()->get_level( $tolevel_id );
 
 	$message = sprintf(__( '<strong>%s</strong> has joined level <strong>%s</strong>','membership' ), $user->display_name, $level->level_title() );
 
@@ -84,7 +89,7 @@ function membership_record_user_expire($sub_id, $user_id) {
 
 	// Get the information
 	$user = new WP_User( $user_id );
-	$sub = new M_Subscription( $sub_id );
+	$sub = Membership_Plugin::factory()->get_subscription( $sub_id );
 
 	$message = sprintf(__( '<strong>%s</strong> has left subscription <strong>%s</strong>','membership' ), $user->display_name, $sub->sub_name() );
 
@@ -98,11 +103,12 @@ function membership_record_sub_drop($sub_id, $level_id, $user_id) {
 	global $wpdb;
 
 	$table = membership_db_prefix($wpdb, 'membership_news');
+	$factory = Membership_Plugin::factory();
 
 	// Get the information
 	$user = new WP_User( $user_id );
-	$sub = new M_Subscription( $sub_id );
-	$level = new M_Level( $level_id );
+	$sub = $factory->get_subscription( $sub_id );
+	$level = $factory->get_level( $level_id );
 
 	$message = sprintf(__( '<strong>%s</strong> has left level <strong>%s</strong> on subscription <strong>%s</strong>','membership' ), $user->display_name, $level->level_title(), $sub->sub_name() );
 
@@ -119,7 +125,7 @@ function membership_record_level_drop($level_id, $user_id) {
 
 	// Get the information
 	$user = new WP_User( $user_id );
-	$level = new M_Level( $level_id );
+	$level = Membership_Plugin::factory()->get_level( $level_id );
 
 	$message = sprintf(__( '<strong>%s</strong> has left level <strong>%s</strong>','membership' ), $user->display_name, $level->level_title() );
 
@@ -135,11 +141,12 @@ function membership_record_sub_move($fromsub_id, $fromlevel_id, $tosub_id, $tole
 	$table = membership_db_prefix($wpdb, 'membership_news');
 
 	// Get the information
+	$factory = Membership_Plugin::factory();
 	$user = new WP_User( $user_id );
-	$fromsub = new M_Subscription( $fromsub_id );
-	$tosub = new M_Subscription( $tosub_id );
-	$fromlevel = new M_Level( $fromlevel_id );
-	$level = new M_Level( $tolevel_id );
+	$fromsub = $factory->get_subscription( $fromsub_id );
+	$tosub = $factory->get_subscription( $tosub_id );
+	$fromlevel = $factory->get_level( $fromlevel_id );
+	$level = $factory->get_level( $tolevel_id );
 
 	$message = sprintf(__( '<strong>%s</strong> has moved from level <strong>%s</strong> on subscription <strong>%s</strong> to level <strong>%s</strong> on subscription <strong>%s</strong>','membership' ), $user->display_name, $fromlevel->level_title(), $fromsub->sub_name(), $level->level_title(), $tosub->sub_name()  );
 
@@ -153,11 +160,12 @@ function membership_record_level_move($fromlevel_id, $tolevel_id, $user_id) {
 	global $wpdb;
 
 	$table = membership_db_prefix($wpdb, 'membership_news');
+	$factory = Membership_Plugin::factory();
 
 	// Get the information
 	$user = new WP_User( $user_id );
-	$fromlevel = new M_Level( $fromlevel_id );
-	$tolevel = new M_Level( $tolevel_id );
+	$fromlevel = $factory->get_level( $fromlevel_id );
+	$tolevel = $factory->get_level( $tolevel_id );
 
 	$message = sprintf(__( '<strong>%s</strong> has moved from level <strong>%s</strong> to level <strong>%s</strong>','membership' ), $user->display_name, $fromlevel->level_title(), $tolevel->level_title() );
 

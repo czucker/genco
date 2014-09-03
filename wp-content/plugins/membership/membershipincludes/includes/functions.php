@@ -1,4 +1,8 @@
 <?php
+// We initially need to make sure that this function exists, and if not then include the file that has it.
+if ( !function_exists( 'is_plugin_active_for_network' ) ) {
+    require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+}
 
 // Addons loading code
 
@@ -87,24 +91,28 @@ function get_membership_gateways() {
 }
 
 function load_membership_gateways() {
+	global $M_Gateways;
 
-	$gateways = get_option('membership_activated_gateways', array());
+	$M_Gateways = array();
+	$gateways = get_option( 'membership_activated_gateways', array() );
 
-	if ( is_dir( membership_dir('membershipincludes/gateways') ) ) {
-		if ( $dh = opendir( membership_dir('membershipincludes/gateways') ) ) {
+	if ( is_dir( membership_dir( 'membershipincludes/gateways' ) ) ) {
+		if ( ( $dh = opendir( membership_dir( 'membershipincludes/gateways' ) ) ) ) {
 			$mem_gateways = array();
-			while ( ( $gateway = readdir( $dh ) ) !== false )
-				if ( substr( $gateway, -4 ) == '.php' )
+			while ( ( $gateway = readdir( $dh ) ) !== false ) {
+				if ( substr( $gateway, -4 ) == '.php' ) {
 					$mem_gateways[] = $gateway;
+				}
+			}
 			closedir( $dh );
 			sort( $mem_gateways );
 
-			$mem_gateways = apply_filters('membership_available_gateways', $mem_gateways);
+			$mem_gateways = apply_filters( 'membership_available_gateways', $mem_gateways );
 
-			foreach( $mem_gateways as $mem_gateway ) {
-				$check_gateway = str_replace('gateway.', '', str_replace('.php', '', $mem_gateway));
-				if(in_array($check_gateway, $gateways)) {
-					include_once( membership_dir('membershipincludes/gateways/' . $mem_gateway) );
+			foreach ( $mem_gateways as $mem_gateway ) {
+				$check_gateway = str_replace( 'gateway.', '', str_replace( '.php', '', $mem_gateway ) );
+				if ( in_array( $check_gateway, $gateways ) ) {
+					include_once( membership_dir( 'membershipincludes/gateways/' . $mem_gateway ) );
 				}
 			}
 		}
@@ -218,10 +226,13 @@ function membership_wp_upload_url() {
 		$url = trailingslashit( $siteurl ) . UPLOADS;
 	}
 
-	if ( is_multisite() && !$main_override && ( !isset( $switched ) || $switched === false ) ) {
-		if ( defined( 'BLOGUPLOADDIR' ) )
-			$dir = untrailingslashit(BLOGUPLOADDIR);
-		$url = str_replace( UPLOADS, 'files', $url );
+	if ( is_multisite() && !$main_override && (!isset( $switched ) || $switched === false ) ) {
+		if ( defined( 'BLOGUPLOADDIR' ) ) {
+			$dir = untrailingslashit( BLOGUPLOADDIR );
+		}
+		if ( defined( 'UPLOADS' ) ) {
+			$url = str_replace( UPLOADS, 'files', $url );
+		}
 	}
 
 	$bdir = $dir;
@@ -299,79 +310,32 @@ function membership_upload_url() {
 
 }
 
-function membership_is_active($userdata, $password) {
-
-	global $wpdb;
-
-	// Checks if this member is an active one.
-	if(!empty($userdata) && !is_wp_error($userdata)) {
-		$id = $userdata->ID;
-
-		if(get_user_meta($id, $wpdb->prefix . 'membership_active', true) == 'no') {
-			return new WP_Error('member_inactive', __('Sorry, this account is not active.', 'membership'));
-		}
-
-	}
-
-	return $userdata;
-
-}
-
-add_filter('wp_authenticate_user', 'membership_is_active', 30, 2);
-
-function membership_assign_subscription($user_id) {
-
-	global $M_options;
-
-	if(!empty($M_options['freeusersubscription'])) {
-		$member = new M_Membership($user_id);
-		if($member) {
-			$member->create_subscription($M_options['freeusersubscription']);
-		}
-	}
-
-}
-
-add_action('user_register', 'membership_assign_subscription', 30);
-
-function membership_db_prefix(&$wpdb, $table, $useprefix = true) {
-
-	if($useprefix) {
+function membership_db_prefix( wpdb $wpdb, $table, $useprefix = true ) {
+	$membership_prefix = '';
+	if ( $useprefix ) {
 		$membership_prefix = 'm_';
-	} else {
-		$membership_prefix = '';
 	}
 
-	if( defined('MEMBERSHIP_GLOBAL_TABLES') && MEMBERSHIP_GLOBAL_TABLES == true ) {
-		if(!empty($wpdb->base_prefix)) {
-			return $wpdb->base_prefix . $membership_prefix . $table;
-		} else {
-			return $wpdb->prefix . $membership_prefix . $table;
-		}
-	} else {
-		return $wpdb->prefix . $membership_prefix . $table;
+	$global = is_multisite() && filter_var( MEMBERSHIP_GLOBAL_TABLES, FILTER_VALIDATE_BOOLEAN );
+	$prefix = $wpdb->get_blog_prefix( $global ? MEMBERSHIP_GLOBAL_MAINSITE : null );
+	$table_name = $prefix . $membership_prefix . $table;
+
+	if ( $global && defined( 'MULTI_DB_VERSION' ) && function_exists( 'add_global_table' ) ) {
+		add_global_table( $membership_prefix . $table );
 	}
 
+	return $table_name;
 }
 
 // Template based functions
 function current_member() {
-
-	$user = wp_get_current_user();
-	$member = new M_Membership( $user->ID );
-
-	if(!empty($member)) {
-		return $member;
-	} else {
-		return false;
-	}
-
+	return Membership_Plugin::factory()->get_member( get_current_user_id() );
 }
 
 function current_user_is_member() {
 
 	$user = wp_get_current_user();
-	$member = new M_Membership( $user->ID );
+	$member = Membership_Plugin::factory()->get_member( $user->ID );
 
 	if(!empty($member)) {
 		return $member->is_member();
@@ -382,65 +346,32 @@ function current_user_is_member() {
 }
 
 function current_user_has_subscription() {
+	$member = current_member();
 
-	$user = wp_get_current_user();
-	$member = new M_Membership( $user->ID );
-
-	if(!empty($member)) {
+	if ( !empty( $member ) ) {
 		return $member->has_subscription();
 	} else {
 		return false;
 	}
-
 }
 
 function current_user_on_level( $level_id ) {
+	$member = current_member();
 
-	$user = wp_get_current_user();
-	$member = new M_Membership( $user->ID );
-
-	if(!empty($member)) {
+	if ( !empty( $member ) ) {
 		return $member->on_level( $level_id, true );
 	} else {
 		return false;
 	}
-
 }
 
 function current_user_on_subscription( $sub_id ) {
+	$member = current_member();
 
-	$user = wp_get_current_user();
-	$member = new M_Membership( $user->ID );
-
-	if(!empty($member)) {
+	if ( !empty( $member ) ) {
 		return $member->on_sub( $sub_id );
 	} else {
 		return false;
-	}
-
-}
-
-// Functions
-if(!function_exists('M_register_rule')) {
-	function M_register_rule($rule_name, $class_name, $section) {
-
-		global $M_Rules, $M_SectionRules;
-
-		if(!is_array($M_Rules)) {
-			$M_Rules = array();
-		}
-
-		if(!is_array($M_SectionRules)) {
-			$M_SectionRules = array();
-		}
-
-		if(class_exists($class_name)) {
-			$M_SectionRules[$section][$rule_name] = $class_name;
-			$M_Rules[$rule_name] = $class_name;
-		} else {
-			return false;
-		}
-
 	}
 }
 
@@ -464,25 +395,12 @@ function get_last_transaction_for_user_and_sub($user_id, $sub_id) {
 }
 
 function M_get_membership_active() {
-
-	if(defined('MEMBERSHIP_GLOBAL_TABLES') && MEMBERSHIP_GLOBAL_TABLES === true) {
-		if(function_exists('get_blog_option')) {
-			if(function_exists('switch_to_blog')) {
-				switch_to_blog(MEMBERSHIP_GLOBAL_MAINSITE);
-			}
-			$membershipactive = get_blog_option(MEMBERSHIP_GLOBAL_MAINSITE, 'membership_active', 'no');
-			if(function_exists('restore_current_blog')) {
-				restore_current_blog();
-			}
-		} else {
-			$membershipactive = get_option('membership_active', 'no');
-		}
-	} else {
-		$membershipactive = get_option('membership_active', 'no');
+	$global = defined( 'MEMBERSHIP_GLOBAL_TABLES' ) && filter_var( MEMBERSHIP_GLOBAL_TABLES, FILTER_VALIDATE_BOOLEAN );
+	if ( $global && function_exists( 'get_blog_option' ) ) {
+		return get_blog_option( MEMBERSHIP_GLOBAL_MAINSITE, 'membership_active', 'no' );
 	}
 
-	return $membershipactive;
-
+	return get_option( 'membership_active', 'no' );
 }
 
 // Pages permalink functions
@@ -628,7 +546,7 @@ function M_activation_function() {
 		$user = wp_get_current_user();
 	}
 
-	if($user->user_login == MEMBERSHIP_MASTER_ADMIN && !$user->has_cap('membershipadmin')) {
+	if( $user->user_login == MEMBERSHIP_MASTER_ADMIN && !$user->has_cap('membershipadmin')) {
 		$user->add_cap('membershipadmin');
 	}
 }
@@ -660,18 +578,14 @@ function M_strip_decimal_places( $amount ) {
 }
 add_filter('membership_amount_JPY', 'M_strip_decimal_places');
 
-function M_get_option($key, $default = false) {
-
-	if(defined('MEMBERSHIP_GLOBAL_TABLES') && MEMBERSHIP_GLOBAL_TABLES === true) {
-		if(function_exists('get_blog_option')) {
-			return get_blog_option(MEMBERSHIP_GLOBAL_MAINSITE, $key, $default);
-		} else {
-			return get_option( $key , $default);
-		}
+function M_get_option( $key, $default = false ) {
+	if ( defined( 'MEMBERSHIP_GLOBAL_TABLES' ) && MEMBERSHIP_GLOBAL_TABLES === true ) {
+		return function_exists( 'get_blog_option' )
+			? get_blog_option( MEMBERSHIP_GLOBAL_MAINSITE, $key, $default )
+			: get_option( $key, $default );
 	} else {
-		return get_option( $key, $default);
+		return get_option( $key, $default );
 	}
-
 }
 
 function M_update_option($key, $value) {
@@ -702,29 +616,55 @@ function M_delete_option($key) {
 
 }
 
+/**
+ * Returns currently using coupon.
+ *
+ * @return M_Coupon Object of M_Coupon class if a coupon is used, otherwise FALSE.
+ */
+function membership_get_current_coupon() {
+	$coupon_code = trim( filter_input( INPUT_POST, 'coupon_code' ) );
+	return !empty( $coupon_code ) ? new M_Coupon( $coupon_code ) : false;
+}
+
 function membership_price_in_text( $pricing ) {
 
 	global $M_options;
 
+	// Run a check to see if this is a fully free subscription
+	if( !empty($pricing) ) {
+		$free = true;
+		foreach($pricing as $key => $price) {
+			if(!empty($price['amount']) && $price['amount'] > 0 ) {
+				$free = false;
+			}
+		}
+	}
+	// If it is then we just return nothing
+	if( $free ) {
+		return false;
+	}
+
+	// Otherwise we process
 	$pd = array();
 	$count = 1;
 
-	if(empty($M_options['paymentcurrency'])) {
-		$M_options['paymentcurrency'] = '&USD;';
+	if ( empty( $M_options['paymentcurrency'] ) ) {
+		$M_options['paymentcurrency'] = 'USD';
 	}
 
-	switch( $M_options['paymentcurrency'] ) {
-		case "USD": $cur = "$";
-					break;
-
-		case "GBP":	$cur = "&pound;";
-					break;
-
-		case "EUR":	$cur = "&euro;";
-					break;
-
-		default:	$cur = $M_options['paymentcurrency'];
-					break;
+	switch ( $M_options['paymentcurrency'] ) {
+		case "USD":
+			$cur = "$";
+			break;
+		case "GBP":
+			$cur = "&pound;";
+			break;
+		case "EUR":
+			$cur = "&euro;";
+			break;
+		default:
+			$cur = $M_options['paymentcurrency'];
+			break;
 	}
 
 	foreach((array) $pricing as $key => $price) {
@@ -1049,22 +989,365 @@ function membership_price_in_text( $pricing ) {
 }
 
 function membership_redirect_to_protected() {
-
 	global $M_options;
 
-	if(defined('MEMBERSHIP_GLOBAL_TABLES') && MEMBERSHIP_GLOBAL_TABLES === true ) {
-		if(function_exists('switch_to_blog')) {
-			switch_to_blog(MEMBERSHIP_GLOBAL_MAINSITE);
+	if ( defined( 'MEMBERSHIP_GLOBAL_TABLES' ) && MEMBERSHIP_GLOBAL_TABLES === true ) {
+		if ( function_exists( 'switch_to_blog' ) ) {
+			switch_to_blog( MEMBERSHIP_GLOBAL_MAINSITE );
 		}
 	}
 
-	$url = get_permalink( (int) $M_options['nocontent_page'] );
+	$url = get_permalink( absint( $M_options['nocontent_page'] ) );
 	$current_url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-	if($url != $current_url) {
-		wp_safe_redirect( $url );
+	if ( $url != $current_url && !headers_sent() ) {
+		wp_safe_redirect( add_query_arg( 'redirect_to', urlencode( $current_url ), $url ) );
 		exit;
+	}
+}
+
+function membership_check_expression_match( $host, $list ) {
+	$list = array_map( 'strtolower', array_filter( array_map( 'trim', $list ) ) );
+	foreach ( $list as $value ) {
+		$matchstring = mb_stripos( $value, '\/' ) !== false ? stripcslashes( $value ) : $value;
+		if ( preg_match( "#{$matchstring}#i", $host ) ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+function membership_debug_log( $message ) {
+
+	if( defined('MEMBERSHIP_DEBUG') && MEMBERSHIP_DEBUG == true ) {
+
+		if( defined('MEMBERSHIP_DEBUG_LEVEL') && MEMBERSHIP_DEBUG_LEVEL == 'adv' ) {
+			$message .= ' - ' . print_r( debug_backtrace(), true );
+		}
+
+		// We have debugging switched on
+		switch( MEMBERSHIP_DEBUG_METHOD ) {
+			case 'log': error_log( $message );
+						break;
+
+			case 'email':
+						if( is_email( MEMBERSHIP_DEBUG_EMAIL ) ) {
+							if( function_exists('wp_mail') ) {
+								wp_mail( MEMBERSHIP_DEBUG_EMAIL, __('Membership Debug Message','membership'), $message );
+							} else {
+								error_log( $message , 1, MEMBERSHIP_DEBUG_EMAIL );
+							}
+						}
+						break;
+
+			default:
+						do_action( 'membership_debug', MEMBERSHIP_DEBUG_METHOD, $message );
+						do_action( 'membership_debug_' . MEMBERSHIP_DEBUG_METHOD, $message );
+						break;
+		}
 	}
 
 }
-?>
+
+function membership_is_registration_page( $page_id = null, $check_is_page = true ) {
+	global $M_options;
+
+	if ( $check_is_page && !is_page() ) {
+		return false;
+	}
+
+	$page_id = intval( $page_id );
+	if ( !$page_id ) {
+		$page_id = get_the_ID();
+	}
+
+	return isset( $M_options['registration_page'] ) && $page_id == $M_options['registration_page'];
+}
+
+function membership_is_account_page( $page_id = null, $check_is_page = true ) {
+	global $M_options;
+
+	if ( $check_is_page && !is_page() ) {
+		return false;
+	}
+
+	$page_id = intval( $page_id );
+	if ( !$page_id ) {
+		$page_id = get_the_ID();
+	}
+
+	return isset( $M_options['account_page'] ) && $page_id == $M_options['account_page'];
+}
+
+function membership_is_subscription_page( $page_id = null, $check_is_page = true ) {
+	global $M_options;
+
+	if ( $check_is_page && !is_page() ) {
+		return false;
+	}
+
+	$page_id = intval( $page_id );
+	if ( !$page_id ) {
+		$page_id = get_the_ID();
+	}
+
+	return isset( $M_options['subscriptions_page'] ) && $page_id == $M_options['subscriptions_page'];
+}
+
+function membership_is_welcome_page( $page_id = null, $check_is_page = true ) {
+	global $M_options;
+
+	if ( $check_is_page && !is_page() ) {
+		return false;
+	}
+
+	$page_id = intval( $page_id );
+	if ( !$page_id ) {
+		$page_id = get_the_ID();
+	}
+
+	return isset( $M_options['registrationcompleted_page'] ) && $page_id == $M_options['registrationcompleted_page'];
+}
+
+function membership_is_protected_page( $page_id = null, $check_is_page = true ) {
+	global $M_options;
+
+	if ( $check_is_page && !is_page() ) {
+		return false;
+	}
+
+	$page_id = intval( $page_id );
+	if ( !$page_id ) {
+		$page_id = get_the_ID();
+	}
+
+	return isset( $M_options['nocontent_page'] ) && $page_id == $M_options['nocontent_page'];
+}
+
+function membership_is_special_page( $page_id = null, $check_is_page = true ) {
+	global $M_options;
+
+	if ( $check_is_page && !is_page() ) {
+		return false;
+	}
+
+	$page_id = intval( $page_id );
+	if ( !$page_id ) {
+		$page_id = get_the_ID();
+	}
+
+	$is_special = false;
+
+	$is_special |= isset( $M_options['nocontent_page'] ) && $page_id == $M_options['nocontent_page'];
+	$is_special |= isset( $M_options['registrationcompleted_page'] ) && $page_id == $M_options['registrationcompleted_page'];
+	$is_special |= isset( $M_options['subscriptions_page'] ) && $page_id == $M_options['subscriptions_page'];
+	$is_special |= isset( $M_options['account_page'] ) && $page_id == $M_options['account_page'];
+	$is_special |= isset( $M_options['registration_page'] ) && $page_id == $M_options['registration_page'];
+
+	return $is_special;
+}
+
+function membership_get_expire_date( $sub_id = null, $date_format = null ) {
+	global $member;
+	$member = Membership_Plugin::current_member();
+
+	if ( $member && is_a( $member, 'Membership_Model_Member' ) ) {
+		if ( !$sub_id ) {
+			$sub_ids = $member->get_subscription_ids();
+			if ( count( $sub_ids ) > 0 ) {
+				$sub_id = $sub_ids[0];
+			}
+		}
+
+		if ( $sub_id ) {
+			$expired = get_user_meta( $member->ID, 'expire_current_' . $sub_id, true );
+			if ( $expired ) {
+				if ( !$date_format ) {
+					$date_format = get_option( 'date_format' );
+				}
+				return date( $date_format, $expired );
+			}
+		}
+	}
+
+	return __( 'unknown', 'membership' );
+}
+
+// Rules stuff below
+
+/**
+ * Registers rule in the system.
+ *
+ * @global array $M_Rules The array of registered rules.
+ * @global array $M_SectionRules The array of sections and associated rules.
+ * @param string $rule_name The name of the rule.
+ * @param string $class_name The class name of the rule.
+ * @param string $section The section where the rule belongs to.
+ */
+function M_register_rule( $rule_name, $class_name, $section ) {
+	global $M_Rules, $M_SectionRules;
+
+	if ( !is_array( $M_Rules ) ) {
+		$M_Rules = array();
+	}
+
+	if ( !is_array( $M_SectionRules ) ) {
+		$M_SectionRules = array();
+	}
+
+	if ( !isset( $M_SectionRules[$section] ) ) {
+		$M_SectionRules[$section] = array();
+	}
+
+	$M_SectionRules[$section][$rule_name] = $class_name;
+	$M_Rules[$rule_name] = $class_name;
+}
+
+add_filter( 'favorite_actions', 'M_cache_favourite_actions', 999 );
+function M_cache_favourite_actions( $actions = false ) {
+	static $M_actions = null;
+
+	if ( $actions !== false ) {
+		$M_actions = $actions;
+	} else {
+		$actions = $M_actions;
+	}
+
+	return $actions;
+}
+
+add_filter( 'membership_level_sections', 'M_AddAdminSection', 99 );
+function M_AddAdminSection( $sections ) {
+	$sections['admin'] = array( "title" => __( 'Administration', 'membership' ) );
+	return $sections;
+}
+
+// Pass thru function
+function MBP_can_access_page( $page ) {
+	global $member;
+	$member = Membership_Plugin::current_member();
+	if ( !empty( $member ) && method_exists( $member, 'pass_thru' ) ) {
+		return $member->pass_thru( 'bppages', array( 'can_access_page' => $page ) );
+	}
+}
+
+function M_AddBuddyPressSection( $sections ) {
+	$sections['bp'] = array( "title" => __( 'BuddyPress', 'membership' ) );
+	return $sections;
+}
+
+// BuddyPress options
+function M_AddBuddyPressOptions() {
+	if ( defined( 'MEMBERSHIP_GLOBAL_TABLES' ) && MEMBERSHIP_GLOBAL_TABLES === true ) {
+		if ( function_exists( 'get_blog_option' ) ) {
+			$MBP_options = get_blog_option( MEMBERSHIP_GLOBAL_MAINSITE, 'membership_bp_options', array() );
+		} else {
+			$MBP_options = get_option( 'membership_bp_options', array() );
+		}
+	} else {
+		$MBP_options = get_option( 'membership_bp_options', array() );
+	}
+
+	?><div class="postbox">
+		<h3 class="hndle" style="cursor:auto;"><span><?php _e( 'BuddyPress protected content message','membership' ) ?></span></h3>
+		<div class="inside">
+			<p class='description'><?php _e( 'This is the message that is displayed when a BuddyPress related operation is restricted. Depending on your theme this is displayed in a red bar, and so should be short and concise.', 'membership' ) ?></p>
+
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><?php _e( 'BuddyPress No access message', 'membership' ) ?></th>
+					<td>
+						<?php wp_editor( stripslashes( $MBP_options['buddypressmessage'] ), "buddypressmessage", array( "textarea_name" => "buddypressmessage" ) ) ?>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div><?php
+}
+
+function M_AddBuddyPressOptionsProcess() {
+	if ( defined( 'MEMBERSHIP_GLOBAL_TABLES' ) && MEMBERSHIP_GLOBAL_TABLES === true ) {
+		if ( function_exists( 'get_blog_option' ) ) {
+			$MBP_options = get_blog_option( MEMBERSHIP_GLOBAL_MAINSITE, 'membership_bp_options', array() );
+		} else {
+			$MBP_options = get_option( 'membership_bp_options', array() );
+		}
+	} else {
+		$MBP_options = get_option( 'membership_bp_options', array() );
+	}
+
+	$MBP_options['buddypressmessage'] = $_POST['buddypressmessage'];
+
+	if ( defined( 'MEMBERSHIP_GLOBAL_TABLES' ) && MEMBERSHIP_GLOBAL_TABLES === true ) {
+		if ( function_exists( 'get_blog_option' ) ) {
+			update_blog_option( MEMBERSHIP_GLOBAL_MAINSITE, 'membership_bp_options', $MBP_options );
+		} else {
+			update_option( 'membership_bp_options', $MBP_options );
+		}
+	} else {
+		update_option( 'membership_bp_options', $MBP_options );
+	}
+}
+
+function M_HideBuddyPressPages( $pages ) {
+	if ( function_exists( 'bp_core_get_directory_page_ids' ) ) {
+		$existing_pages = bp_core_get_directory_page_ids();
+	}
+
+	foreach ( $pages as $key => $page ) {
+		if ( in_array( $page->ID, (array) $existing_pages ) ) {
+			unset( $pages[$key] );
+		}
+	}
+
+	return $pages;
+}
+
+function M_KeepBuddyPressPages( $pages ) {
+	$existing_pages = bp_core_get_directory_page_ids();
+	if ( !empty( $existing_pages ) ) {
+		$pages = array_merge( $pages, $existing_pages );
+	}
+
+	return $pages;
+}
+
+function M_overrideBPSignupSlug( $slug ) {
+	$permalink = M_get_registration_permalink();
+	return !empty( $permalink ) ? basename( $permalink ) : $slug;
+}
+
+add_action( 'plugins_loaded', 'M_setup_BP_addons', 99 );
+function M_setup_BP_addons() {
+	if ( !defined( 'BP_VERSION' ) || version_compare( preg_replace( '/-.*$/', '', BP_VERSION ), "1.5", '<' ) ) {
+		return;
+	}
+
+	add_action( 'membership_postoptions_page', 'M_AddBuddyPressOptions', 11 );
+	add_action( 'membership_option_menu_process_posts', 'M_AddBuddyPressOptionsProcess', 11 );
+
+	add_filter( 'membership_level_sections', 'M_AddBuddyPressSection' );
+	add_filter( 'membership_hide_protectable_pages', 'M_HideBuddyPressPages' );
+	add_filter( 'membership_override_viewable_pages_menu', 'M_KeepBuddyPressPages' );
+	add_filter( 'bp_get_signup_slug', 'M_overrideBPSignupSlug' );
+}
+
+// BuddyPress compatibility
+
+add_action( 'bp_pre_user_query_construct', 'membership_exclude_inactive_users' );
+function membership_exclude_inactive_users( $bp_user_query ) {
+	global $wpdb;
+
+	if ( Membership_Plugin::is_enabled() ) {
+		$query = new WP_User_Query( array(
+			'meta_key'     => membership_db_prefix( $wpdb, 'membership_active', false ),
+			'meta_value'   => 'no',
+			'meta_compare' => '=',
+		) );
+
+		if ( $query->get_total() > 0 ) {
+			$bp_user_query->query_vars['exclude'] = wp_list_pluck( $query->get_results(), 'ID' );
+		}
+	}
+}

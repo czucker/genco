@@ -1,5 +1,6 @@
 <?php
-if(!class_exists('M_Ping')) {
+
+if ( !class_exists( 'M_Ping' ) ) {
 
 	class M_Ping {
 
@@ -25,24 +26,28 @@ if(!class_exists('M_Ping')) {
 		var $ping;
 		var $id;
 
-		var $pingconstants = array(	'%blogname%' => '',
-									'%blogurl%' => '',
-									'%username%' => '',
-									'%usernicename%' => '',
-									'%useremail%'	=>	'',
-									'%userid%'		=>	'',
-									'%networkname%' => '',
-									'%networkurl%' => '',
-									'%subscriptionname%' => '',
-									'%levelname%' => '',
-									'%timestamp%' => ''
-									);
+		var $pingconstants = array(
+			'%blogname%'         => '',
+			'%blogurl%'          => '',
+			'%username%'         => '',
+			'%usernicename%'     => '',
+			'%userdisplayname%'  => '',
+			'%userfirstname%'    => '',
+			'%userlastname%'     => '',
+			'%useremail%'        => '',
+			'%userid%'           => '',
+			'%networkname%'      => '',
+			'%networkurl%'       => '',
+			'%subscriptionname%' => '',
+			'%levelname%'        => '',
+			'%timestamp%'        => '',
+		);
 
 		function __construct( $id = false) {
 
 			global $wpdb;
 
-			$this->db =& $wpdb;
+			$this->db = $wpdb;
 
 			foreach($this->tables as $table) {
 				$this->$table = membership_db_prefix($this->db, $table);
@@ -110,13 +115,14 @@ if(!class_exists('M_Ping')) {
 			// Display some instructions for the message.
 			echo '<div class="instructions" style="float: left; width: 40%; margin-left: 10px;">';
 			echo __('You can use the following constants within the message body to embed database information.','membership');
-			echo '<br /><em>';
+			echo '<br /><br /><em style="font-family:monospace">';
 
 			echo implode('<br/>', array_keys(apply_filters('membership_ping_constants_list', $this->pingconstants)) );
 
-			echo '</em><br/>' . __('One entry per line. e.g. key=value','membership');
+			echo '</em><br/><br />';
+			echo __('You can also make a variable an array. (e.g. merge_vars[FNAME]=%userfirstname%)', 'membership') . '<br /><br />';
+			echo __('One entry per line. e.g. key=value','membership');
 			echo '</div>';
-
 			echo '</td>';
 			echo '</tr>';
 
@@ -157,12 +163,13 @@ if(!class_exists('M_Ping')) {
 			// Display some instructions for the message.
 			echo '<div class="instructions" style="float: left; width: 40%; margin-left: 10px;">';
 			echo __('You can use the following constants within the message body to embed database information.','membership');
-			echo '<br /><em>';
+			echo '<br /><br /><em style="font-family:monospace">';
 
 			echo implode('<br/>', array_keys(apply_filters('membership_ping_constants_list', $this->pingconstants)) );
 
-			echo '</em><br/>' . __('One entry per line. e.g. key=value','membership');
-
+			echo '</em><br/><br />';
+			echo __('You can also make a variable an array. (e.g. merge_vars[FNAME]=%userfirstname%)', 'membership') . '<br /><br />';
+			echo __('One entry per line. e.g. key=value','membership');
 			echo '</div>';
 			echo '</td>';
 			echo '</tr>';
@@ -254,128 +261,161 @@ if(!class_exists('M_Ping')) {
 
 		// processing
 		function send_ping( $sub_id = false, $level_id = false, $user_id = false ) {
+			if ( !class_exists( 'WP_Http' ) ) {
+				include_once( ABSPATH . WPINC . '/class-http.php' );
+			}
 
 			$this->ping = $this->get_ping();
-
-			if( !class_exists( 'WP_Http' ) ) {
-			    include_once( ABSPATH . WPINC. '/class-http.php' );
+			if ( !$this->ping ) {
+				return;
 			}
 
-			$pingdata = $this->pingconstants;
+			$pingdata = apply_filters( 'membership_ping_constants_list', $this->pingconstants );
 
-			if(empty($user_id)) {
-				$user = wp_get_current_user();
-				$member = new M_Membership( $user->ID );
-			} else {
-				$member = new M_Membership( $user_id );
-			}
+			$member = Membership_Plugin::factory()->get_member( empty( $user_id ) ? get_current_user_id() : $user_id );
 
-			foreach($pingdata as $key => $value) {
-				switch($key) {
-					case '%blogname%':			$pingdata[$key] = get_option('blogname');
-												break;
-
-					case '%blogurl%':			$pingdata[$key] = get_option('home');
-												break;
-
-					case '%username%':			$pingdata[$key] = $member->user_login;
-												break;
-
-					case '%usernicename%':		$pingdata[$key] = $member->user_nicename;
-												break;
-
-					case '%useremail%':			$pingdata[$key] = $member->user_email;
-												break;
-
-					case '%userid%':			$pingdata[$key] = $member->ID;
-												break;
-
-					case '%networkname%':		$pingdata[$key] = get_site_option('site_name');
-												break;
-
-					case '%networkurl%':		$pingdata[$key] = get_site_option('siteurl');
-												break;
-
-					case '%subscriptionname%':	if(!$sub_id) {
-													$ids = $member->get_subscription_ids();
-													if(!empty($ids)) {
-														$sub_id = $ids[0];
-													}
-												}
-
-												if(!empty($sub_id)) {
-													$sub =& new M_Subscription( $sub_id );
-													$pingdata[$key] = $sub->sub_name();
-												} else {
-													$pingdata[$key] = '';
-												}
-
-												break;
-
-					case '%levelname%':			if(!$level_id) {
-													$ids = $member->get_level_ids();
-													if(!empty($ids)) {
-														$levels = $ids[0];
-													}
-												}
-
-												if(!empty($levels->level_id)) {
-													$level =& new M_Level( $levels->level_id );
-													$pingdata[$key] = $level->level_title();
-												} else {
-													$pingdata[$key] = '';
-												}
-												break;
-
-					case '%timestamp%':			$pingdata[$key] = time();
-												break;
-
-					default:					$pingdata[$key] = apply_filter( 'membership_pingfield_' . $key, '' );
-												break;
+			if ( !$sub_id ) {
+				$ids = $member->get_subscription_ids();
+				if ( !empty( $ids ) ) {
+					$sub_id = $ids[0];
 				}
 			}
 
-			$url = $this->ping->pingurl;
+			if ( !$level_id ) {
+				$ids = $member->get_level_ids();
+				if ( !empty( $ids ) ) {
+					$level_id = $ids[0]->level_id;
+				}
+			}
+
+			foreach ( $pingdata as $key => $value ) {
+				switch ( $key ) {
+					case '%blogname%':
+						$pingdata[$key] = get_option( 'blogname' );
+						break;
+
+					case '%blogurl%':
+						$pingdata[$key] = get_option( 'home' );
+						break;
+
+					case '%username%':
+						$pingdata[$key] = $member->user_login;
+						break;
+
+					case '%usernicename%':
+						$pingdata[$key] = $member->user_nicename;
+						break;
+
+					case '%userdisplayname%':
+						$pingdata[$key] = $member->display_name;
+						break;
+
+					case '%userfirstname%':
+						$pingdata[$key] = $member->user_firstname;
+						break;
+
+					case '%userlastname%':
+						$pingdata[$key] = $member->user_lastname;
+						break;
+
+					case '%useremail%':
+						$pingdata[$key] = $member->user_email;
+						break;
+
+					case '%userid%':
+						$pingdata[$key] = $member->ID;
+						break;
+
+					case '%networkname%':
+						$pingdata[$key] = get_site_option( 'site_name' );
+						break;
+
+					case '%networkurl%':
+						$pingdata[$key] = get_site_option( 'siteurl' );
+						break;
+
+					case '%subscriptionname%':
+						if ( !empty( $sub_id ) ) {
+							$sub = Membership_Plugin::factory()->get_subscription( $sub_id );
+							$pingdata[$key] = $sub->sub_name();
+						} else {
+							$pingdata[$key] = '';
+						}
+
+						break;
+
+					case '%levelname%':
+						if ( !empty( $level_id ) ) {
+							$level = Membership_Plugin::factory()->get_level( $level_id );
+							$pingdata[$key] = $level->level_title();
+						} else {
+							$pingdata[$key] = '';
+						}
+						break;
+
+					case '%timestamp%':
+						$pingdata[$key] = time();
+						break;
+
+					default:
+						$pingdata[$key] = apply_filters( 'membership_pingfield_' . $key, '' );
+						break;
+				}
+			}
 
 			// Globally replace the values in the ping and then make it into an array to send
-			$pingmessage = str_replace(array_keys($pingdata), array_values($pingdata), $this->ping->pinginfo);
-			$pingmessage = array_map( 'trim', explode("\n", $pingmessage) );
+			$pingmessage = str_replace( array_keys( $pingdata ), array_values( $pingdata ), $this->ping->pinginfo );
+			$pingmessage = array_map( 'trim', explode( PHP_EOL, $pingmessage ) );
 
 			// make the ping message into a sendable bit of text
 			$pingtosend = array();
-			foreach($pingmessage as $key => $value) {
-				$temp = explode("=", $value);
-				$pingtosend[$temp[0]] = $temp[1];
+			foreach ( $pingmessage as $key => $value ) {
+				$temp = explode( "=", $value );
+
+				if ( strpos($temp[0], '[') !== false && strpos($temp[0], ']') !== false ) {
+					//this key is an array - let's add to the $pingtosend array as an array
+					$varname = $temp[0];
+					$value = $temp[1];
+
+					$start = strpos($varname, '[');
+					$end = strpos($varname, ']');
+					$key = substr($varname, 0, $start);
+					$subkey = substr($varname, $start+1, $end-$start-1);
+
+					if ( !isset($pingtosend[$key]) ) {
+						$pingtosend[$key] = array($subkey => $value);
+					} else {
+						$pingtosend[$key][$subkey] = $value;
+					}
+				} elseif ( count( $temp ) == 2 ) {
+					$pingtosend[$temp[0]] = $temp[1];
+				}
 			}
 
 			// Send the request
-			if( class_exists( 'WP_Http' ) ) {
-				$request = new WP_Http;
+			$request = new WP_Http();
+			$url = $this->ping->pingurl;
+			switch ( $this->ping->pingtype ) {
+				case 'GET':
+					$url .= http_build_query($pingtosend);
+					// old method kept for consideration as using WP method.
+					// $url = add_query_arg( array_map( 'urlencode', $pingtosend ), $url );
+					$result = $request->request( $url, array( 'method' => 'GET', 'body' => '' ) );
+					break;
 
-				switch( $this->ping->pingtype ) {
-					case 'GET':		$url = untrailingslashit($url) . "?";
-					 				foreach($pingtosend as $key => $val) {
-										if(substr($url, -1) != '?') $url .= "&";
-										$url .= $key . "=" . urlencode($val);
-									}
-									$result = $request->request( $url, array( 'method' => 'GET', 'body' => '' ) );
-									break;
-
-					case 'POST':	$result = $request->request( $url, array( 'method' => 'POST', 'body' => $pingtosend ) );
-									break;
-				}
-
-				/*
-				'headers': an array of response headers, such as "x-powered-by" => "PHP/5.2.1"
-				'body': the response string sent by the server, as you would see it with you web browser
-				'response': an array of HTTP response codes. Typically, you'll want to have array('code'=>200, 'message'=>'OK')
-				'cookies': an array of cookie information
-				*/
-
-				$this->add_history( $pingtosend, $result );
+				case 'POST':
+					$result = $request->request( $url, array( 'method' => 'POST', 'body' => $pingtosend ) );
+					break;
 			}
 
+			/*
+			  'headers': an array of response headers, such as "x-powered-by" => "PHP/5.2.1"
+			  'body': the response string sent by the server, as you would see it with you web browser
+			  'response': an array of HTTP response codes. Typically, you'll want to have array('code'=>200, 'message'=>'OK')
+			  'cookies': an array of cookie information
+			 */
 
+			$this->add_history( $pingtosend, $result );
 		}
 
 		function resend_historic_ping( $history_id, $rewrite ) {
@@ -426,106 +466,74 @@ if(!class_exists('M_Ping')) {
 		}
 
 	}
+
 }
 
-// Ping integration functions and hooks
-/*
-do_action( 'membership_add_level', $tolevel_id, $this->ID );
-do_action( 'membership_drop_level', $fromlevel_id, $this->ID );
-do_action( 'membership_move_level', $fromlevel_id, $tolevel_id, $this->ID );
-
-do_action( 'membership_add_subscription', $tosub_id, $tolevel_id, $to_order, $this->ID);
-do_action( 'membership_drop_subscription', $fromsub_id, $this->ID );
-do_action( 'membership_move_subscription', $fromsub_id, $tosub_id, $tolevel_id, $to_order, $this->ID );
-*/
-
+add_action( 'membership_add_level', 'M_ping_joinedlevel', 10, 2 );
 function M_ping_joinedlevel( $tolevel_id, $user_id ) {
-
 	// Set up the level and find out if it has a joining ping
-	$level =& new M_Level( $tolevel_id );
-
+	$level = Membership_Plugin::factory()->get_level( $tolevel_id );
 	$joiningping_id = $level->get_meta( 'joining_ping' );
-	if(!empty($joiningping_id)) {
-		$ping =& new M_Ping( $joiningping_id );
-
+	if ( !empty( $joiningping_id ) ) {
+		$ping = new M_Ping( $joiningping_id );
 		$ping->send_ping( false, $tolevel_id, $user_id );
 	}
-
-
 }
-add_action( 'membership_add_level', 'M_ping_joinedlevel', 10, 2 );
 
+add_action( 'membership_drop_level', 'M_ping_leftlevel', 10, 2 );
 function M_ping_leftlevel( $fromlevel_id, $user_id ) {
-
 	// Set up the level and find out if it has a leaving ping
-	$level =& new M_Level( $fromlevel_id );
-
+	$level = Membership_Plugin::factory()->get_level( $fromlevel_id );
 	$leavingping_id = $level->get_meta( 'leaving_ping' );
-	if(!empty($leavingping_id)) {
-		$ping =& new M_Ping( $leavingping_id );
-
+	if ( !empty( $leavingping_id ) ) {
+		$ping = new M_Ping( $leavingping_id );
 		$ping->send_ping( false, $fromlevel_id, $user_id );
 	}
-
 }
-add_action( 'membership_drop_level', 'M_ping_leftlevel', 10, 2 );
 
+add_action( 'membership_move_level', 'M_ping_movedlevel', 10, 3 );
 function M_ping_movedlevel( $fromlevel_id, $tolevel_id, $user_id ) {
-
 	M_ping_leftlevel( $fromlevel_id, $user_id );
 	M_ping_joinedlevel( $tolevel_id, $user_id );
-
 }
-add_action( 'membership_move_level', 'M_ping_movedlevel', 10, 3 );
 
-function M_ping_joinedsub( $tosub_id, $tolevel_id, $to_order, $user_id ) {
-
-	$sub =& new M_Subscription( $tosub_id );
-	$subjoiningping_id = $sub->get_meta( 'joining_ping' );
-
-	if(!empty($subjoiningping_id)) {
-		$ping =& new M_Ping( $subjoiningping_id );
-
-		$ping->send_ping( $tosub_id, $tolevel_id, $user_id );
-	}
-
-	$level =& new M_Level( $tolevel_id );
-	$joiningping_id = $level->get_meta( 'joining_ping' );
-
-	if(!empty($joiningping_id)) {
-		$ping =& new M_Ping( $joiningping_id );
-
-		$ping->send_ping( $tosub_id, $tolevel_id, $user_id );
-	}
-
-}
 add_action( 'membership_add_subscription', 'M_ping_joinedsub', 10, 4 );
+function M_ping_joinedsub( $tosub_id, $tolevel_id, $to_order, $user_id ) {
+	$sub = Membership_Plugin::factory()->get_subscription( $tosub_id );
+	$subjoiningping_id = $sub->get_meta( 'joining_ping' );
+	if ( !empty( $subjoiningping_id ) ) {
+		$ping = new M_Ping( $subjoiningping_id );
+		$ping->send_ping( $tosub_id, $tolevel_id, $user_id );
+	}
 
+	$level = Membership_Plugin::factory()->get_level( $tolevel_id );
+	$joiningping_id = $level->get_meta( 'joining_ping' );
+	if ( !empty( $joiningping_id ) ) {
+		$ping = new M_Ping( $joiningping_id );
+		$ping->send_ping( $tosub_id, $tolevel_id, $user_id );
+	}
+}
+
+add_action( 'membership_drop_subscription', 'M_ping_leftsub', 10, 3 );
 function M_ping_leftsub( $fromsub_id, $fromlevel_id, $user_id ) {
-
 	// Leaving the level
 	M_ping_leftlevel( $fromlevel_id, $user_id );
-
 	// Leaving the sub
-	$sub =& new M_Subscription( $fromsub_id );
-	$subleavingping_id = $sub->get_meta( 'leaving_ping' );
-
-	if(!empty($subleavingping_id)) {
-		$ping =& new M_Ping( $subleavingping_id );
-
-		$ping->send_ping( $fromsub_id, false, $user_id );
-	}
-
+	M_ping_expiresub( $fromsub_id, $user_id );
 }
-add_action( 'membership_drop_subscription', 'M_ping_leftsub', 10, 3 );
 
+add_action( 'membership_expire_subscription', 'M_ping_expiresub', 10, 2 );
+function M_ping_expiresub( $sub_id, $user_id ) {
+	$sub = Membership_Plugin::factory()->get_subscription( $sub_id );
+	$subleavingping_id = $sub->get_meta( 'leaving_ping' );
+	if ( !empty( $subleavingping_id ) ) {
+		$ping = new M_Ping( $subleavingping_id );
+		$ping->send_ping( $sub_id, false, $user_id );
+	}
+}
+
+add_action( 'membership_move_subscription', 'M_ping_movedsub', 10, 6 );
 function M_ping_movedsub( $fromsub_id, $fromlevel_id, $tosub_id, $tolevel_id, $to_order, $user_id ) {
-
 	M_ping_leftsub( $fromsub_id, $fromlevel_id, $user_id );
 	M_ping_joinedsub( $tosub_id, $tolevel_id, $to_order, $user_id );
-
 }
-add_action( 'membership_move_subscription', 'M_ping_movedsub', 10, 6 );
-
-
-?>

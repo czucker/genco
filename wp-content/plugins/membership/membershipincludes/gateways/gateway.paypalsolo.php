@@ -1,34 +1,33 @@
 <?php
 /*
 Addon Name: PayPal Single Payments Gateway
-Author: Barry (Incsub)
-Author URI: http://caffeinatedb.com
+Author: Incsub
+Author URI: http://premium.wpmudev.org
 Gateway ID: paypalsolo
 */
 
-class paypalsolo extends M_Gateway {
+class paypalsolo extends Membership_Gateway {
 
 	var $gateway = 'paypalsolo';
 	var $title = 'PayPal Express - with Single Payments';
 	var $issingle = true;
 
-	function paypalsolo() {
-		parent::M_Gateway();
+	public function __construct() {
+		parent::__construct();
 
-		add_action('M_gateways_settings_' . $this->gateway, array(&$this, 'mysettings'));
+		add_action( 'M_gateways_settings_' . $this->gateway, array( &$this, 'mysettings' ) );
 
 		// If I want to override the transactions output - then I can use this action
 		//add_action('M_gateways_transactions_' . $this->gateway, array(&$this, 'mytransactions'));
 
-		if($this->is_active()) {
+		if ( $this->is_active() ) {
 			// Subscription form gateway
-			add_action('membership_purchase_button', array(&$this, 'display_subscribe_button'), 1, 3);
+			add_action( 'membership_purchase_button', array( &$this, 'display_subscribe_button' ), 1, 3 );
 
 			// Payment return
-			add_action('membership_handle_payment_return_' . $this->gateway, array(&$this, 'handle_paypal_return'));
-			add_filter( 'membership_subscription_form_subscription_process', array(&$this, 'signup_free_subscription'), 10, 2 );
+			add_action( 'membership_handle_payment_return_' . $this->gateway, array( &$this, 'handle_paypal_return' ) );
+			add_filter( 'membership_subscription_form_subscription_process', array( &$this, 'signup_free_subscription' ), 10, 2 );
 		}
-
 	}
 
 	function mysettings() {
@@ -36,6 +35,8 @@ class paypalsolo extends M_Gateway {
 		global $M_options;
 
 		?>
+		<h3><?php _e('IPN Setup Instructions', 'membership'); ?></h3>
+		<p><?php printf(__('In order for Membership to function correctlty you must setup an IPN listening URL with PayPal. Failure to do so will prevent your site from being notified when a member cancels their subscription.<br />Your IPN listening URL is: <strong>%s</strong><br /><a target="_blank" href="https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNSetup/">Instructions &raquo;</a></p></p>', 'membership'), trailingslashit(home_url('paymentreturn/' . $this->gateway))); ?></p>
 		<table class="form-table">
 		<tbody>
 		  <tr valign="top">
@@ -56,6 +57,7 @@ class paypalsolo extends M_Gateway {
 		          'BE'	=> __('Belgium', 'membership'),
 		          'CA'	=> __('Canada', 'membership'),
 		          'CN'	=> __('China', 'membership'),
+				  'DK' => __('DENMARK', 'membership'),
 		          'FR'	=> __('France', 'membership'),
 		          'DE'	=> __('Germany', 'membership'),
 		          'HK'	=> __('Hong Kong', 'membership'),
@@ -65,6 +67,7 @@ class paypalsolo extends M_Gateway {
 		          'NL'	=> __('Netherlands', 'membership'),
 				  'NZ'	=> __('New Zealand', 'membership'),
 		          'PL'	=> __('Poland', 'membership'),
+				  'RU'  => __('Russia', 'membership'),
 		          'SG'	=> __('Singapore', 'membership'),
 		          'ES'	=> __('Spain', 'membership'),
 		          'SE'	=> __('Sweden', 'membership'),
@@ -142,22 +145,20 @@ class paypalsolo extends M_Gateway {
 		<?php
 	}
 
-	function build_custom($user_id, $sub_id, $amount, $sublevel = 0, $fromsub = 0) {
-
+	function build_custom( $user_id, $sub_id, $amount, $sublevel = 0, $fromsub = 0 ) {
 		global $M_options;
 
-		$custom = '';
-
-		//fake:user:sub:key
-
 		$custom = time() . ':' . $user_id . ':' . $sub_id . ':';
-		$key = md5('MEMBERSHIP' . apply_filters('membership_amount_' . $M_options['paymentcurrency'], $amount));
+		$key = md5( 'MEMBERSHIP' . apply_filters( 'membership_amount_' . $M_options['paymentcurrency'], $amount ) );
+
+		if ( $fromsub === false ) {
+			$fromsub = filter_input( INPUT_GET, 'from_subscription', FILTER_VALIDATE_INT );
+		}
 
 		$custom .= $key;
 		$custom .= ":" . $sublevel . ":" . $fromsub;
 
 		return $custom;
-
 	}
 
 	function single_button($pricing, $subscription, $user_id, $sublevel = 0, $fromsub = 0) {
@@ -182,14 +183,13 @@ class paypalsolo extends M_Gateway {
 		$form .= '<input type="hidden" name="item_name" value="' . $subscription->sub_name() . '">';
 		$form .= '<input type="hidden" name="amount" value="' . apply_filters('membership_amount_' . $M_options['paymentcurrency'], number_format($pricing[$sublevel -1]['amount'], 2, '.' , '')) . '">';
 		$form .= '<input type="hidden" name="currency_code" value="' . $M_options['paymentcurrency'] .'">';
-
 		$form .= '<input type="hidden" name="return" value="' . apply_filters( 'membership_return_url_' . $this->gateway, M_get_returnurl_permalink()) . '">';
 		$form .= '<input type="hidden" name="cancel_return" value="' . apply_filters( 'membership_cancel_url_' . $this->gateway, M_get_subscription_permalink()) . '">';
-
 		$form .= '<input type="hidden" name="custom" value="' . $this->build_custom($user_id, $subscription->id, number_format($pricing[$sublevel -1]['amount'], 2, '.' , ''), $sublevel, $fromsub) .'">';
-
 		$form .= '<input type="hidden" name="lc" value="' . esc_attr(get_option( $this->gateway . "_paypal_site" )) . '">';
-		$form .= '<input type="hidden" name="notify_url" value="' . apply_filters( 'membership_notify_url_' . $this->gateway, trailingslashit(get_option('home')) . 'paymentreturn/' . esc_attr($this->gateway)) . '">';
+		$form .= '<input type="hidden" name="notify_url" value="' . apply_filters( 'membership_notify_url_' . $this->gateway, home_url('paymentreturn/' . esc_attr($this->gateway))) . '">';
+		$form .= '<input type="hidden" name="no_note" value="1" />';
+		$form .= '<input type="hidden" name="no_shipping" value="1" />';
 
 		if($sublevel == 1) {
 			$button = get_option( $this->gateway . "_paypal_button", 'https://www.paypal.com/en_US/i/btn/btn_subscribe_LG.gif' );
@@ -216,7 +216,7 @@ class paypalsolo extends M_Gateway {
 		}
 
 		// create_subscription
-		$member = new M_Membership($user_id);
+		$member = Membership_Plugin::factory()->get_member($user_id);
 		if($member) {
 			$member->create_subscription($sub_id, $this->gateway);
 		}
@@ -257,7 +257,14 @@ class paypalsolo extends M_Gateway {
 			$form .= '<input type="hidden" name="action" value="subscriptionsignup" />';
 			$form .=  wp_nonce_field('free-sub_' . $subscription->sub_id(), "_wpnonce", true, false);
 			$form .=  "<input type='hidden' name='gateway' value='" . $this->gateway . "' />";
-			$button = get_option( $this->gateway . "_payment_button", 'https://www.paypal.com/en_US/i/btn/btn_subscribe_LG.gif' );
+
+			$button = get_option( $this->gateway . "_payment_button", '' );
+			if( empty($button) ) {
+				$form .= '<input type="submit" class="button ' . apply_filters('membership_subscription_button_color', 'blue') . '" value="' . __('Sign Up','membership') . '" />';
+			} else {
+				$form .= '<input type="image" name="submit" border="0" src="' . $button . '" alt="PayPal - The safer, easier way to pay online">';
+			}
+
 		} else {
 			$form .=  wp_nonce_field('renew-sub_' . $subscription->sub_id(), "_wpnonce", true, false);
 			$form .=  "<input type='hidden' name='action' value='subscriptionsignup' />";
@@ -265,10 +272,15 @@ class paypalsolo extends M_Gateway {
 			$form .=  "<input type='hidden' name='subscription' value='" . $subscription->sub_id() . "' />";
 			$form .=  "<input type='hidden' name='user' value='" . $user_id . "' />";
 			$form .=  "<input type='hidden' name='level' value='" . $sublevel . "' />";
-			$button = get_option( $this->gateway . "_payment_button", 'http://www.paypal.com/en_US/i/btn/x-click-but23.gif' );
+
+			$button = get_option( $this->gateway . "_payment_button", '' );
+			if( empty($button) ) {
+				$form .= '<input type="submit" class="button ' . apply_filters('membership_subscription_button_color', 'blue') . '" value="' . __('Sign Up','membership') . '" />';
+			} else {
+				$form .= '<input type="image" name="submit" border="0" src="' . $button . '" alt="PayPal - The safer, easier way to pay online">';
+			}
 		}
 
-		$form .= '<input type="image" name="submit" border="0" src="' . $button . '" alt="PayPal - The safer, easier way to pay online">';
 		$form .= '</form>';
 
 		return $form;
@@ -345,7 +357,9 @@ class paypalsolo extends M_Gateway {
 			update_option( $this->gateway . "_paypal_upgrade_button", $_POST[ '_paypal_upgrade_button' ] );
 			update_option( $this->gateway . "_paypal_cancel_button", $_POST[ '_paypal_cancel_button' ] );
 			update_option( $this->gateway . "_paypal_renew_button", $_POST[ '_paypal_renew_button' ] );
-			update_option( $this->gateway . "_completed_message", $_POST[ 'completed_message' ] );
+			if ( isset( $_POST[ 'completed_message' ] ) ) {
+				update_option( $this->gateway . "_completed_message", $_POST[ 'completed_message' ] );
+			}
 		}
 
 		// default action is to return true
@@ -365,64 +379,33 @@ class paypalsolo extends M_Gateway {
 				$domain = 'https://www.sandbox.paypal.com';
 			}
 
-			$req = 'cmd=_notify-validate';
-			if (!isset($_POST)) $_POST = $HTTP_POST_VARS;
-			foreach ($_POST as $k => $v) {
-				if (get_magic_quotes_gpc()) $v = stripslashes($v);
-				$req .= '&' . $k . '=' . $v;
-			}
+			membership_debug_log( __('Received PayPal IPN from - ' , 'membership') . $domain );
 
-			$header = 'POST /cgi-bin/webscr HTTP/1.0' . "\r\n"
-					. 'Content-Type: application/x-www-form-urlencoded' . "\r\n"
-					. 'Content-Length: ' . strlen($req) . "\r\n"
-					. "\r\n";
+			//Paypal post authenticity verification
+			$ipn_data = (array) stripslashes_deep( $_POST );
+			$ipn_data['cmd'] = '_notify-validate';
+			$response = wp_remote_post("$domain/cgi-bin/webscr", array(
+					'timeout' => 60,
+					'sslverify' => false,
+					'httpversion' => '1.1',
+					'body' => $ipn_data,
+				) );
 
-			@set_time_limit(60);
-			if ($conn = @fsockopen($domain, 80, $errno, $errstr, 30)) {
-				fputs($conn, $header . $req);
-				socket_set_timeout($conn, 30);
-
-				$response = '';
-				$close_connection = false;
-				while (true) {
-					if (feof($conn) || $close_connection) {
-						fclose($conn);
-						break;
-					}
-
-					$st = @fgets($conn, 4096);
-					if ($st === false) {
-						$close_connection = true;
-						continue;
-					}
-
-					$response .= $st;
-				}
-
-				$error = '';
-				$lines = explode("\n", str_replace("\r\n", "\n", $response));
-				// looking for: HTTP/1.1 200 OK
-				if (count($lines) == 0) $error = 'Response Error: Header not found';
-				else if (substr($lines[0], -7) != ' 200 OK') $error = 'Response Error: Unexpected HTTP response';
-				else {
-					// remove HTTP header
-					while (count($lines) > 0 && trim($lines[0]) != '') array_shift($lines);
-
-					// first line will be empty, second line will have the result
-					if (count($lines) < 2) $error = 'Response Error: No content found in transaction response';
-					else if (strtoupper(trim($lines[1])) != 'VERIFIED') $error = 'Response Error: Unexpected transaction response';
-				}
-
-				if ($error != '') {
-					echo $error;
-					exit;
-				}
+			if ( ! is_wp_error( $response ) && 200 == $response['response']['code'] && ! empty( $response['body'] ) && "VERIFIED" == $response['body'] ) {
+				membership_debug_log( 'PayPal Transaction Verified' );
+			} else {
+				$error = 'Response Error: Unexpected transaction response';
+				membership_debug_log( $error );
+				membership_debug_log( $response );
+				echo $error;
+				exit;
 			}
 
 			// handle cases that the system must ignore
 			//if ($_POST['payment_status'] == 'In-Progress' || $_POST['payment_status'] == 'Partially-Refunded') exit;
 			$new_status = false;
 			// process PayPal response
+			$factory = Membership_Plugin::factory();
 			switch ($_POST['payment_status']) {
 				case 'Partially-Refunded':
 					break;
@@ -439,40 +422,45 @@ class paypalsolo extends M_Gateway {
 
 					$newkey = md5('MEMBERSHIP' . $amount);
 					if($key != $newkey) {
-						$member = new M_Membership($user_id);
+						$member = $factory->get_member($user_id);
 						if($member) {
 							if(defined('MEMBERSHIP_DEACTIVATE_USER_ON_CANCELATION') && MEMBERSHIP_DEACTIVATE_USER_ON_CANCELATION == true ) {
 								$member->deactivate();
 							}
 						}
-					} else {
-						if( !$this->duplicate_transaction( $user_id, $sub_id, $amount, $currency, $timestamp, trim($_POST['txn_id']), $_POST['payment_status'], '' ) ) {
-							$this->record_transaction($user_id, $sub_id, $amount, $currency, $timestamp, trim($_POST['txn_id']), $_POST['payment_status'], '');
+					} elseif ( !$this->_check_duplicate_transaction( $user_id, $sub_id, $timestamp, trim( $_POST['txn_id'] ) ) ) {
+						$this->_record_transaction( $user_id, $sub_id, $amount, $currency, $timestamp, trim( $_POST['txn_id'] ), $_POST['payment_status'], '' );
 
-							if($sublevel == '1') {
-								// This is the first level of a subscription so we need to create one if it doesn't already exist
-								$member = new M_Membership($user_id);
-								if($member) {
-									$member->create_subscription($sub_id, $this->gateway);
-									do_action('membership_payment_subscr_signup', $user_id, $sub_id);
-								}
-							} else {
-								$member = new M_Membership($user_id);
-								if($member) {
-									// Mark the payment so that we can move through ok
-									$member->record_active_payment( $sub_id, $sublevel, $timestamp );
-								}
+						if ( $sublevel == '1' ) {
+							// This is the first level of a subscription so we need to create one if it doesn't already exist
+							$member = $factory->get_member( $user_id );
+							if ( $member ) {
+								$member->create_subscription( $sub_id, $this->gateway );
+								do_action( 'membership_payment_subscr_signup', $user_id, $sub_id );
 							}
-
-							// remove any current subs for upgrades
-							if(!empty($fromsub) && $fromsub != 0) {
-								$member->drop_subscription( $fromsub );
+						} else {
+							$member = $factory->get_member( $user_id );
+							if ( $member ) {
+								// Mark the payment so that we can move through ok
+								$member->record_active_payment( $sub_id, $sublevel, $timestamp );
 							}
-
-							// Added for affiliate system link
-							do_action('membership_payment_processed', $user_id, $sub_id, $amount, $currency, $_POST['txn_id']);
 						}
+
+						// remove any current subs for upgrades
+						$sub_ids = $member->get_subscription_ids();
+						foreach ( $sub_ids as $fromsub ) {
+							if ( $sub_id == $fromsub ) {
+								continue;
+							}
+
+							$member->drop_subscription($fromsub);
+						}
+
+						// Added for affiliate system link
+						do_action( 'membership_payment_processed', $user_id, $sub_id, $amount, $currency, $_POST['txn_id'] );
 					}
+
+					membership_debug_log( __('Processed transaction received - ','membership') . print_r($_POST, true) );
 					break;
 
 				case 'Reversed':
@@ -482,9 +470,11 @@ class paypalsolo extends M_Gateway {
 					$currency = $_POST['mc_currency'];
 					list($timestamp, $user_id, $sub_id, $key, $sublevel) = explode(':', $_POST['custom']);
 
-					$this->record_transaction($user_id, $sub_id, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
+					$this->_record_transaction($user_id, $sub_id, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
 
-					$member = new M_Membership($user_id);
+					membership_debug_log( __('Reversed transaction received - ','membership') . print_r($_POST, true) );
+
+					$member = $factory->get_member($user_id);
 					if($member) {
 						$member->expire_subscription($sub_id);
 						if(defined('MEMBERSHIP_DEACTIVATE_USER_ON_CANCELATION') && MEMBERSHIP_DEACTIVATE_USER_ON_CANCELATION == true ) {
@@ -502,9 +492,11 @@ class paypalsolo extends M_Gateway {
 					$currency = $_POST['mc_currency'];
 					list($timestamp, $user_id, $sub_id, $key, $sublevel) = explode(':', $_POST['custom']);
 
-					$this->record_transaction($user_id, $sub_id, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
+					$this->_record_transaction($user_id, $sub_id, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
 
-					$member = new M_Membership($user_id);
+					membership_debug_log( __('Refunded transaction received - ','membership') . print_r($_POST, true) );
+
+					$member = $factory->get_member($user_id);
 					if($member) {
 						$member->expire_subscription($sub_id);
 					}
@@ -519,9 +511,11 @@ class paypalsolo extends M_Gateway {
 					$currency = $_POST['mc_currency'];
 					list($timestamp, $user_id, $sub_id, $key, $sublevel) = explode(':', $_POST['custom']);
 
-					$this->record_transaction($user_id, $sub_id, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
+					$this->_record_transaction($user_id, $sub_id, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
 
-					$member = new M_Membership($user_id);
+					membership_debug_log( __('Denied transaction received - ','membership') . print_r($_POST, true) );
+
+					$member = $factory->get_member($user_id);
 					if($member) {
 						$member->expire_subscription($sub_id);
 						if(defined('MEMBERSHIP_DEACTIVATE_USER_ON_CANCELATION') && MEMBERSHIP_DEACTIVATE_USER_ON_CANCELATION == true ) {
@@ -551,7 +545,9 @@ class paypalsolo extends M_Gateway {
 					$currency = $_POST['mc_currency'];
 					list($timestamp, $user_id, $sub_id, $key, $sublevel) = explode(':', $_POST['custom']);
 
-					$this->record_transaction($user_id, $sub_id, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
+					$this->_record_transaction($user_id, $sub_id, $amount, $currency, $timestamp, $_POST['txn_id'], $_POST['payment_status'], $note);
+
+					membership_debug_log( __('Pending transaction received - ','membership') . print_r($_POST, true) );
 
 					do_action('membership_payment_pending', $user_id, $sub_id, $amount, $currency, $_POST['txn_id']);
 					break;
@@ -568,9 +564,11 @@ class paypalsolo extends M_Gateway {
 					if($_POST['case_type'] == 'dispute') {
 						list($timestamp, $user_id, $sub_id, $key, $sublevel) = explode(':', $_POST['custom']);
 						// immediately suspend the account
-						$member = new M_Membership($user_id);
+						$member = $factory->get_member($user_id);
 						if($member) {
 							$member->deactivate();
+
+							membership_debug_log( sprintf(__('Dispute for %d','membership'), $user_id ) );
 						}
 					}
 
@@ -582,12 +580,11 @@ class paypalsolo extends M_Gateway {
 			// Did not find expected POST variables. Possible access attempt from a non PayPal site.
 			header('Status: 404 Not Found');
 			echo 'Error: Missing POST variables. Identification is not possible.';
+			membership_debug_log( 'Error: Missing POST variables. Identification is not possible.' );
 			exit;
 		}
 	}
 
 }
 
-M_register_gateway('paypalsolo', 'paypalsolo');
-
-?>
+Membership_Gateway::register_gateway( 'paypalsolo', 'paypalsolo' );

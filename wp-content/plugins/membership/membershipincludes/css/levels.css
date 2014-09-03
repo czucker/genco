@@ -1,5 +1,9 @@
 /* @override http://dev.site/wp-content/plugins/membership/membershipincludes/css/levels.css?ver=12 */
 
+.tablenav .actions{
+    padding-right: 0px;
+}
+
 div.level-liquid-left {
 	float: left;
 	clear: left;
@@ -103,7 +107,7 @@ input.wide {
 
 div.level-details select {
 	display: block;
-	margin-top: 5px;	
+	margin-top: 5px;
 }
 
 .level-holder h3 {
@@ -372,7 +376,7 @@ div.level-operation .inner-operation p.description {
 }
 
 div.level-operation.open div.inner-operation {
-	
+
 }
 
 div.level-operation.closed div.inner-operation {
@@ -508,15 +512,18 @@ div.buttons a.cancellink {
 }
 
 div.positivecontent {
-	
+
 }
 
 #wp-level_protectedcontent-wrap {
 	margin-left: 10px;
-	margin-right: 10px;	
+	margin-right: 10px;
 }
 
 #wp-level_protectedcontent-editor-container {
-	
+
 }
 
+
+
+/* 331762-1409676849-au */

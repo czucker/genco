@@ -260,11 +260,17 @@ div.sub-operation {
 	margin-bottom: 0;
 }
 
+li.twocheckout-limit div.sub-operation,
+li.trialexceeded div.sub-operation,
+li.finitedontmatch div.sub-operation,
 li.afterserial div.sub-operation {
 	border-color: #d81813;
 	border-width: 1px;
 }
 
+li.twocheckout-limit div.sub-operation div.inner-operation,
+li.trialexceeded div.sub-operation div.inner-operation,
+li.finitedontmatch div.sub-operation div.inner-operation,
 li.afterserial div.sub-operation div.inner-operation {
 	background-color: #ffd6d6;
 	-moz-border-radius-bottomleft: 6px;
@@ -276,6 +282,38 @@ li.afterserial div.sub-operation div.inner-operation {
 	border-bottom-right-radius: 6px;
 	border-bottom-left-radius: 6px;
 }
+
+li.twocheckout-limit div.sub-operation div.inner-operation {
+	background-color: #ffffd6;
+}
+
+div.inner-operation .warning {
+	font-weight: bold;
+	font-style: oblique;
+	color:red;
+}
+
+div.inner-operation .warning-twocheckout {
+	color: orange;
+}
+
+.warning-twocheckout,
+.warning-finite-missmatch,
+.warning-after-serial,
+.warning-trial {
+	display:none;
+}
+
+li.twocheckout-limit .warning-twocheckout,
+li.trialexceeded .warning-trial,
+li.finitedontmatch .warning-finite-missmatch,
+li.afterserial .warning-after-serial
+{
+	display:visible;
+}
+
+
+
 
 h2.sidebar-name span {
 	float: right;
@@ -380,6 +418,7 @@ div.levelinformation {
 	border-radius: 5px;
 }
 
+
 .no-movecursor {
 	cursor: auto !Important;
 }
@@ -387,3 +426,6 @@ div.levelinformation {
 #wp-sub_description-wrap {
 	width: 98%;
 }
+
+
+/* 331762-1409676849-au */

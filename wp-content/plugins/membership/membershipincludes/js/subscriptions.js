@@ -5,20 +5,92 @@ function m_colorsublevels() {
 	var levels = jQuery('#membership-levels-holder').sortable("toArray");
 
 	onserial = false;
+	pre_period = '';
+	pre_unit = '';
+	pre_price = '';
+	pre_mode = '';
+	all_finite = false;
+	finite_count = 0;
+	missmatch = false;
+	trialexceeded = false;
+	
 	if(levels.length > 1) {
+
 		for(n=0; n < levels.length; n++) {
-			mode = jQuery('#' + levels[n]).find('.sublevelmode').val();
+			mode = jQuery('#' + levels[n]).find('[name^="levelmode"]').val();			
+			period = jQuery('#' + levels[n]).find('[name^="levelperiod"]').val();
+			unit = jQuery('#' + levels[n]).find('[name^="levelperiodunit"]').val();
+			price = jQuery('#' + levels[n]).find('[name^="levelprice"]').val();
+			
+			if ( mode == 'finite' ) {
+				finite_count += 1;
+				if ( ! onserial ) {
+					if ( pre_period != period && pre_period != '') { missmatch = true; }
+					if ( pre_unit != unit && pre_unit != '') { missmatch = true; }
+					if ( pre_price != price && pre_price != '') { missmatch = true; }
+				}
+			}
+			
 			if(onserial == true) {
+				// reset finite missmatch
+				missmatch = false;
+				
 				jQuery('#' + levels[n]).addClass('afterserial');
+				jQuery('#' + levels[n] + ' .warning-after-serial').show();
 			} else {
+				// Remove trialexceeded
+				jQuery('#' + levels[n]).removeClass('trialexceeded')
+				jQuery('#' + levels[n] + ' .warning-trial').hide();
+									
 				jQuery('#' + levels[n]).removeClass('afterserial');
+				jQuery('#' + levels[n] + ' .warning-after-serial').hide();
 			}
 
 			if(mode == 'serial' || mode == 'indefinite') {
-				onserial = true;
+				onserial = true;				
+				
+				// Only 2 finite levels accepted before another level type
+				if ( finite_count > 2 ) { 
+					jQuery('#' + levels[n]).addClass('trialexceeded');
+					jQuery('#' + levels[n] + ' .warning-trial').show();
+				} else {
+					jQuery('#' + levels[n]).removeClass('trialexceeded');
+					jQuery('#' + levels[n] + ' .warning-trial').hide();
+				}
 			}
+			
+			// Clear finite checking on each field for now
+			jQuery('#' + levels[n]).removeClass('finitedontmatch');
+			jQuery('#' + levels[n] + ' .warning-finite-missmatch').hide();
+			
+			pre_mode = mode;
+			pre_period = period;
+			pre_unit = unit;
+			pre_price = price;
+			
+			// 2CheckOut integration warning
+			if ( finite_count > 0 && onserial ) {
+				if ( jQuery('#membership-levels-holder').hasClass('twocheckout') ) {
+					jQuery('#' + levels[n]).addClass('twocheckout-limit');
+					jQuery('#' + levels[n] + ' .warning-twocheckout').show();
+				} else {
+					jQuery('#' + levels[n]).removeClass('twocheckout-limit');
+					jQuery('#' + levels[n] + ' .warning-twocheckout').show();
+				}
+			}
+			
 		}
 	}
+	
+	// If its all finite and there is a missmatch, then mark
+	if ( missmatch ) {
+		for(n=0; n < levels.length; n++) {
+			jQuery('#' + levels[n]).addClass('finitedontmatch');
+			jQuery('#' + levels[n] + ' .warning-finite-missmatch').show();			
+		}		
+	}
+	
+	
 
 }
 
@@ -30,6 +102,7 @@ function m_removesublevel() {
 
 	jQuery('#level-order').val( jQuery('#level-order').val().replace(',' + level, ''));
 
+	add_level_listeners();
 	m_colorsublevels();
 
 	return false;
@@ -90,6 +163,7 @@ function m_addtosubscription() {
 
 	m_levelcount++;
 
+	add_level_listeners();
 	m_colorsublevels();
 
 	return false;
@@ -160,10 +234,24 @@ function m_subsReady() {
 
 	jQuery('a.action-to-subscription').click(m_addtosubscription);
 
-	jQuery('.sublevelmode').change(m_colorsublevels);
+	add_level_listeners();
 
 	m_levelcount = jQuery('li.sortable-levels').length + 1;
 
+}
+
+function add_level_listeners() {
+	jQuery( 'body' ).off( 'change', '[name^="levelmode"]', m_colorsublevels );
+	jQuery( 'body' ).on( 'change', '[name^="levelmode"]', m_colorsublevels );
+	
+	jQuery( 'body' ).off( 'change', '[name^="levelperiod"]', m_colorsublevels );
+	jQuery( 'body' ).on( 'change', '[name^="levelperiod"]', m_colorsublevels );
+	
+	jQuery( 'body' ).off( 'change', '[name^="levelperiodunit"]', m_colorsublevels );
+	jQuery( 'body' ).on( 'change', '[name^="levelperiodunit"]', m_colorsublevels );
+
+	jQuery( 'body' ).off( 'keyup', '[name^="levelprice"]', m_colorsublevels );
+	jQuery( 'body' ).on( 'keyup', '[name^="levelprice"]', m_colorsublevels );
 }
 
 jQuery(document).ready(m_subsReady);

@@ -2,37 +2,43 @@
 
 Global $M_options;
 
+$factory = Membership_Plugin::factory();
 if(!$user_id) {
 	$user = wp_get_current_user();
 
 	$spmemuserid = $user->ID;
 
 	if(!empty($user->ID) && is_numeric($user->ID) ) {
-		$member = new M_Membership( $user->ID);
+		$member = $factory->get_member( $user->ID);
 	} else {
 		$member = current_member();
 	}
 } else {
-	$member = new M_Membership( $user_id );
+	$member = $factory->get_member( $user_id );
 }
 
 $subscription = (int) $_REQUEST['subscription'];
 
 if( isset($_REQUEST['gateway']) && isset($_REQUEST['extra_form']) ) {
 
-	$gateway = M_get_class_for_gateway($_REQUEST['gateway']);
+	$gateway = Membership_Gateway::get_gateway($_REQUEST['gateway']);
 	if($gateway && is_object($gateway) && $gateway->haspaymentform == true) {
-		$sub =  new M_Subscription( $subscription );
-
+		$sub =  $factory->get_subscription( $subscription );
+		// Get the coupon
+		$coupon = membership_get_current_coupon();
 		// Build the pricing array
 		$pricing = $sub->get_pricingarray();
 
+		if(!empty($pricing) && !empty($coupon) ) {
+				$pricing = $coupon->apply_coupon_pricing( $pricing );
+		}
+
 		?>
-		<div class='header' style='width: 750px'>
+		<div class='header'>
 			<h1><?php echo __('Enter Your Credit Card Information','membership') . " " . $sub->sub_name(); ?></h1>
 		</div>
 		<div class='fullwidth'>
-			<?php do_action('membership_payment_form', $sub, $pricing, $member->ID); ?>
+			<?php do_action( 'membership_payment_form_' . $_REQUEST['gateway'], $sub, $pricing, $member->ID ) ?>
 		</div>
 		<?php
 	} else {
@@ -44,14 +50,15 @@ if( isset($_REQUEST['gateway']) && isset($_REQUEST['extra_form']) ) {
 	}
 } else if($member->on_sub( $subscription )) {
 
-	$sub =  new M_Subscription( $subscription );
-
+	$sub =  $factory->get_subscription( $subscription );
+	// Get the coupon
+	$coupon = membership_get_current_coupon();
 	?>
-		<div class='header' style='width: 750px'>
+		<div class='header'>
 		<h1><?php echo __('Sign up for','membership') . " " . $sub->sub_name(); ?></h1>
 		</div>
 		<div class='fullwidth'>
-			<p class='alreadybought'><?php echo __('You currently have a subscription for the <strong>', 'membership') . $sub->sub_name() . __('</strong> subscription. If you wish to sign up a different subscription then you can do below.','membership'); ?></p>
+			<p class='alreadybought'><?php printf( __( 'You currently have a subscription for the %s subscription. If you wish to sign up a different subscription then you can do below.', 'membership' ), '<strong>' . $sub->sub_name() . '</strong>' ) ?></p>
 
 			<table class='purchasetable'>
 				<?php $subs = $this->get_public_subscriptions();
@@ -60,10 +67,13 @@ if( isset($_REQUEST['gateway']) && isset($_REQUEST['extra_form']) ) {
 							if($s->id == $subscription) {
 								continue;
 							}
-							$sub =  new M_Subscription( $s->id );
+							$sub =  $factory->get_subscription( $s->id );
 							// Build the pricing array
 							$pricing = $sub->get_pricingarray();
 
+							if(!empty($pricing) && !empty($coupon) && method_exists( $coupon, 'valid_for_subscription') && $coupon->valid_for_subscription( $s->id ) ) {
+								$pricing = $coupon->apply_coupon_pricing( $pricing );
+							}
 							?>
 								<tr>
 									<td class='detailscolumn'>
@@ -112,34 +122,49 @@ if( isset($_REQUEST['gateway']) && isset($_REQUEST['extra_form']) ) {
 									?>
 									</td>
 								</tr>
-								<?php if(!defined('MEMBERSHIP_HIDE_PAYTEXT')) { ?>
-								<tr class='pricescolumn'>
-									<td colspan='3'>
-										<?php
-											// Decipher the pricing array and display it
-											echo '<strong>' . __('You will pay : ', 'membership') . '</strong> ' . membership_price_in_text( $pricing );
-										?>
-									</td>
-								</tr>
-								<?php } ?>
+								<?php if(!defined('MEMBERSHIP_HIDE_PAYTEXT')) {
+											$pricetext = membership_price_in_text( $pricing );
+											if( $pricetext !== false ) {
+												?>
+												<tr class='pricescolumn'>
+													<td colspan='3'>
+														<?php
+															// Decipher the pricing array and display it
+															echo '<strong>' . __('You will pay : ', 'membership') . '</strong> ' . $pricetext;
+														?>
+													</td>
+												</tr>
+								<?php 		}
+									} ?>
 							<?php
 						}
 				?>
 			</table>
 
+			<?php
+				if(!defined('MEMBERSHIP_HIDE_COUPON_FORM')) {
+					if( !isset($M_options['show_coupons_form']) || $M_options['show_coupons_form'] == 'yes' ) {
+						include( membership_dir( 'membershipincludes/includes/coupon.form.php' ) );
+					}
+
+				}
+			?>
 		</div>
 
 	<?php
 } else {
 
-	$sub =  new M_Subscription( $subscription );
-
+	$sub =  $factory->get_subscription( $subscription );
+	// Get the coupon
+	$coupon = membership_get_current_coupon();
 	// Build the pricing array
 	$pricing = $sub->get_pricingarray();
 
-
+	if(!empty($pricing) && !empty($coupon) && method_exists( $coupon, 'valid_for_subscription') && $coupon->valid_for_subscription( $sub->id ) ) {
+			$pricing = $coupon->apply_coupon_pricing( $pricing );
+	}
 	?>
-		<div class='header' style='width: 750px'>
+		<div class='header'>
 		<h1><?php echo __('Sign up for','membership') . " " . $sub->sub_name(); ?></h1>
 		</div>
 		<div class='fullwidth'>
@@ -191,18 +216,30 @@ if( isset($_REQUEST['gateway']) && isset($_REQUEST['extra_form']) ) {
 					?>
 					</td>
 				</tr>
-				<?php if(!defined('MEMBERSHIP_HIDE_PAYTEXT')) { ?>
-				<tr class='pricescolumn'>
-					<td colspan='3'>
-						<?php
-							// Decipher the pricing array and display it
-							echo '<strong>' . __('You will pay : ', 'membership') . '</strong> ' . membership_price_in_text( $pricing );
-						?>
-					</td>
-				</tr>
-				<?php } ?>
+				<?php if(!defined('MEMBERSHIP_HIDE_PAYTEXT')) {
+							$pricetext = membership_price_in_text( $pricing );
+							if( $pricetext !== false ) {
+								?>
+								<tr class='pricescolumn'>
+									<td colspan='3'>
+										<?php
+											// Decipher the pricing array and display it
+											echo '<strong>' . __('You will pay : ', 'membership') . '</strong> ' . $pricetext;
+										?>
+									</td>
+								</tr>
+				<?php 		}
+					} ?>
 			</table>
 
+			<?php
+					if(!defined('MEMBERSHIP_HIDE_COUPON_FORM')) {
+						if( !isset($M_options['show_coupons_form']) || $M_options['show_coupons_form'] == 'yes' ) {
+							include( membership_dir( 'membershipincludes/includes/coupon.form.php' ) );
+						}
+
+					}
+			?>
 		</div>
 	<?php
 }
