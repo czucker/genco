@@ -590,3 +590,4 @@
 [05-Sep-2014 15:29:54 UTC] PHP Warning:  Illegal string offset 'theme' in /home/czucker/public_html/Dev/genco/wp-content/plugins/arscode-ninja-popups/admin/fields/select_theme/field_select_theme.php on line 38
 [05-Sep-2014 15:29:54 UTC] PHP Warning:  Illegal string offset 'theme' in /home/czucker/public_html/Dev/genco/wp-content/plugins/arscode-ninja-popups/admin/fields/select_theme/field_select_theme.php on line 38
 [05-Sep-2014 15:29:54 UTC] PHP Warning:  Illegal string offset 'theme' in /home/czucker/public_html/Dev/genco/wp-content/plugins/arscode-ninja-popups/admin/fields/select_theme/field_select_theme.php on line 38
+[05-Sep-2014 17:08:25 UTC] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in /home/czucker/public_html/Dev/genco/wp-includes/class-wp-image-editor-imagick.php on line 127
