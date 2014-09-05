@@ -181,6 +181,13 @@ if ( vp_metabox('background_settings.hb_content_background_color') )
 
 					$thumb = get_post_thumbnail_id(); 
 					$image = hb_resize( $thumb, '', $image_dimensions['width'], $image_dimensions['height'], true );
+
+					$perma = get_the_permalink();
+					$custom_url = vp_metabox('portfolio_settings.hb_portfolio_custom_url');
+					
+					if ($custom_url){
+						$perma = $custom_url;
+					}
 					
 				?>
 
@@ -190,7 +197,7 @@ if ( vp_metabox('background_settings.hb_content_background_color') )
 						<!-- BEGIN .standard-gallery-item -->
 						<div class="standard-gallery-item" data-value="<?php the_time('c'); ?>">
 							<div class="hb-gal-standard-img-wrapper">
-								<a href="<?php the_permalink(); ?>">
+								<a href="<?php echo $perma; ?>">
 									<img src="<?php echo $image['url']; ?>" />
 
 									<div class="item-overlay"></div>
@@ -204,7 +211,7 @@ if ( vp_metabox('background_settings.hb_content_background_color') )
 							</div>
 
 							<div class="hb-gal-standard-description portfolio-description">
-								<h3><a href="<?php the_permalink(); ?>"><span class="hb-gallery-item-name"><?php the_title(); ?></span></a></h3>
+								<h3><a href="<?php echo $perma; ?>"><span class="hb-gallery-item-name"><?php the_title(); ?></span></a></h3>
 								<div class="hb-gal-standard-count"><?php echo $filters_names_string; ?></div>
 
 								<?php if ( hb_options('hb_portfolio_enable_likes') ) echo hb_print_portfolio_likes(get_the_ID()); ?>
@@ -219,7 +226,7 @@ if ( vp_metabox('background_settings.hb_content_background_color') )
 
 								<div class="portfolio-small-meta clearfix">
 									<span class="float-left project-date"><?php the_time('F j, Y'); ?></span>
-									<a href="<?php the_permalink(); ?>" class="float-right details-link"><?php _e('Details <i class="icon-angle-right"></i>' , 'hbthemes'); ?></a>
+									<a href="<?php echo $perma; ?>" class="float-right details-link"><?php _e('Details <i class="icon-angle-right"></i>' , 'hbthemes'); ?></a>
 								</div>
 
 							</div>

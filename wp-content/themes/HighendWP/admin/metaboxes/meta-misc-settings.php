@@ -42,6 +42,13 @@ return array(
 		'default' => false,
 	),
 	array(
+		'type' => 'toggle',
+		'name' => 'hb_onepage_also',
+		'label' => __('Use One Page menu for Mobile Menu?','hbthemes'),
+		'description' => __('Check this box if you want to use the One Page menu as your Mobile Menu for this page.','hbthemes'),
+		'default' => false,
+	),
+	array(
 		'type' => 'textbox',
 		'name' => 'hb_page_extra_class',
 		'label' => __('Extra Classes', 'hbthemes'),

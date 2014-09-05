@@ -77,12 +77,17 @@ class hb_portfolio_widget_rand extends WP_Widget {
 			echo '<div class="hb-stream '. $column_class .' clearfix" id="'.$unique_id.'"><ul>';
 			$counter = (int) $number;
 			if ( $loop->have_posts() ) : while ( $loop->have_posts() ) : $loop->the_post();
+			$perma = get_the_permalink();
+			$custom_url = vp_metabox('portfolio_settings.hb_portfolio_custom_url');	
+			if ($custom_url){
+				$perma = $custom_url;
+			}
 			$thumb = get_post_thumbnail_id(); 
 			$image = hb_resize( $thumb, '', 250, 250, true );
 			if ( $thumb ) {
 				$counter--;
 				if ($counter>=0) {
-					echo '<li><a href="'.get_permalink().'" title="'.get_the_title().'" rel="tooltip">';
+					echo '<li><a href="'.$perma.'" title="'.get_the_title().'" rel="tooltip">';
 					echo '<img src="'.$image['url'].'" />';
 					echo '</a></li>';			
 				}

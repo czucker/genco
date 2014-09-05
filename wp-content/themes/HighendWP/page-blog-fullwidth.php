@@ -64,7 +64,7 @@ if ( vp_metabox('background_settings.hb_content_background_color') )
 			?>
 
 			<!-- BEGIN #hb-blog-posts -->
-			<div id="hb-blog-posts" class="hb-blog-grid masonry-holder unboxed-blog-layoutXXXX clearfix" data-layout-mode="<?php echo $blog_grid_style; ?>" data-column-size="<?php echo $blog_grid_column_class; ?>" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">	
+			<div id="hb-blog-posts" class="hb-blog-grid masonry-holder clearfix" data-layout-mode="<?php echo $blog_grid_style; ?>" data-column-size="<?php echo $blog_grid_column_class; ?>" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">	
 			<?php get_template_part('loop','blog-grid'); ?>
 			</div>
 			<!-- END #hb-blog-posts -->

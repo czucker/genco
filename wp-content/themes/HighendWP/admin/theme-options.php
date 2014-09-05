@@ -480,7 +480,7 @@ return array(
 							'type' => 'radiobutton',
 							'name' => 'hb_content_width',
 							'label' => __('Choose Content Width', 'hbthemes'),
-							'description' => __('Choose between 940px and 1140px width. You can use any width by entering Custom CSS.' , 'hbthemes'),
+							'description' => __('Choose between 940px, 1140px and full width. You can use any width by entering Custom CSS.' , 'hbthemes'),
 							'items' => array(
 								array(
 									'value' => '940px',
@@ -489,6 +489,10 @@ return array(
 								array(
 									'value' => '1140px',
 									'label' => __('1140px', 'hbthemes'),
+								),
+								array(
+									'value' => 'fw-100',
+									'label' => __('Fullwidth 100%', 'hbthemes'),
 								),
 							),
 							'default' => array(
@@ -2075,6 +2079,13 @@ return array(
 			'icon' => 'font-awesome:hb-moon-twitter',
 			'controls' => array(
 				array(
+					'type' => 'toggle',
+					'name' => 'hb_soc_links_new_tab',
+					'label' => __('Open links in new tab?', 'hbthemes'),
+					'description' => __('Enable this field if you want to open your social links in new tab.', 'hbthemes'),
+					'default' => '0',
+				),
+				array(
 					'type' => 'textbox',
 					'name' => 'hb_twitter_link',
 					'label' => __('Twitter', 'hbthemes'),
@@ -2086,6 +2097,12 @@ return array(
 					'label' => __('Facebook', 'hbthemes'),
 					'description' => __('Enter your Facebook url here. Example: http://facebook.com/hbthemes', 'hbthemes'),
 					'default' => 'http://facebook.com/hbthemes',
+				),
+				array(
+					'type' => 'textbox',
+					'name' => 'hb_vkontakte_link',
+					'label' => __('VKontakte', 'hbthemes'),
+					'description' => __('Enter your VKontakte url here.', 'hbthemes'),
 				),
 				array(
 					'type' => 'textbox',
@@ -3049,7 +3066,7 @@ return array(
 							'label' => __('Navigation Font Size', 'hbthemes'),
 							'description' => __('Specify navigation font size in pixels.', 'hbthemes'),
 							'min' => '8',
-							'max' => '40',
+							'max' => '60',
 							'step' => '1',
 							'default' => '13',
 							'dependency' => array(
@@ -3305,7 +3322,7 @@ return array(
 							'label' => __('Heading 1 Font Size', 'hbthemes'),
 							'description' => __('Specify Heading 1 font size in pixels.', 'hbthemes'),
 							'min' => '8',
-							'max' => '40',
+							'max' => '80',
 							'step' => '1',
 							'default' => '30',
 							'dependency' => array(
@@ -3433,7 +3450,7 @@ return array(
 							'label' => __('Heading 2 Font Size', 'hbthemes'),
 							'description' => __('Specify Heading 2 font size in pixels.', 'hbthemes'),
 							'min' => '8',
-							'max' => '40',
+							'max' => '80',
 							'step' => '1',
 							'default' => '24',
 							'dependency' => array(
@@ -3561,7 +3578,7 @@ return array(
 							'label' => __('Heading 3 Font Size', 'hbthemes'),
 							'description' => __('Specify Heading 3 font size in pixels.', 'hbthemes'),
 							'min' => '8',
-							'max' => '40',
+							'max' => '80',
 							'step' => '1',
 							'default' => '20',
 							'dependency' => array(
@@ -3689,7 +3706,7 @@ return array(
 							'label' => __('Heading 4 Font Size', 'hbthemes'),
 							'description' => __('Specify Heading 4 font size in pixels.', 'hbthemes'),
 							'min' => '8',
-							'max' => '40',
+							'max' => '80',
 							'step' => '1',
 							'default' => '18',
 							'dependency' => array(
@@ -3817,7 +3834,7 @@ return array(
 							'label' => __('Heading 5 Font Size', 'hbthemes'),
 							'description' => __('Specify Heading 5 font size in pixels.', 'hbthemes'),
 							'min' => '8',
-							'max' => '40',
+							'max' => '80',
 							'step' => '1',
 							'default' => '16',
 							'dependency' => array(
@@ -3945,7 +3962,7 @@ return array(
 							'label' => __('Heading 6 Font Size', 'hbthemes'),
 							'description' => __('Specify Heading 6 font size in pixels.', 'hbthemes'),
 							'min' => '8',
-							'max' => '40',
+							'max' => '80',
 							'step' => '1',
 							'default' => '16',
 							'dependency' => array(
@@ -4396,7 +4413,7 @@ return array(
 		            'name' => 'hb_maintenance_content',
 		            'label' => __('Maintenance Content', 'hbthemes'),
 		            'description' => __('Enter the content for maintenance page which will be showed below logo and countdown if those are selected. Shortcodes are supported. H1 and H4 have special stylings', 'hbthemes'),
-		            'use_external_plugins' => '0',
+		            'use_external_plugins' => '1',
 		            'default' => '<h1>We are working on something awesome!</h1><h4>Phasellus sit amet turpis euismod, dignissim ante eget.</h4><h4>Proin porttitor facilisis semper. Maecenas aliquam, sapien vel.</h4>',
 		            'dependency' => array(
 						'field' => 'hb_enable_maintenance',
@@ -4507,7 +4524,7 @@ function hb_system_diagnostic() {
 		$error = "";
 		$mem_limit = hb_nummerize(WP_MEMORY_LIMIT);
         if ( $mem_limit < 67108864 ) {
-        	$error = "<span style='color:red;'><br/>Recommended memory limit should be at least 64MB. Please, take a look at: <a href='http://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP' target='_blank'>Increasing memory allocated to PHP</a> for more information.</span>";
+        	$error = "<span style='color:red;'><br/>Recommended memory limit should be at least 64MB. Please, take a look at: <a href='http://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP' target='_blank'>Increasing memory allocated to PHP</a> for more information. Don't forget to reset Theme Options after that.</span>";
         }
 		$to_ret .= '<div class="vp-field"><div class="label"><strong>WP Memory Limit:</strong></div><div class="field">'.size_format( $mem_limit ).' '. $error .'</div></div>';
 	}
@@ -4516,7 +4533,7 @@ function hb_system_diagnostic() {
 
 	$error_exec = "";
 	if ( ini_get("max_execution_time") < 120 ){
-		$error_exec = "<span style='color:red;'><br/>Recommended max_execution_time should be at least 120. Please, take a look at: <a href='http://hb-themes.com/forum/all/topic/how-to-increase-max_execution_time-variable/' target='_blank'>Increasing max_execution_time instructions</a> for more information.</span>";
+		$error_exec = "<span style='color:red;'><br/>Recommended max_execution_time should be at least 120. Please, take a look at: <a href='http://hb-themes.com/forum/all/topic/how-to-increase-max_execution_time-variable/' target='_blank'>Increasing max_execution_time instructions</a> for more information. Don't forget to reset Theme Options after that.</span>";
 	}
 	$to_ret .= '<div class="vp-field"><div class="label"><strong>Max Execution Time:</strong></div><div class="field">' . ini_get("max_execution_time") . ' '. $error_exec .'</div></div>';
 
@@ -4554,17 +4571,17 @@ function hb_demo_import_html(){
 	$to_return .= "<li>Widgets and Sidebars from Highend Demo.</li>";
 	$to_return .= "<li>WordPress Menus from Highend Demo.</li>";
 	$to_return .= "</ol>";
-	$to_return .= "<p>FULL Demo Import process can take up to 25 minutes or even more to complete.</p>";
-	$to_return .= "<p><strong>DO NOT interrupt the process.</strong></p>";
+	$to_return .= "<p>FULL Demo Import process can take up to 35 minutes to complete. <strong>DO NOT interrupt the process.</strong></p>";
 	$to_return .= "<p>The imported stuff cannot be deleted at once, so we suggest to import the demo on your test website, not live website.</p>";
 
 
 	$to_return .= '<div class="hb-buttons">';
  	$to_return .= '<a href="#" class="vp-button button button-primary hb-import-button full-demo-import">' . __('Import FULL Demo Content', 'hbthemes') . '</a>';
- 	$to_return .= '<a href="#" class="vp-button button button-primary hb-import-button light-demo-import">' . __('Import LIGHT Demo Content', 'hbthemes') . '</a>';
+ 	$to_return .= '<a href="#" class="vp-button button button-primary hb-import-button light-demo-import">' . __('Import LIGHT Demo Content*', 'hbthemes') . '</a>';
  	$to_return .= '</div>';
 
- 	$to_return .= "<p>Due to large demo export files, on some hosts the full demo import will fail and generate Error 500 - Internal Server Error.<br/>In that case, you can try increasing max_execution_time to 120 and WP_MEMORY_LIMIT to 128M.<br/><br/>We strongly suggest to import the LIGHT demo content instead. (The demo content without images and sliders)</p>";
+ 	$to_return .= "<p>*LIGHT demo content does not include images and sliders. If the full demo fails, try importing the light version.</p>";
+ 	$to_return .= "<p>Due to large demo export files, on some servers the demo import will fail and cause Error 500 - Internal Server Error.<br/>In that case, please open a support topic on <a href='http://forum.hb-themes.com/'>our forum</a>.<br/><br/>Currently, the one click demo import IS NOT available for iPage hosted websites.</p>";
 
  	return $to_return;
 }

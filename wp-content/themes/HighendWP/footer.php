@@ -21,10 +21,10 @@
 	<p><?php echo hb_options('hb_quick_contact_box_text'); ?></p>
 
 	<form id="contact-panel-form">
-		<p><input type="text" placeholder="Name" name="hb_contact_name" id="hb_contact_name_id" class="required requiredField" tabindex="33"/></p>
-		<p><input type="email" placeholder="Email" name="hb_contact_email" id="hb_contact_email_id" class="required requiredField" tabindex="34"/></p>
-		<p><input type="text" placeholder="Subject" name="hb_contact_subject" id="hb_contact_subject_id"/></p>
-		<p><textarea placeholder="Your message..." name="hb_contact_message" id="hb_contact_message_id" class="required requiredField" tabindex="35"></textarea></p>
+		<p><input type="text" placeholder="<?php _e('Name', 'hbthemes'); ?>" name="hb_contact_name" id="hb_contact_name_id" class="required requiredField" tabindex="33"/></p>
+		<p><input type="email" placeholder="<?php _e('Email', 'hbthemes'); ?>" name="hb_contact_email" id="hb_contact_email_id" class="required requiredField" tabindex="34"/></p>
+		<p><input type="text" placeholder="<?php _e('Subject', 'hbthemes'); ?>" name="hb_contact_subject" id="hb_contact_subject_id"/></p>
+		<p><textarea placeholder="<?php _e('Your message...', 'hbthemes'); ?>" name="hb_contact_message" id="hb_contact_message_id" class="required requiredField" tabindex="35"></textarea></p>
 		<a href="#" id="hb-submit-contact-panel-form" class="hb-button no-three-d special-icon hb-asbestos hb-small-button"><i class="<?php echo hb_options('hb_quick_contact_box_button_icon'); ?>"></i><span><?php echo hb_options('hb_quick_contact_box_button_title'); ?></span></a>
 		<input type="hidden" id="success_text" value="<?php _e('Message Sent!', 'hbthemes'); ?>"/>
 	</form>

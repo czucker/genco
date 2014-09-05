@@ -139,10 +139,10 @@
                 <ul id="highend_widget">
                     <li id="highend_docs"><a href="http://documentation.hb-themes.com/highend/index.html" target="_blank">' . __('Read the documentation', 'hbthemes') . '</a></li>
                     <li id="highend_videos"><a href="http://documentation.hb-themes.com/highend/index.html#video-tutorials" target="_blank">' . __('Watch video tutorials', 'hbthemes') . '</a></li>
-                    <li id="highend_forum"><a href="http://forum.hb-themes.com" target="_blank">' . __('Visit support forum', 'hbthemes') . '</a></li>
+                    <li id="highend_forum"><a href="http://forum.hb-themes.com" target="_blank">' . __('Open a support topic', 'hbthemes') . '</a></li>
                     <li id="highend_facebook"><a href="http://facebook.com/hbthemes" target="_blank">' . __('Find us on Facebook', 'hbthemes') . '</a></li>
                     <li id="highend_twitter"><a href="http://twitter.com/hbthemes" target="_blank">' . __('Follow us on Twitter', 'hbthemes') . '</a></li>
-                    <li id="highend_customization"><a href="http://hb-themes.com/home/hire-us" target="_blank">' . __('Request a customization', 'hbthemes') . '</a></li>
+                    <li id="highend_customization"><a href="http://hb-themes.com/home/hire-us" target="_blank">' . __('Hire HB-Themes to build your website', 'hbthemes') . '</a></li>
                 </ul>';
 
                 if ( !empty($hb_feed) ){
@@ -361,8 +361,13 @@
             $class_string = str_replace('vc_row-fluid', 'row', $class_string);
             $class_string = str_replace('wpb_row ', 'element-row ', $class_string);
         }
-        if ($tag == 'vc_column' || $tag == 'vc_column_inner') {
-            $class_string = preg_replace('/vc_span(\d{1,2})/', 'col-$1', $class_string);
+
+        if ( defined('WPB_VC_VERSION') && version_compare(WPB_VC_VERSION, "4.3.0") >= 0 ) {
+            // good version
+        } else {
+            if ($tag == 'vc_column' || $tag == 'vc_column_inner') {
+                $class_string = preg_replace('/vc_span(\d{1,2})/', 'col-$1', $class_string);
+            }
         }
         return $class_string;
     }
@@ -385,21 +390,21 @@
         //vc_remove_element("vc_accordion");
         //vc_remove_element("vc_accordion_tab");
         //vc_remove_element("vc_carousel");
-        vc_remove_element("vc_cta_button");
+        //vc_remove_element("vc_cta_button");
         vc_remove_element("vc_cta_button2");
-        vc_remove_element("vc_separator");
+        //vc_remove_element("vc_separator");
         //vc_remove_element("vc_flickr");
         vc_remove_element("vc_pie");
         vc_remove_element("vc_item");
         vc_remove_element("vc_items");
-        vc_remove_element("vc_posts_grid");
+        //vc_remove_element("vc_posts_grid");
         vc_remove_element("vc_posts_slider");
         vc_remove_element("vc_progress_bar");
-        vc_remove_element("vc_gallery");
-        vc_remove_element("vc_images_carousel");
+        //vc_remove_element("vc_gallery");
+        //vc_remove_element("vc_images_carousel");
         //vc_remove_element("vc_button");
-        vc_remove_element("vc_message");
-        vc_remove_element("vc_button2");
+        //vc_remove_element("vc_message");
+        //vc_remove_element("vc_button2");
         //vc_remove_element("vc_tab");
         //vc_remove_element("vc_tabs");
         //vc_remove_element("vc_toggle");
@@ -847,6 +852,7 @@
     ================================================== */
     include(HBTHEMES_INCLUDES . '/widgets/widget-most-commented-posts.php');
     include(HBTHEMES_INCLUDES . '/widgets/widget-latest-posts.php');
+    include(HBTHEMES_INCLUDES . '/widgets/widget-latest-posts-simple.php');
     include(HBTHEMES_INCLUDES . '/widgets/widget-most-liked-posts.php');
     include(HBTHEMES_INCLUDES . '/widgets/widget-recent-comments.php');
     include(HBTHEMES_INCLUDES . '/widgets/widget-testimonials.php');
@@ -1406,19 +1412,27 @@
 		if ( class_exists('Woocommerce') ) {
 			$cart_url = '<a class="mobile-menu-shop" href="'.$woocommerce->cart->get_cart_url().'"><i class="hb-moon-cart-checkout"></i></a>'. "\n";
 		}
-	
-        if ( has_nav_menu ('mobile-menu') ) {
+
+        if ( vp_metabox('misc_settings.hb_onepage_also') ){
             $mobile_menu_args = array(
                 'echo'            => false,
-                'theme_location' => 'mobile-menu',
+                'theme_location' => 'one-page-menu',
                 'fallback_cb' => ''
-            );
+            );   
         } else {
-            $mobile_menu_args = array(
-                'echo'            => false,
-                'theme_location' => 'main-menu',
-                'fallback_cb' => ''
-            );
+            if ( has_nav_menu ('mobile-menu') ) {
+                $mobile_menu_args = array(
+                    'echo'            => false,
+                    'theme_location' => 'mobile-menu',
+                    'fallback_cb' => ''
+                );
+            } else {
+                $mobile_menu_args = array(
+                    'echo'            => false,
+                    'theme_location' => 'main-menu',
+                    'fallback_cb' => ''
+                );
+            }
         }
                                     
         $mobile_menu_output = "";                            

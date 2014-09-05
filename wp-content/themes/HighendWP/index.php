@@ -28,7 +28,7 @@
 				<?php } ?>
 
 				<!-- BEGIN #hb-blog-posts -->
-				<div id="hb-blog-posts" class="hb-blog-classic hb-blog-large unboxed-blog-layoutXXXX clearfix<?php if ($pagination_style == 'ajax') echo ' masonry-holder'; ?>" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">	
+				<div id="hb-blog-posts" class="hb-blog-classic hb-blog-large clearfix<?php if ($pagination_style == 'ajax') echo ' masonry-holder'; ?>" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">	
 			
 				<?php get_template_part('loop','blog');?>
 

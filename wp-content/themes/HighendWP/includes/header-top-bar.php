@@ -242,6 +242,13 @@ if ( class_exists('Woocommerce') ) {
 
     if ( hb_options('hb_top_header_socials_enable') ) { ?>
 
+    <?php
+        $target = ' target="_self"';
+        if ( hb_options('hb_soc_links_new_tab') ){
+            $target = ' target="_blank"';
+        }
+    ?>
+
         <!-- BEGIN .top-widget -->
         <div id="top-socials-widget" class="top-widget float-right social-list">
             <ul class="clearfix">
@@ -251,18 +258,20 @@ if ( class_exists('Woocommerce') ) {
                     foreach ($hb_socials as $hb_social) {
                         if ( $hb_social == 'custom-url' ){
                             $hb_social_n = 'link-5';
+                        } else if ( $hb_social == 'vkontakte' ){
+                            $hb_social_n = 'vk';
                         } else {
                             $hb_social_n = $hb_social;
                         }
                     ?>
-                    <?php if ($hb_social_n != 'behance') { ?>
+                    <?php if ($hb_social_n != 'behance' && $hb_social_n != 'vk') { ?>
                             <li>
-                                <a href="<?php echo hb_options('hb_' . $hb_social . '_link'); ?>" original-title="<?php echo ucfirst($hb_social); ?>"><i class="hb-moon-<?php echo $hb_social_n; ?>"></i></a> 
+                                <a href="<?php echo hb_options('hb_' . $hb_social . '_link'); ?>" original-title="<?php echo ucfirst($hb_social); ?>"<?php echo $target; ?>><i class="hb-moon-<?php echo $hb_social_n; ?>"></i></a> 
                             </li>
                         <?php
                         } else { ?>
                             <li>
-                                <a href="<?php echo hb_options('hb_' . $hb_social . '_link'); ?>" original-title="<?php echo ucfirst($hb_social); ?>"><i class="icon-<?php echo $hb_social_n; ?>"></i></a> 
+                                <a href="<?php echo hb_options('hb_' . $hb_social . '_link'); ?>" original-title="<?php echo ucfirst($hb_social); ?>"<?php echo $target; ?>><i class="icon-<?php echo $hb_social_n; ?>"></i></a> 
                             </li>
                         <?php }
                     }

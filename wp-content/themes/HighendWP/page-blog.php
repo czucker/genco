@@ -81,7 +81,7 @@ if ( vp_metabox('background_settings.hb_content_background_color') )
 			?>
 
 			<!-- BEGIN #hb-blog-posts -->
-			<div id="hb-blog-posts" class="<?php echo $blog_class; ?> unboxed-blog-layoutXXXX clearfix<?php if ($pagination_style == 'ajax') echo ' masonry-holder'; ?>" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">	
+			<div id="hb-blog-posts" class="<?php echo $blog_class; ?> clearfix<?php if ($pagination_style == 'ajax') echo ' masonry-holder'; ?>" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">	
 			<?php 
 				if ( $blog_style == "blog-small" )
 					get_template_part('loop','blog-small');

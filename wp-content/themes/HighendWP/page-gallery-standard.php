@@ -153,7 +153,7 @@ if ( vp_metabox('background_settings.hb_content_background_color') )
 					<!-- BEGIN .sort-tabs -->
 					<ul class="filter-tabs sort-tabs clearfix">
 						<li class="selected"><a href="#" title="<?php _e('Show Newest First','hbthemes'); ?>" class="all" data-sort="data"><span class="item-name"><?php _e('Date','hbthemes'); ?></span></a></li>
-						<li><a href="#" title="<?php _e('Sort by Name','hbtbemes'); ?>" data-sort="name"><span class="item-name"><?php _e('Name','hbthemes'); ?></span></a></li>
+						<li><a href="#" title="<?php _e('Sort by Name','hbthemes'); ?>" data-sort="name"><span class="item-name"><?php _e('Name','hbthemes'); ?></span></a></li>
 					</ul>
 					<!-- END .sort-tabs -->
 					<?php } ?>

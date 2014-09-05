@@ -18,9 +18,16 @@ if(class_exists('RevSlider')){
 
 return array(
 	array(
+		'type' => 'textbox',
+		'name' => 'hb_portfolio_custom_url',
+		'label' => __('Custom Portfolio Link', 'hbthemes'),
+		'description' => __('Enter a custom URL that will be opened after clicking on this portfolio item. Enter full URL with http:// prefix. Leave empty to use SINGLE PORTFOLIO PAGE.', 'hbthemes'),
+		'default' => "",
+	),
+	array(
 		'type' => 'select',
 		'name' => 'hb_featured_section_type',
-		'label' => __('Featured Section','hbthemes'),
+		'label' => __('Featured Section Shows','hbthemes'),
 		'description' => __('Choose what to display in the featured section of the portfolio page.','hbthemes'),
 		'items' => array(
 			array(

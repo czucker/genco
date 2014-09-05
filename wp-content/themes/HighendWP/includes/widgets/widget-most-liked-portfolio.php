@@ -105,13 +105,19 @@ class hb_liked_portfolio_widget extends WP_Widget {
 		echo '<div class="hb-stream '. $column_class .' clearfix" id="'.$unique_id.'"><ul>';
 		$counter = (int) $number;
 		if ( $portfolio_items->have_posts() ) : while ( $portfolio_items->have_posts() ) : $portfolio_items->the_post();
+			$perma = get_the_permalink();
+			$custom_url = vp_metabox('portfolio_settings.hb_portfolio_custom_url');
+					
+			if ($custom_url){
+				$perma = $custom_url;
+			}
 			$thumb = get_post_thumbnail_id(); 
 			$image = hb_resize( $thumb, '', 250, 250, true );
 			$likes = hb_like_this( get_the_ID() );
 			if ( $thumb ) {
 				$counter--;
 				if ($counter>=0) {
-					echo '<li><a href="'.get_permalink().'" title="'.get_the_title().'" rel="tooltip">';
+					echo '<li><a href="'.$perma.'" title="'.get_the_title().'" rel="tooltip">';
 					echo '<img src="'.$image['url'].'" />';
 					echo '<span class="widget-like-count"><i class="hb-moon-heart"></i>'. number_format($likes) .'</span>';
 					echo '</a></li>';			
@@ -159,7 +165,7 @@ class hb_liked_portfolio_widget extends WP_Widget {
 		/* Set up some default widget settings. */
 		$defaults = array(
 		'title' => 'Most Liked Portfolio Widget',
-		'number' => '',
+		'number' => '3',
 		'category' => '',
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>

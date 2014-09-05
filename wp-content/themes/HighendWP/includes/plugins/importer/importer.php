@@ -27,6 +27,13 @@ function hb_importer() {
                 $hb_import_attachments = false;
             }
 
+            /* Delete menus to prevent menu duplication */
+            wp_delete_nav_menu('Main Menu');
+            wp_delete_nav_menu('Footer Menu');
+            wp_delete_nav_menu('One Page Menu');
+            wp_delete_nav_menu('Shortcodes Menu');
+            wp_delete_nav_menu('Sidebar Navigation1');
+
 			/* First Import Posts, Pages, Portfolio Content, FAQ, Images, Menus */
 			$theme_xml = get_template_directory() . '/includes/plugins/importer/data/highend.xml.gz';
 			$importer->fetch_attachments = $hb_import_attachments;
@@ -146,7 +153,7 @@ function hb_importer() {
 			$import_widgets = hb_import_widget_data( $widget_data );
 
 
-			// Import Layerslider
+			/* Import Layerslider
             if( function_exists( 'layerslider_import_sample_slider' ) && $hb_import_attachments == true ) { // if layerslider is activated
                 // Get importUtil
                 include WP_PLUGIN_DIR . '/LayerSlider/classes/class.ls.importutil.php';
@@ -182,7 +189,7 @@ function hb_importer() {
                         $slides_array[$val] = $key;
                     }
                 }
-            }
+            }*/
             
 			// Import Revslider
             if( class_exists('UniteFunctionsRev') && $hb_import_attachments == true ) { // if revslider is activated

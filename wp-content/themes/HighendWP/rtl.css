@@ -8,11 +8,6 @@
 */
 
 
-/* Import Default CSS
-================================================== */
-@import url(css/style.css) screen;
-
-
 /* RTL Styles
 ================================================== */
 #main-wrapper .nav-type-1 #logo{float:right}
@@ -56,7 +51,7 @@ article.search-entry p{margin-left:0;margin-right:90px}
 .widget_archive ul > li a:before{margin-right:0;float:left;content:"\f104"}
 .widget_nav_menu ul > li a:before{margin-right:0;float:left;content:"\f104"}
 .widget_meta ul > li a:before{margin-right:0;float:left;content:"\f104"}
-.widget_recent_entries ul > li a:before{margin-right:0;float:left;content:"\f104"}
+.hb_latest_posts_simple_widget ul > li .hb-spl-inner > a:before, .widget_recent_entries ul > li a:before{margin-right:0;float:left;content:"\f104"}
 .widget_product_categories ul > li a:before{margin-right:0;float:left;content:"\f104"}
 #main-wrapper .widget_nav_menu ul.menu ul li a{padding-left:0;padding-right:38px}
 .most-liked-list li .like-count{left:auto;right:10px}
@@ -98,10 +93,9 @@ a#search-trigger{padding-left:0!important;padding-right:14px!important}
 .hb-skill-meter .bar-title{float:right}
 .hb-skill-meter .progress-value{float:left}
 #main-content .hb-button.special-icon.hb-small-button{padding-left:16px;padding-right:55px!important}
-.hb-callout-box a{right:auto;left:30px!important}
+.hb-callout-box a{right:auto!important;left:30px!important}
 .hb-callout-box h3{border-left:none;border-right:solid 3px #1dc6df;margin-right:15px;margin-left:30%}
 blockquote.pullquote{border-left:0;border-right:solid 3px #1dc6df}
-.standard-icon-box i.title-icon{float:right;margin-right:0;margin-left:15px}
 .alignleft{text-align:right}
 .alignright{text-align:left}
 .content-box.left-icon i.box-icon{left:auto;right:-30px}
@@ -139,3 +133,16 @@ th{text-align:right}
 #top-info-widget i{display:none}
 .recent-comments-content:after{display:none}
 .ts-1 .flex-control-nav{display:none}
+.breadcrumbs-wrapper { left:50px; right: auto; }
+.hb-boxed-layout #header-inner.stuck #header-inner-bg {width: 100%;}
+#header-inner {left: 0px; width: 100%;}
+.hb-callout-box h3 {padding-left: 0; padding-right: 15px;}
+.fw-section {right: -51px;}
+.hb-box-cont-header i {margin-right: 0; margin-left:7px; float: right; margin-top: 5px;}
+.teaser-content.alignleft, .feature-box.alignleft {text-align: left !important;}
+.teaser-content.alignright, .feature-box.alignright {text-align: right !important;}
+.feature-box.alignright i.title-icon {float: right; margin-right: 0; margin-left: 15px;}
+.hb-button.special-icon {padding-left: 20px !important;}
+.team-member-img img {margin:0 !important;}
+#main-wrapper .standard-gallery-item, #main-wrapper .gallery-item { margin-right: 0!important; margin-left: 20px !important; }
+#main-wrapper .float-right {float: left !important;}

@@ -139,7 +139,7 @@
 								<?php } ?>
 
 								<?php 
-								$social_links = array("envelop" => "Mail", "dribbble" => "Dribbble" , "facebook" => "Facebook", "flickr" => "Flickr", "forrst"=>"Forrst", "google-plus" => "Google Plus", "html5"=> "HTML 5", "cloud" => "iCloud", "lastfm"=> "LastFM", "linkedin"=> "LinkedIn", "paypal"=> "PayPal", "pinterest"=> "Pinterest", "reddit"=>"Reddit", "feed2"=>"RSS", "skype"=>"Skype", "stumbleupon"=> "StumbleUpon", "tumblr"=>"Tumblr", "twitter"=>"Twitter", "vimeo"=>"Vimeo", "wordpress"=>"WordPress", "yahoo"=>"Yahoo", "youtube"=>"YouTube", "github"=>"Github", "yelp"=>"Yelp", "mail"=>"Mail", "instagram"=>"Instagram", "foursquare"=>"Foursquare", "xing"=>"Xing");
+								$social_links = array("envelop" => "Mail", "dribbble" => "Dribbble" , "facebook" => "Facebook", "flickr" => "Flickr", "forrst"=>"Forrst", "google-plus" => "Google Plus", "html5"=> "HTML 5", "cloud" => "iCloud", "lastfm"=> "LastFM", "linkedin"=> "LinkedIn", "paypal"=> "PayPal", "pinterest"=> "Pinterest", "reddit"=>"Reddit", "feed2"=>"RSS", "skype"=>"Skype", "stumbleupon"=> "StumbleUpon", "tumblr"=>"Tumblr", "twitter"=>"Twitter", "vimeo"=>"Vimeo", "wordpress"=>"WordPress", "yahoo"=>"Yahoo", "youtube"=>"YouTube", "github"=>"Github", "yelp"=>"Yelp", "mail"=>"Mail", "instagram"=>"Instagram", "foursquare"=>"Foursquare", "xing"=>"Xing", "vk"=>"VKontakte", "behance"=>"Behance");
 								$has_social_link = false;
 								$title_displayed = false;
 								foreach ($social_links as $soc_id => $soc_name) {
@@ -153,7 +153,11 @@
 											<?php 
 										}
 									?>
-										<li class="<?php echo $soc_id; ?>"><a href="<?php echo vp_metabox('team_member_settings.hb_employee_social_' . $soc_id); ?>" target="_blank"><i class="hb-moon-<?php echo $soc_id; ?>"></i><i class="hb-moon-<?php echo $soc_id; ?>"></i></a></li>
+										<?php if ($soc_id != 'behance' && $soc_id != 'vk') { ?>
+											<li class="<?php echo $soc_id; ?>"><a href="<?php echo vp_metabox('team_member_settings.hb_employee_social_' . $soc_id); ?>" target="_blank"><i class="hb-moon-<?php echo $soc_id; ?>"></i><i class="hb-moon-<?php echo $soc_id; ?>"></i></a></li>
+										<?php } else { ?>
+											<li class="<?php echo $soc_id; ?>"><a href="<?php echo vp_metabox('team_member_settings.hb_employee_social_' . $soc_id); ?>" target="_blank"><i class="icon-<?php echo $soc_id; ?>"></i><i class="icon-<?php echo $soc_id; ?>"></i></a></li>
+										<?php } ?>
 									<?php
 									}
 									

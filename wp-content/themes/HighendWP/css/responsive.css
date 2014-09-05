@@ -49,6 +49,19 @@
 	article.search-entry a.search-thumb {float: none; margin-bottom: 10px; display: block;}
 	.columns-6 .hb-fw-element {width: 33.33% !important;}
 	#main-wrapper .hb-parallax-wrapper{background-size:cover;background-repeat:no-repeat;background-position:center center!important}
+
+	/* prettyPhoto styling for small screens */
+	.pp_pic_holder.pp_default { width: 100%!important; left: 0!important;}
+	.pp_content { width: 100%!important; height: auto!important; }
+	.pp_hoverContainer { width: 100% !important; height: 100% !important; }
+	.pp_fade { width: 100%!important; height: 100%!important; }
+	#pp_full_res img { width: 100%!important; height: auto!important; }
+	.pp_details { width: 94%!important; padding-left: 3%; padding-right: 4%; padding-top: 10px; padding-bottom: 10px; background-color: #fff; margin-top: -2px!important; }
+	a.pp_close { right: 10px!important; top: 10px!important; }
+	div.pp_default .pp_nav { margin-left: 0; }
+	a.pp_previous, a.pp_next { height: 100%; top: 0; }
+	a.pp_expand, a.pp_contract {display: none !important;}
+	div.pp_default .pp_content_container .pp_left, div.pp_default .pp_content_container .pp_right {padding:0 !important;}
 }
 
 

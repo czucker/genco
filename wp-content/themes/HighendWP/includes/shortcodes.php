@@ -29,7 +29,6 @@ function hb_portfolio_fullwidth_shortcode($params = array()) {
 		'class' => ''
 	), $params));
 
-
 	if ( $class != '' ){
 		$class = ' ' . $class;
 	}
@@ -102,11 +101,17 @@ function hb_portfolio_fullwidth_shortcode($params = array()) {
 	$output .= '<div class="hb-fw-elements columns-' . $columns . '">';
 
 	while ( $queried_items->have_posts() ) : $queried_items->the_post();
+		$perma = get_the_permalink();
+		$custom_url = vp_metabox('portfolio_settings.hb_portfolio_custom_url');
+					
+		if ($custom_url){
+			$perma = $custom_url;
+		}
 		$thumb = get_post_thumbnail_id(); 
 		$image = hb_resize( $thumb, '', $image_dimensions['width'], $image_dimensions['height'], true );
 
 		$output .= '<div class="hb-fw-element">';
-		$output .= '<a href="' . get_permalink() . '">';
+		$output .= '<a href="' . $perma . '">';
 
 		if ( $image )
 			$output .= '<img src="' . $image['url'] . '" width="'. $image['width'] .'" height="'. $image['height'] .'" alt="' . get_the_title() . '"/>';
@@ -1088,7 +1093,6 @@ function hb_blog_carousel_shortcode($params = array(), $content = null) {
 		}
 
 		$output .= '<div class="blog-list-item-excerpt">';
-		//$output .= '<p>' . get_the_excerpt() . '</p>';
 		$output .= '<p>' . wp_trim_words( strip_shortcodes( get_the_content() ) , $excerpt_length , NULL) . '</p>';
 		if ( $read_more == "yes" )
 			$output .= '<a href="' . get_permalink() . '" class="simple-read-more">Read More</a>';
@@ -2617,6 +2621,11 @@ function hb_portfolio_carousel_shortcode($params = array()) {
 	$output .= '<div class="crsl-wrap">';
 
 	while ( $queried_items->have_posts() ) : $queried_items->the_post();
+		$perma = get_the_permalink();
+		$custom_url = vp_metabox('portfolio_settings.hb_portfolio_custom_url');			
+		if ($custom_url){
+			$perma = $custom_url;
+		}
 		$thumb = get_post_thumbnail_id();
 		$filters_names = wp_get_post_terms(get_the_ID() , 'portfolio_categories' , array("fields"=>"names"));
 		$filters_names_string = implode ($filters_names, ", ");
@@ -2626,7 +2635,7 @@ function hb_portfolio_carousel_shortcode($params = array()) {
 		if ( $thumb ) {
 			$image = hb_resize($thumb,'',586,349,true);
 			$output .= '<div class="hb-gal-standard-img-wrapper">';
-			$output .= '<a href="' . get_permalink() . '">';
+			$output .= '<a href="' . $perma . '">';
 			$output .= '<img src="' . $image['url'] . '" width="'. $image['width'] .'" height="'. $image['height'] .'" alt="Portfolio Image" />';
 			$output .= '<div class="item-overlay"></div>';
 			$output .= '<div class="item-overlay-text">';
@@ -2639,7 +2648,7 @@ function hb_portfolio_carousel_shortcode($params = array()) {
 		}
 
 		$output .= '<div class="hb-gal-standard-description portfolio-description">';
-		$output .= '<h3><a href="' . get_permalink() . '"><span class="hb-gallery-item-name">' . get_the_title() . '</span></a></h3>';
+		$output .= '<h3><a href="' . $perma . '"><span class="hb-gallery-item-name">' . get_the_title() . '</span></a></h3>';
 		
 		if ( $filters_names_string ) $output .= '<div class="hb-gal-standard-count">' . $filters_names_string . '</div>';
 		if ( hb_options('hb_portfolio_enable_likes') ) $output .= hb_print_portfolio_likes(get_the_ID()); 
@@ -2651,7 +2660,7 @@ function hb_portfolio_carousel_shortcode($params = array()) {
 				$output .= wp_trim_words( strip_shortcodes( get_the_content() ) , 10 , NULL);
 			$output .= '<div class="portfolio-small-meta clearfix">';
 			$output .= '<span class="float-left project-date">' . get_the_time('F d, Y') . '</span>';
-			$output .= '<a href="' . get_permalink() . '" class="float-right details-link">' . __('Details' , 'hbthemes') . ' <i class="icon-angle-right"></i></a>';
+			$output .= '<a href="' . $perma . '" class="float-right details-link">' . __('Details' , 'hbthemes') . ' <i class="icon-angle-right"></i></a>';
 			$output .= '</div>';
 		}
 
@@ -3455,6 +3464,7 @@ function hb_social_list($params = array(), $content = null) {
 		'reddit' => '',
 		'xing' => '',
 		'behance' => '',
+		'vk' => '',
 		'envelop' => '',
 		'feed_2' => '',
 		'custom_url' => '',
@@ -3488,6 +3498,7 @@ function hb_social_list($params = array(), $content = null) {
 		'reddit',
 		'xing',
 		'behance',
+		'vk',
 		'envelop',
 		'feed_2',
 		'custom_url'
@@ -3539,7 +3550,7 @@ function hb_social_list($params = array(), $content = null) {
 				$new_soc_net = $social_network;
 			}
 			
-			if ( $new_soc_net != 'behance' ){
+			if ( $new_soc_net != 'behance' && $new_soc_net != 'vk' ){
 				$output .= '<li class="' . $new_soc_net . '"><a href="' . $$social_network . '" target="' . $new_tab . '"><i class="hb-moon-' . $new_soc_net . '"></i><i class="hb-moon-' . $new_soc_net . '"></i></a></li>';
 			} else {
 				$output .= '<li class="' . $new_soc_net . '"><a href="' . $$social_network . '" target="' . $new_tab . '"><i class="icon-' . $new_soc_net . '"></i><i class="icon-' . $new_soc_net . '"></i></a></li>';
@@ -4847,13 +4858,6 @@ Example: hb-moon-apple-fruit. Example for character: $", "js_composer")
 					"admin_label" => true,
 					"description" => __("Choose where will be icon positioned.", "js_composer")
 		        ),
-		        array(
-			      "type" => 'checkbox',
-			      "heading" => __("Border around icon?", "js_composer"),
-			      "param_name" => "border",
-			      "value" => Array(__("Yes, please", "js_composer") => 'yes')
-			    ),
-
 			    array(
 					"type" => "dropdown",
 					"heading" => __("Border around icon?", "js_composer"),
@@ -6143,6 +6147,13 @@ Example: hb-moon-apple-fruit. Example for character: $", "js_composer")
 		        ),
 		        array(
 		                "type" => "textfield",
+		                "heading" => __("VKontakte URL", "js_composer"),
+		                "param_name" => "vk",
+		                "admin_label" => true,
+		                "value" => "",
+		        ),
+		        array(
+		                "type" => "textfield",
 		                "heading" => __("Yahoo URL", "js_composer"),
 		                "param_name" => "yahoo",
 		                "admin_label" => true,
@@ -7424,8 +7435,8 @@ Example: hb-moon-apple-fruit. Example for character: $", "js_composer")
 					"admin_label" => true,
 					"value" => array(
 		               	__("Do nothing", "js_composer") => 'none',
-						__("Open lightbox", "js_composer") => 'open-url',
-						__("Open url in same tab", "js_composer") => 'open-lightbox',
+						__("Open lightbox", "js_composer") => 'open-lightbox',
+						__("Open url in same tab", "js_composer") => 'open-url',
 					),
 					"description" => __("Choose what to do when clicked on image.", "js_composer"),
 		        ),

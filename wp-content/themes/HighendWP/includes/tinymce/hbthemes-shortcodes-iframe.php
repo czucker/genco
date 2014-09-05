@@ -113,8 +113,6 @@ if (!isset($table_prefix)){
 					<option value="simple-slider">Simple Slider</option>
 					<option value="sitemap">Sitemap</option>
 					<option value="social-icons">Social Icons</option>
-					<option value="horizontal-tabs">Tabs Horizontal</option>
-					<option value="vertical-tabs">Tabs Vertical</option>
 					<option value="team-member-box">Team Member Box</option>
 					<option value="team-members-carousel">Team Members Carousel</option>
 					<option value="teaser-box">Teaser Box</option>

@@ -127,7 +127,7 @@
 			$font_face = hb_options('hb_font_h2_face');
 			$font_weight = hb_options('hb_font_h2_weight');
 			VP_Site_GoogleWebFont::instance()->add($font_face, $font_weight, $font_style, $font_subsets);
-			echo 'h2, #hb-page-title h2 {
+			echo 'h2, #hb-page-title h2, .post-content h2.title {
 				font-family: "' . $font_face . '", sans-serif;
 				font-size: '. hb_options('hb_font_h2_size') .'px;
 				line-height: '. hb_options('hb_font_h2_line_height') .'px;
@@ -301,8 +301,8 @@
 		$hb_content_width = "width-1140";
 		if ( hb_options('hb_content_width') == '940px' ){
 			$hb_content_width = "width-940";
-		} else if ( hb_options('hb_content_width') == 'width-fluid' ) {
-			$hb_content_width = "width-fluid";
+		} else if ( hb_options('hb_content_width') == 'fw-100' ) {
+			$hb_content_width = "fw-100";
 		}
 
 		$hb_logo_alignment = "";

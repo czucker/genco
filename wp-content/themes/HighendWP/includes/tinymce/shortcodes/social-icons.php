@@ -199,6 +199,11 @@ tinyMCEPopup.onInit.add(SocialDialog.init, SocialDialog);
 	        </div>
 
 	        <div class="form-section clearfix">
+	            <label for="vk">VKontakte URL.<br/><small>Enter your VKontakte URL. Leave empty to ignore.</small></label>
+	            <input type="text" name="vk" id="vk" placeholder="Enter link here..."></textarea>
+	        </div>
+
+	        <div class="form-section clearfix">
 	            <label for="yelp">Yelp URL.<br/><small>Enter your Yelp URL. Leave empty to ignore.</small></label>
 	            <input type="text" name="yelp" id="yelp" placeholder="Enter link here..."></textarea>
 	        </div>

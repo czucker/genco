@@ -294,7 +294,8 @@
 			}
 
 			if (get_theme_mod('hb_top_bar_text_color_setting')){
-				echo '#header-bar, #fancy-search input[type=text], #fancy-search ::-webkit-input-placeholder { color:' . get_theme_mod('hb_top_bar_text_color_setting') . '}';
+				echo '#header-bar, #fancy-search input[type=text] { color:' . get_theme_mod('hb_top_bar_text_color_setting') . '}';
+				echo '#fancy-search ::-webkit-input-placeholder { color:' . get_theme_mod('hb_top_bar_text_color_setting') . '}';
 			}
 
 			if (get_theme_mod('hb_top_bar_link_color_setting')){

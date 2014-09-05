@@ -226,6 +226,7 @@ function hb_get_social_medias() {
 		array('value' => 'vimeo', 'label' => 'Vimeo'),
 		array('value' => 'xing', 'label' => 'Xing'),
 		array('value' => 'behance', 'label' => 'Behance'),
+		array('value' => 'vk', 'label' => 'VKontakte'),
 		array('value' => 'wordpress', 'label' => 'WordPress'),
 		array('value' => 'yahoo', 'label' => 'Yahoo!'),
 		array('value' => 'yelp', 'label' => 'Yelp'),

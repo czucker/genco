@@ -9,22 +9,22 @@
 <?php endif; ?>
 	<?php switch ($status) {
 		case 'normal':
-			$icon_class = 'fa-lightbulb-o';
+			$icon_class = 'icon-lightbulb-o';
 			break;
 		case 'info':
-			$icon_class = 'fa-info-circle';
+			$icon_class = 'icon-info-circle';
 			break;
 		case 'success':
-			$icon_class = 'fa-check-circle';
+			$icon_class = 'icon-check-circle';
 			break;
 		case 'warning':
-			$icon_class = 'fa-exclamation-triangle';
+			$icon_class = 'icon-exclamation-triangle';
 			break;
 		case 'error':
-			$icon_class = 'fa-times-circle';
+			$icon_class = 'icon-times-circle';
 			break;
 		default:
-			$icon_class = 'fa-lightbulb-o';
+			$icon_class = 'icon-lightbulb-o';
 			break;
 	} ?>
 	<i class="fa <?php echo $icon_class; ?>"></i>
