@@ -591,3 +591,47 @@
 [05-Sep-2014 15:29:54 UTC] PHP Warning:  Illegal string offset 'theme' in /home/czucker/public_html/Dev/genco/wp-content/plugins/arscode-ninja-popups/admin/fields/select_theme/field_select_theme.php on line 38
 [05-Sep-2014 15:29:54 UTC] PHP Warning:  Illegal string offset 'theme' in /home/czucker/public_html/Dev/genco/wp-content/plugins/arscode-ninja-popups/admin/fields/select_theme/field_select_theme.php on line 38
 [05-Sep-2014 17:08:25 UTC] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in /home/czucker/public_html/Dev/genco/wp-includes/class-wp-image-editor-imagick.php on line 127
+[09-Sep-2014 17:32:23 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 17:32:23 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 17:32:23 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 17:32:23 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 17:32:55 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 17:32:55 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 17:32:55 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 17:32:55 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 17:34:00 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 17:34:00 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 17:34:00 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 17:34:00 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 17:46:31 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 17:46:31 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 17:46:31 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 17:46:31 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 17:46:48 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 17:46:48 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 17:46:48 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 17:46:48 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 17:47:42 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 17:47:42 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 17:47:42 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 17:47:42 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 17:48:58 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 17:48:58 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 17:48:58 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 17:48:58 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 17:49:50 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 17:49:50 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 17:49:50 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 17:49:50 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 18:06:26 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 18:06:26 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 18:06:26 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 18:06:26 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 19:06:11 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 19:06:11 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 19:06:11 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 19:06:11 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
+[09-Sep-2014 19:06:38 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 15
+[09-Sep-2014 19:06:38 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 16
+[09-Sep-2014 19:06:38 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 17
+[09-Sep-2014 19:06:38 UTC] PHP Warning:  Creating default object from empty value in /home/czucker/public_html/Dev/genco/wp-content/themes/HighendWP/admin/theme-customizer.php on line 18
