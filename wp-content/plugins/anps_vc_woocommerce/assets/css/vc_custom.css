@@ -1,0 +1,109 @@
+.wpb_bootstrap_modals .vc-element-icon.icon-wpb-woo, .wpb_content_element.wp_woo > .wpb_element_wrapper, .vc-editor .vc-element-icon.icon-wpb-woo
+{ background-image: url(../img/woocommerce.png); }
+
+.anps_custom_wrapper {
+	position: relative;
+}
+
+#anps_custom_prod, #anps_custom_cat { display: none; }
+
+.anps_custom {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 1px solid #AAA;
+	border-top: 0;
+	background: #FFF;
+	box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+	display: none;
+	left: 0;
+	max-height: 141px;
+	margin-top: 0px;
+	padding-top: 5px;
+	position: absolute;
+	overflow-y: auto;
+	top: 100%;
+	width: 100%;
+	z-index: 9;
+}
+
+.anps_custom li {
+	color: #555;
+	cursor: pointer;
+	padding: 5px 6px;
+}
+
+.anps_custom li:hover {
+	background-color: #3875D7;
+	background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(20%,#3875D7),color-stop(90%,#2A62BC));
+	background-image: -webkit-linear-gradient(#3875D7 20%,#2A62BC 90%);
+	background-image: -moz-linear-gradient(#3875d7 20%,#2a62bc 90%);
+	background-image: -o-linear-gradient(#3875d7 20%,#2a62bc 90%);
+	background-image: linear-gradient(#3875D7 20%,#2A62BC 90%);
+	color: #FFF;
+}
+
+.anps_custom li.selected,
+.anps_custom li.selected:hover {
+	background: none;
+	color: #CCC;
+	cursor: default;
+}
+
+.anps_custom_vals {
+	border: 1px solid #DDD;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+	cursor: pointer;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+	min-height: 19px;
+	padding: 8px 6px;
+}
+
+.anps_custom_vals.active {
+	border-color: #5897FB;
+}
+
+.anps_custom_vals.active + .anps_custom {
+	display: block;
+}
+
+.anps_custom_vals:after {
+	clear: both;
+	content: '';
+	display: table;
+}
+
+.anps_custom_vals li {
+	border: 1px solid #AAA;
+	border-radius: 3px;
+	background-color: #E4E4E4;
+	background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(20%,#F4F4F4),color-stop(50%,#F0F0F0),color-stop(52%,#E8E8E8),color-stop(100%,#EEE));
+	background-image: -webkit-linear-gradient(#F4F4F4 20%,#F0F0F0 50%,#E8E8E8 52%,#EEE 100%);
+	background-image: -moz-linear-gradient(#f4f4f4 20%,#f0f0f0 50%,#e8e8e8 52%,#eee 100%);
+	background-image: -o-linear-gradient(#f4f4f4 20%,#f0f0f0 50%,#e8e8e8 52%,#eee 100%);
+	background-image: linear-gradient(#F4F4F4 20%,#F0F0F0 50%,#E8E8E8 52%,#EEE 100%);
+	background-clip: padding-box;
+	box-shadow: 0 0 2px #FFF inset,0 1px 0 rgba(0, 0, 0, 0.05);
+	color: #333;
+	cursor: default;
+	float: left;
+	line-height: 13px;
+	margin: 3px 0 3px 5px;
+	position: relative;
+	padding: 5px 25px 5px 6px;
+}
+
+.anps_custom_vals li button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 900;
+	line-height: normal;
+	position: absolute;
+	margin: 0;
+	padding: 1px 6px;
+	right: 0;
+	top: 0;
+	z-index: 2;
+}

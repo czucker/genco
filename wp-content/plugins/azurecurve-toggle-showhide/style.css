@@ -1,0 +1,31 @@
+/* toggle
+----------------------------------------------- */
+.azc_tsh_toggle{
+    margin: 5px 0px !important;
+	border: 1px solid #007fff;
+    font-weight:600;
+    font-size: 14px;
+    padding: 10px 10px 0 30px;
+    background-image: url('images/plus.png');
+    background-repeat: no-repeat;
+	background-position: 10px 10px;
+	height: 36px;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+.azc_tsh_toggle a{
+	color: #000;
+}
+.azc_tsh_toggle_active{
+    background-image: url('images/minus.png') !important;
+    margin-bottom: 0px !important;
+}
+.azc_tsh_toggle_container {
+	margin: auto;
+    margin-bottom: 5px !important;
+	padding: 5px 15px;
+	border: 1px solid #007fff;
+	border-top: none;
+	overflow: auto;
+}
