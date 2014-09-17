@@ -1,3 +1,11 @@
+<?php
+/**
+ * Legacy template for compatibility with versions prior to 2.0.0
+ *
+ * @version     2.0.0
+ */
+?>
+
 <?php if ($instance['before_posts']) : ?>
   <div class="upw-before">
     <?php echo wpautop($instance['before_posts']); ?>
@@ -12,7 +20,7 @@
 
     <?php $current_post = ($post->ID == $current_post_id && is_single()) ? 'current-post-item' : ''; ?>
 
-    <li <?php post_class($current_post); ?>>
+    <li class="<?php echo ($post->ID == $current_post_id && is_single())?'current-post-item':'' ?>">
 
       <?php if (current_theme_supports('post-thumbnails') && $instance['show_thumbnail'] && has_post_thumbnail()) : ?>
         <div class="upw-image">
