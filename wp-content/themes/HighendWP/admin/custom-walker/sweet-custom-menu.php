@@ -32,7 +32,7 @@ class rc_sweet_custom_menu {
 		add_action( 'wp_update_nav_menu_item', array( $this, 'rc_scm_update_custom_nav_fields'), 10, 3 );
 		
 		// edit menu walker
-		add_filter( 'wp_edit_nav_menu_walker', array( $this, 'rc_scm_edit_walker'), 10, 2 );
+		add_filter( 'wp_nav_menu_item_custom_fields', array( $this, 'rc_scm_edit_walker'), 10, 2 );
 
 	} // end constructor
 	
