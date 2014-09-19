@@ -1,15 +1,4 @@
 # BEGIN RHL
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-RewriteRule ^admin[^/]*$ admin/ [R=301,L]
-RewriteCond %{QUERY_STRING} !^(.*)rewrittenadmin=(.*)$
-RewriteRule ^admin(.*)$ wp-admin$1?rewrittenadmin=1 [QSA,L,NE]
-RewriteCond %{QUERY_STRING} !^(.*)rewrittenadmin=(.*)$
-RewriteRule ^wp-admin/?$ / [R=404,L]
-RewriteCond %{QUERY_STRING} !^(.*)rewrittenadmin=(.*)$
-RewriteRule ^wp-admin/(.*)$ admin/$1 [QSA,R=301,L,NE]
-</IfModule>
 
 # END RHL
 
