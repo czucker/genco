@@ -16776,3 +16776,6 @@
 [19-Sep-2014 15:10:18 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 786432 bytes) in /home/czucker/public_html/wp-includes/SimplePie/Item.php on line 2736
 [19-Sep-2014 15:10:36 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 786432 bytes) in /home/czucker/public_html/wp-includes/SimplePie/Item.php on line 2736
 [19-Sep-2014 15:18:59 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 786432 bytes) in /home/czucker/public_html/wp-includes/SimplePie/Item.php on line 2736
+[20-Sep-2014 15:26:10 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 306362 bytes) in /home/czucker/public_html/wp-includes/functions.php on line 288
+[20-Sep-2014 15:26:26 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 306362 bytes) in /home/czucker/public_html/wp-includes/functions.php on line 288
+[20-Sep-2014 15:38:21 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 262144 bytes) in /home/czucker/public_html/wp-content/plugins/jetpack/modules/custom-css/csstidy/class.csstidy.php on line 369

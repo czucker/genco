@@ -386,3 +386,196 @@
 09-18-2014 @ 12:35:38 - Payment status: completed
 09-18-2014 @ 12:35:39 - Payment complete.
 09-18-2014 @ 14:39:50 - Generating payment form for order #1477. Notify URL: http://www.genco.tv/wc-api/WC_Gateway_Paypal/
+09-21-2014 @ 08:42:41 - Generating payment form for order #1500. Notify URL: http://www.genco.tv/wc-api/WC_Gateway_Paypal/
+09-21-2014 @ 08:44:20 - Generating payment form for order #1500. Notify URL: http://www.genco.tv/wc-api/WC_Gateway_Paypal/
+09-21-2014 @ 08:47:01 - Checking IPN response is valid via https://www.paypal.com/cgi-bin/webscr...
+09-21-2014 @ 08:47:01 - IPN Request: Array
+(
+    [body] => Array
+        (
+            [cmd] => _notify-validate
+            [mc_gross] => 29.95
+            [invoice] => GENCO1500
+            [protection_eligibility] => Ineligible
+            [item_number1] => 
+            [payer_id] => FKB9Z5NLWPAAE
+            [tax] => 0.00
+            [payment_date] => 05:46:50 Sep 21, 2014 PDT
+            [payment_status] => Completed
+            [charset] => windows-1252
+            [mc_shipping] => 0.00
+            [mc_handling] => 0.00
+            [first_name] => Ronald
+            [mc_fee] => 1.17
+            [notify_version] => 3.8
+            [custom] => a:2:{i:0;i:1500;i:1;s:22:"wc_order_541ec8247524b";}
+            [payer_status] => unverified
+            [business] => sales@genco.tv
+            [num_cart_items] => 1
+            [mc_handling1] => 0.00
+            [verify_sign] => AobJ4pPlG15DT05xrDFyByVYOuMhAeobeL8gTtjth-w7kNzsFhwu4YXK
+            [payer_email] => ronaldtipa@cox.net
+            [mc_shipping1] => 0.00
+            [txn_id] => 2GF17914E1131394Y
+            [payment_type] => instant
+            [last_name] => Tips
+            [item_name1] => Genco Extra Virgin Olive Oil
+            [receiver_email] => sales@genco.tv
+            [payment_fee] => 1.17
+            [quantity1] => 1
+            [receiver_id] => 345DKBY5DTE8Q
+            [txn_type] => cart
+            [mc_gross_1] => 29.95
+            [mc_currency] => USD
+            [residence_country] => US
+            [receipt_id] => 4676-9162-1251-4881
+            [transaction_subject] => a:2:{i:0;i:1500;i:1;s:22:"wc_order_541ec8247524b";}
+            [payment_gross] => 29.95
+            [ipn_track_id] => ebc7aebff1f16
+        )
+
+    [sslverify] => 
+    [timeout] => 60
+    [httpversion] => 1.1
+    [compress] => 
+    [decompress] => 
+    [user-agent] => WooCommerce/2.1.12
+)
+
+09-21-2014 @ 08:47:03 - IPN Response: Array
+(
+    [headers] => Array
+        (
+            [server] => Apache
+            [x-frame-options] => SAMEORIGIN
+            [content-type] => text/html; charset=UTF-8
+            [dc] => slc-b-origin-www-1.paypal.com
+            [date] => Sun, 21 Sep 2014 12:47:03 GMT
+            [content-length] => 8
+            [connection] => close
+            [set-cookie] => Array
+                (
+                    [0] => cwrClyrK4LoCV1fydGbAxiNL6iG=oJO9U5Ptn88gxS4NG-B-6-1LORFI3we6dC7fB6cbOSN5ZBV2ZpUJL1PScv8nE5UZhLHugu8ZCNxeUG8_Hlkwp8I44e1yWVUyla6_SoouSf-LItFbmT3q-1WMIFxK0T7Lwiu1fxrS6cAt2kZrA65tyDJPT-LBPZXzq8K0r7kvTsaekyR-HwQaeKRvJIHid6K3kQw3mq_BufnEnzYvJsk9shCh_NtrJ0cMTZfPsFtom5PfrQxFJF2GJSir5dka1FlRVjxS_7YT_3adXbOApdizDtDGFh8fNnXCz6_23Yk88_7IiHJGjSsj97yzgr8RZlREssYWjJmvGwbALGX0AJTB5R30MZgNU4HvjjyvEC9UAfTCRROy4KTr5erqnUPx4xXi8DzTCJ_3kX1pQBvFjTjXejBmZrk1IHldHJomiGP8cdBK5BunxLLixYl45gC; domain=.paypal.com; path=/; Secure; HttpOnly
+                    [1] => cookie_check=yes; expires=Wed, 18-Sep-2024 12:47:03 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+                    [2] => navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+                    [3] => navlns=0.0; expires=Tue, 20-Sep-2016 12:47:03 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+                    [4] => Apache=10.74.8.134.1411303623534649; path=/; expires=Tue, 13-Sep-44 12:47:03 GMT
+                    [5] => X-PP-SILOVER=name%3DLIVE6.WEB.1%26silo_version%3D880%26app%3Dslingshot%26TIME%3D3351780948; domain=.paypal.com; path=/; Secure; HttpOnly
+                    [6] => X-PP-SILOVER=; Expires=Thu, 01 Jan 1970 00:00:01 GMT
+                    [7] => Apache=10.74.8.46.1411303623524579; path=/; expires=Tue, 13-Sep-44 12:47:03 GMT
+                    [8] => AKDC=slc-b-origin-www-1.paypal.com; expires=Sun, 21-Sep-2014 13:17:03 GMT; path=/; secure
+                )
+
+            [strict-transport-security] => max-age=63072000
+        )
+
+    [body] => VERIFIED
+    [response] => Array
+        (
+            [code] => 200
+            [message] => OK
+        )
+
+    [cookies] => Array
+        (
+            [0] => WP_Http_Cookie Object
+                (
+                    [name] => cwrClyrK4LoCV1fydGbAxiNL6iG
+                    [value] => oJO9U5Ptn88gxS4NG-B-6-1LORFI3we6dC7fB6cbOSN5ZBV2ZpUJL1PScv8nE5UZhLHugu8ZCNxeUG8_Hlkwp8I44e1yWVUyla6_SoouSf-LItFbmT3q-1WMIFxK0T7Lwiu1fxrS6cAt2kZrA65tyDJPT-LBPZXzq8K0r7kvTsaekyR-HwQaeKRvJIHid6K3kQw3mq_BufnEnzYvJsk9shCh_NtrJ0cMTZfPsFtom5PfrQxFJF2GJSir5dka1FlRVjxS_7YT_3adXbOApdizDtDGFh8fNnXCz6_23Yk88_7IiHJGjSsj97yzgr8RZlREssYWjJmvGwbALGX0AJTB5R30MZgNU4HvjjyvEC9UAfTCRROy4KTr5erqnUPx4xXi8DzTCJ_3kX1pQBvFjTjXejBmZrk1IHldHJomiGP8cdBK5BunxLLixYl45gC
+                    [expires] => 
+                    [path] => /
+                    [domain] => .paypal.com
+                    [secure] => 
+                    [httponly] => 
+                )
+
+            [1] => WP_Http_Cookie Object
+                (
+                    [name] => cookie_check
+                    [value] => yes
+                    [expires] => 1726663623
+                    [path] => /
+                    [domain] => .paypal.com
+                    [secure] => 
+                    [httponly] => 
+                )
+
+            [2] => WP_Http_Cookie Object
+                (
+                    [name] => navcmd
+                    [value] => _notify-validate
+                    [expires] => 
+                    [path] => /
+                    [domain] => .paypal.com
+                    [secure] => 
+                    [httponly] => 
+                )
+
+            [3] => WP_Http_Cookie Object
+                (
+                    [name] => navlns
+                    [value] => 0.0
+                    [expires] => 1474375623
+                    [path] => /
+                    [domain] => .paypal.com
+                    [secure] => 
+                    [httponly] => 
+                )
+
+            [4] => WP_Http_Cookie Object
+                (
+                    [name] => Apache
+                    [value] => 10.74.8.134.1411303623534649
+                    [expires] => 2357383623
+                    [path] => /
+                    [domain] => www.paypal.com
+                )
+
+            [5] => WP_Http_Cookie Object
+                (
+                    [name] => X-PP-SILOVER
+                    [value] => name=LIVE6.WEB.1&silo_version=880&app=slingshot&TIME=3351780948
+                    [expires] => 
+                    [path] => /
+                    [domain] => .paypal.com
+                    [secure] => 
+                    [httponly] => 
+                )
+
+            [6] => WP_Http_Cookie Object
+                (
+                    [name] => X-PP-SILOVER
+                    [value] => 
+                    [expires] => 1
+                    [path] => /cgi-bin/
+                    [domain] => www.paypal.com
+                )
+
+            [7] => WP_Http_Cookie Object
+                (
+                    [name] => Apache
+                    [value] => 10.74.8.46.1411303623524579
+                    [expires] => 2357383623
+                    [path] => /
+                    [domain] => www.paypal.com
+                )
+
+            [8] => WP_Http_Cookie Object
+                (
+                    [name] => AKDC
+                    [value] => slc-b-origin-www-1.paypal.com
+                    [expires] => 1411305423
+                    [path] => /
+                    [domain] => www.paypal.com
+                    [secure] => 
+                )
+
+        )
+
+    [filename] => 
+)
+
+09-21-2014 @ 08:47:03 - Received valid response from PayPal
+09-21-2014 @ 08:47:03 - Found order #1500
+09-21-2014 @ 08:47:03 - Payment status: completed
+09-21-2014 @ 08:47:04 - Payment complete.
