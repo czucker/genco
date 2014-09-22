@@ -1,0 +1,41 @@
+@CHARSET "ISO-8859-1";
+input.displayorder{
+    width:3% !important;
+}
+
+.form-table input, select,checkbox{
+    box-shadow: 0 0 10px #EEEEEE inset;
+}
+
+.eMember_yellow_box {
+    background: #FFF6D5;
+    border: 1px solid #D1B655;
+    color: #3F2502;
+    margin: 10px 0px 10px 0px;
+    padding: 5px 5px 5px 10px;
+    text-shadow: 1px 1px #FFFFFF;
+}
+
+.eMember_grey_box{
+    background: #ECECEC;
+    border: 1px solid #CFCFCF;
+    color: #363636;
+    margin: 10px 0px 15px 0px;
+    padding: 5px 5px 5px 10px;
+    text-shadow: 1px 1px #FFFFFF;	
+}
+
+a.eMember_tooltip span {
+    display:none; 
+    padding:5px; 
+    margin-left:8px; 
+    width:150px;
+}
+a.eMember_tooltip:hover span{
+    display:inline; 
+    position:absolute; 
+    border:1px solid #cccccc; 
+    background:#ffffff; 
+    color:#6c6c6c;
+    text-decoration:none;
+}

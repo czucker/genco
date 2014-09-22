@@ -1,0 +1,266 @@
+/*Copyright � 2008-2012 by Tips and Tricks HQ (http://www.tipsandtricks-hq.com) � All Rights Reserved*/
+
+.eMember-clear-float{clear:both;}
+.eMember_text_input { font-size: 1.3em; height:auto; color: #444; background: #eee; border: 1px solid #aaa; border-right-color: #ddd; border-bottom-color: #ddd; width: 85% !important; padding:4px !important;}
+.eMember_text_input:focus { height:auto; background: #fff; border-color: #777; border-right-color: #ccc; border-bottom-color: #ccc; }
+.eMember_logged_widget{margin: 10px;}
+.eMember_highlight {text-transform: uppercase;text-align: left;font-size: 14px;font-weight: bold;font-family: Helvetica, Arial, sans-serif;}
+.eMember_label {text-transform: uppercase;text-align: left;vertical-align: middle;padding: 15px 10px 10px 0px;font-size: 14px;font-weight: bold;font-family: Helvetica, Arial, sans-serif;}
+.eMember_red{color:red;}
+
+input.eMember_button{
+    background-color: #4D90FE !important;
+    background-image: none !important;
+    border: 1px solid #3079ED !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    font-size: 14px !important;
+    font-family: arial;
+    font-weight:bold;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor:pointer;
+    padding: 3px 30px 3px 30px !important;
+    margin:5px 0px;
+    width:auto !important;
+}
+input.eMember_button:hover {opacity:0.9;}
+
+#wp_emember_loginForm input[type="checkbox"]{width:auto !important;}
+#wp_emember_loginForm td{padding: 2px 0;}
+
+#wp_emember_profileUpdateForm input[type="checkbox"]{width:auto !important;}
+
+#wp_emember_regoForm input[type="checkbox"]{width:auto !important;}
+#wp_emember_regoForm table td{width: auto !important;}
+.emember_check_email_msg{font-weight: bold;}
+
+/********************************/
+.emember_bookmark_button { font-family: arial; height: 60px; width: 60px; }
+.emember_bookmark_button a { text-decoration: none; border: none; }
+.emember_bookmark_button a:hover { text-decoration: none; }
+.emember_bookmark_button .count { background: url('../images/widget.gif') no-repeat; position:relative; display: block; text-decoration: none; width: 50px; height: 34px; text-align: center; font-size: 17px; color: #444444; padding: 4px 0px; }
+.emember_bookmark_button .count span.t { font-size: 10px; line-height: 10px; position: absolute; display: block; top: 23px; left: 5px; }
+.emember_bookmark_button .emember { height: 16px; width: 50px; background: url('../images/widget.gif') no-repeat 0px -45px; text-align: center; margin-top: 3px; display: block; cursor: pointer; padding: 0px 0px 0px; font-size: 11px; color: #FFF; text-decoration: none; line-height: 16px; }
+.emember_bookmark_button .emember:hover, #emember_bookmark_button .emember.selected { background-position: 0px -61px; color: #80b62a; }
+.emember_bookmark_button .emember.selected { cursor: text; } 
+/****************************************/
+
+.emember_upload { padding: 0 20px; float: left; width: 230px; }
+.emember_upload_wrapper { width: 133px;  }		
+.emember_upload_div {height: 24px;	width: 133px;background: #eee 0 0;font-size: 14px; color: #000; text-align: center; padding-top: 0px;position:relative;width: 37%;top:3%;left:31%;}
+/* 
+We can\'t use ":hover" preudo-class because we have
+invisible file input above, so we have to simulate
+hover effect with JavaScript. 
+*/
+.emember_upload_div.hover {background: #6D6D6D 0 56px;color: #F00;	}
+.emember_pagination {font-size: 80%;}        
+.emember_pagination a {text-decoration: none;border: solid 1px #ECECEC;color: #000000;background: #ECECEC;}
+.emember_pagination a, .emember_pagination span {display: block;float: left;padding: 0.3em 0.5em;margin-right: 5px;margin-bottom: 5px;}
+
+.emember_pagination .current {
+    background: #ffffff;
+    color: #000000;
+    border: solid 1px #ECECEC;
+}
+
+.emember_pagination .current.prev, .emember_pagination .current.next{
+    color:#999;
+    border-color:#999;
+    background:#fff;
+}
+.widefat{
+    background-color:#FFFFFF;
+    border-color:#DFDFDF;
+    border-spacing:0;
+    border-style:solid;
+    border-width:1px;
+    clear:both;
+    margin:0;
+    width:100%;
+}
+.widefat thead tr th{
+    background:url("../images/gray-grad.png") repeat-x scroll left top #DFDFDF;
+    color:#333333;	
+}
+
+.alternate{
+    background-color:#F9F9F9;
+}
+#emember_user_search p input,#emember_user_search p select{
+    min-width: 60px;
+}
+
+.emember_profile{
+    border-left: 2px solid #ECECEC;
+    border-right: 2px solid #ECECEC;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 600px;
+}
+.emember_profile_cell{
+    padding-bottom: 3px;
+    font-size: small;
+}
+
+.emember_profile_head{
+    text-align:center;
+    padding-bottom: 15px;
+
+}
+.emember_profile_user_name{
+    font-size: large;
+    padding-bottom:15px; 
+}
+
+#emember_signin_menu {
+    z-index:100;
+    -moz-border-radius:5px 0 5px 5px;
+    -moz-box-shadow:0 3px 3px rgba(0, 0, 0, 0.3);
+    background:none repeat scroll 0 0 #FFFFFF;
+    border:5px solid #CCCCCC;
+    display:none;
+    line-height:16px;
+    padding:8px;
+    position:absolute;
+    text-align:center;
+    width:230px;    
+}
+
+.wp_emember_loginForm {font-size:11px; margin:0; max-width:300px;}
+.wp_emember_loginForm label{margin-left:0px;}	
+.wp_emember_loginForm p {margin:0;}
+.wp_emember_loginForm .textbox label{display:block; padding:0 0 3px;}
+.wp_emember_loginForm .textbox input{
+    border-radius:2px;
+    background:none repeat scroll 0 0 #FFFFFF;
+    color: black;
+    border:1px solid #DDDDDD;
+    display:block;
+    font:13px "Lucida Grande",Arial,Sans-serif;
+    margin:0 0 8px;
+    padding:5px;
+    width:218px;
+}
+.wp_emember_loginForm .textbox input:focus {border-color:#CCCCCC; outline-width:0;}
+.wp_emember_loginForm p.forgot, .wp_emember_loginForm p.forgot-username {display:inline; line-height:20px;}
+.rememberme {padding:4px 0 2px; margin: 0px !important;}
+
+.wp_emember_loginForm .forgot {margin-bottom:4px;}
+.wp_emember_loginForm .forgot a, .wp_emember_loginForm .complete a {margin-right:5px;}
+.ie6 #topnav a.menu-open, .ie6 #topnav a.menu-open:hover {background-color:#DDEEF6 !important;}
+.ie6 #emember_signin_menu {border:1px solid #DDEEF6; width:190px;}
+.emember_ui_close{float:right; line-height:8px;	cursor:pointer;}
+a.emember_activeLink{padding: 1px 2px 4px 2px;}
+
+#wp_emember_email_mailForm{
+    color: black;
+}
+
+.emember_modal {
+    background-color:#fff;
+    color: black;
+    display:none;
+    width:350px;
+    padding:15px;
+    text-align:left;
+    border:2px solid #333;    
+    opacity:1;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    -moz-box-shadow: 0 0 50px #ccc;
+    -webkit-box-shadow: 0 0 50px #ccc;
+}
+
+.emember_modal h2 {line-height:20px; background:#EDEEFF; margin:0 0 10px 0; color:red; padding:10px 0 10px 45px; border-bottom:1px solid #333; font-size:20px;}
+.emember_modal .emember_modal_title{line-height:20px; background:#EDEEFF; margin:0 0 10px 0; padding:10px 0 10px 45px; border-bottom:1px solid #333; font-size:20px;font-weight:bold;}
+
+.emember_apple_overlay {   
+    /* initially overlay is hidden */
+    display:none;    
+    /* growing background image */
+    background-image:url(../images/white.png);    
+    /* width after the growing animation finishes height is automatically calculated */
+    width:640px;       
+    /* some padding to layout nested elements nicely  */
+    padding:35px;
+    font-size:11px;
+}
+.eMember_compact_login{
+
+}
+.eMember_required_warn{	border: 1px solid red;}	
+/* use a semi-transparent image for the overlay */
+#emember_overlay {background-image:url(../images/white.png); color:#efefef; height:450px;}
+
+/* container for external content. uses vertical scrollbar, if needed */
+div.emember_contentWrap {height:441px;overflow-y:auto;}
+
+/* default close button positioned on upper right corner */
+.emember_apple_overlay .close {	
+    background-image:url(../images/close.png);	
+    position:absolute; right:5px; top:5px;
+    cursor:pointer;
+    height:35px;
+    width:35px;
+}	
+
+/* BEGIN: dynamic add/remove row rules */
+input.emember-removable { width: 40% !important; }
+img.emember-remove-field-trigger { margin-top:-49px; margin-left:10px; margin-right:5px; float:right; cursor:pointer;}
+div.emember-removable-field-row { margin-top: 15px; }
+div.emember-add-field-container { margin: 15px 0 0 32% !important; }
+span.emember-add-field-trigger { cursor: pointer; -moz-border-radius: 6px 6px 6px 6px; background: none repeat scroll 0 0 #FFFFFF; border: 1px solid #AAAA00; cursor: pointer; padding: 4px;}
+.ememborder{padding:10px; border:3px solid #DFDFDF;}
+/* END: dynamic add/remove row rules */
+
+.wp-emember-warning-msgbox{
+    display:block;
+    overflow:hidden;	
+    border-color: #AAAAAA #AAAAAA #AAAAAA #F28500;
+    border-style: solid;
+    border-width: 1px 1px 1px 10px;
+    padding:5px;
+    margin:10px 0;
+}
+.wp-emember-warning-msgbox-image, .wp-emember-warning-msgbox-image img{
+    border:none !important;	
+    margin:2px 0px 0px 5px;	
+    float:left;
+}
+.wp-emember-warning-msgbox-text{
+    display:block;
+    overflow:hidden;
+    vertical-align:middle;
+    padding:8px 0px 0px 5px;
+    line-height:2em;
+}
+.eMember_protected_message_default{
+    padding: 10px;
+    border: 1px solid #E3E3E3;
+    margin: 15px 0;
+    background: #F2F2F2;
+}
+.eMember_comment_section_protected_msg{margin:10px 0; font-weight:bold;text-align:center;}
+.eMember_first_click_free_message{
+    padding: 10px;
+    border: 1px solid #D1B655;
+    margin: 10px 0;
+    background: #FFF6D5;
+}
+.emember_error{color:red; font-weight:bold;}
+.emember_ok{color:green; font-weight:bold;}
+.emember_warning{color:red; font-weight:bold;}
+.wp-emember-sort-order{cursor: pointer;}
+img.wp-emember-sort-order{padding:2px; margin:0px; border:none;}
+
+.emember_fancy_login_v2_content{
+    width:250px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+tr.emember_odd_row{}
+tr.emember_even_row{background:#E8E8E8;}
+.emember_hidden{display:none;}

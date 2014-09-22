@@ -1,0 +1,44 @@
+Change log so far for the next major version (v9)
+
+* New email tag for member ID in the registration complete email
+* New section protection shortcode to add "not for" condition (Needs Doc Update)
+* Ability to specify a message for the "First Click Free" viewers
+* Added generic autoresponder integration option
+* Enhanced the WordPress Multisite integration capability
+* Ability to use eMember's profile image picuture in WordPress comment avatar
+* Enhanced the first click free message condition so it only shows on single post view and if the post is fully protected.
+* More BBPress integration feature. Now if a BBPress forum is protected, then all the topics in that forum is also protected
+* Added an option to specify the bookmark listing page URL. When a page URL is specified, it will show the link to this page in the login widget
+* Added a new option in the settings to preserve the WP User's role when using the WP User integration feature
+* Added a new function called "emember_is_logged_into_secondary_level" for developers.
+* Added the display of the expiry date of a member in the admin dashboard.
+* Added an admin notes section for each member. An admin can use this field to save notes about the member
+* Ability to manually add files uploaded to the protected folder via FTP
+* Added an option to turn off the welcome email sending for mailchimp autoresponder signup when double opt-in is disabled.
+* Added an option to show an email list of "Expired Members" in the members list menu area
+* Added an option to enable bookmarking feature for logged in members only
+* Added a shortcode to display various referrer details to the visitor
+* Overhauled the profile image upload functionality (it now automatically saves the image upon ajax upload)
+* Added an option to add a confirm password field in the member registration form
+* Added a new language definition that gets shown to the user when you are using the "Manually Approve Membership" feature
+* Account status now gets set to "pending" at registration time if the "Manually Approve Membership" feature is enabled.
+* A new tab in the "manage content protection" menu to protect Custom Posts
+* Ability to protect the media library attachments
+* Added a "redirect_to" parameter in the [wp_eMember_upgrade_membership_level_to] shortcode to redirect after the upgrade
+* Fixed a minor bug with member data export feature with custom fields
+* Released a new email broadcast addon for eMember
+* Comment RSS feed protection issue fix
+* added email tag filtering for custom fields
+* added a new shortcode [wp_eMember_my_membership_levels] to display a list of membership levels that a user has in his/her profiles (useful if you are using lots of secondary levels).
+* fixed a bug with GetResponse integration
+* Upgraded the tab menu navigation links to the native WordPress ones
+* Added a country dropdown list for the country field in the registration form
+* Improved the [wp_eMember_my_membership_levels] shortcode to show the welcome page URLs too. Example usage: [wp_eMember_my_membership_levels show_welcome_page="1"]
+* Mailchimp interest group integration
+* Fixed an issue with the "Disable simultaneous login" feature.
+* The member email list generator will also include users when the specified level is in their secondary levels.
+* Added a new URL parameter "no-redirect" to override the after login redirect. Example: When members login from the following URL, there will be no after login redirect even if there is one set in the settings:
+example.com/login-page/?no-redirect=1
+* The free registration confirmation message will now show the email address where the mail was sent to. It also has a filter to customize this message.
+* The auto login after registration feature will use encoded password.
+* You can now use multiple email addresses (separated by comma) in the notification email address field.
