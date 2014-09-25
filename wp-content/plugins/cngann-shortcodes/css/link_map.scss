@@ -1,0 +1,13 @@
+link-map{
+	display: block;
+	@include boxit;
+	position: relative;
+	map-link{
+		display: block;
+		@include boxit;
+		position: absolute;
+		*{
+			display:none;
+		}
+	}
+}

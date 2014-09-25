@@ -1,0 +1,28 @@
+.email_form{
+	.error{
+		text-align: center;
+		line-height: 600px;
+		font-size: 24px;
+		font-weight: bold;
+		color: red;
+	}
+	.success{
+		text-align: center;
+		line-height: 600px;
+		font-size: 24px;
+		font-weight: bold;
+	}
+	.fail{
+		background: red;
+		color: white;
+		@include placeholder-color(white);
+	}
+	input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=radio]), textarea{
+		width: 100%;
+		margin-bottom: 10px;
+		line-height: 30px;
+	}
+	input[type=checkbox]{
+		margin-right: 10px;
+	}
+}

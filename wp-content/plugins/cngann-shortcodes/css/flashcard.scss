@@ -1,0 +1,75 @@
+.flashcard{
+	display: block;
+	margin-bottom: 50px;
+	position: relative;
+	@include boxit;
+	&:not(.IE){
+		@include cross-browser-perspective(700px);
+		.card{
+			@include cross-browser-transition(1.5s);
+			@include cross-browser-transform-style(preserve-3d);
+			@include cross-browser-transform-origin(right center);
+			figure {
+				@include cross-browser-backface-visibility(hidden);
+			}
+			&.flipped{
+				.front *{ display:none; }
+				@include cross-browser-transform(translateX( -100% ) rotateY( -180deg ));
+			}
+			&.flipping{
+				.front *{ display:none; }
+			}
+			.back{
+				@include cross-browser-transform(rotateY( -180deg ));
+			}
+		}
+	}
+	&.IE{
+		.card{
+			.back{
+				display:none;
+			}
+			&.flipped{
+				.front{
+					display:none;
+				}
+				.back{
+					display: block;
+				}
+			}
+		}
+	}
+	&.linkmap{
+		.front{ padding: 0px !important; }
+	}
+	.card{
+
+		position: absolute;
+		top:0; left: 0; right: 0; bottom: 0;
+		@include boxit;
+
+		figure {
+			display: block;
+			position: absolute;
+			top:0; left: 0; right: 0; bottom: 0;
+			@include boxit;
+		}
+		.front{
+			padding: 20px;
+			background: $lgrey;
+		}
+		.back{
+			padding: 20px;
+			background: $grey;
+			overflow: hidden;
+			.copy{
+				background-color: $grey;
+				padding: 20px;
+				position: absolute;
+				top:0; left: 0; right: 0; bottom: 0;
+				@include boxit;
+
+			}
+		}
+	}
+}

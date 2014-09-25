@@ -1,0 +1,177 @@
+{
+  "id": "bf10ae6b",
+  "cfgVersion": 1,
+  "name": "WPMU Lib - PopUp Pro",
+  "files": {
+    "15583407": {
+      "id": "15583407",
+      "pid": "bf10ae6b",
+      "name": "tiny-scrollbar.js",
+      "input": "@dev-js/tiny-scrollbar.js",
+      "customOutput": false,
+      "type": "Js",
+      "config": {
+        "autoCompile": true,
+        "uglify": true,
+        "mangle": true,
+        "sourcemaps": false
+      }
+    },
+    "df690a32": {
+      "id": "df690a32",
+      "pid": "bf10ae6b",
+      "name": "select2.scss",
+      "input": "@dev-css/select2.scss",
+      "customOutput": false,
+      "type": "Scss",
+      "config": {
+        "autoCompile": true,
+        "lineNumbers": false,
+        "unixNewlines": false,
+        "sourcemaps": false,
+        "debug": false,
+        "compass": true,
+        "fullCompass": true,
+        "outputStyle": "expanded",
+        "autoprefixer": true
+      }
+    },
+    "b45053f4": {
+      "id": "b45053f4",
+      "pid": "bf10ae6b",
+      "name": "wpmu-ui.scss",
+      "input": "@dev-css/wpmu-ui.scss",
+      "customOutput": false,
+      "type": "Scss",
+      "config": {
+        "autoCompile": true,
+        "lineNumbers": false,
+        "unixNewlines": false,
+        "sourcemaps": false,
+        "debug": false,
+        "compass": true,
+        "fullCompass": true,
+        "outputStyle": "expanded",
+        "autoprefixer": true
+      }
+    },
+    "dd258918": {
+      "id": "dd258918",
+      "pid": "bf10ae6b",
+      "name": "wpmu-vnav.scss",
+      "input": "@dev-css/wpmu-vnav.scss",
+      "customOutput": false,
+      "type": "Scss",
+      "config": {
+        "autoCompile": true,
+        "lineNumbers": false,
+        "unixNewlines": false,
+        "sourcemaps": false,
+        "debug": false,
+        "compass": true,
+        "fullCompass": true,
+        "outputStyle": "expanded",
+        "autoprefixer": true
+      }
+    },
+    "a88382d3": {
+      "id": "a88382d3",
+      "pid": "bf10ae6b",
+      "name": "select2.js",
+      "input": "@dev-js/select2.js",
+      "customOutput": false,
+      "type": "Js",
+      "config": {
+        "autoCompile": true,
+        "uglify": true,
+        "mangle": true,
+        "sourcemaps": false
+      }
+    },
+    "8894810c": {
+      "id": "8894810c",
+      "pid": "bf10ae6b",
+      "name": "wpmu-ui.js",
+      "input": "@dev-js/wpmu-ui.js",
+      "customOutput": false,
+      "type": "Js",
+      "config": {
+        "autoCompile": true,
+        "uglify": true,
+        "mangle": true,
+        "sourcemaps": false
+      }
+    },
+    "2b2b09b8": {
+      "id": "2b2b09b8",
+      "pid": "bf10ae6b",
+      "name": "wpmu-vnav.js",
+      "input": "@dev-js/wpmu-vnav.js",
+      "customOutput": false,
+      "type": "Js",
+      "config": {
+        "autoCompile": true,
+        "uglify": true,
+        "mangle": true,
+        "sourcemaps": false
+      }
+    }
+  },
+  "imports": {},
+  "images": {
+    "db3b54c3": {
+      "id": "db3b54c3",
+      "pid": "bf10ae6b",
+      "path": "img/select2.png",
+      "size": 613,
+      "name": "select2.png",
+      "type": "Png",
+      "initialSize": 613,
+      "status": "NOT_OPTIMIZED"
+    },
+    "292e1029": {
+      "id": "292e1029",
+      "pid": "bf10ae6b",
+      "path": "img/select2x2.png",
+      "size": 845,
+      "name": "select2x2.png",
+      "type": "Png",
+      "initialSize": 845,
+      "status": "NOT_OPTIMIZED"
+    }
+  },
+  "config": {
+    "watch": true,
+    "liveRefresh": true,
+    "liveRefreshDelay": 0,
+    "filterPatterns": "",
+    "useCustomServer": false,
+    "customServerUrl": "",
+    "cssPath": "css/",
+    "jsPath": "js/",
+    "htmlPath": "html/",
+    "minJsPath": "js/",
+    "htmlExtension": ".html",
+    "cssPathType": "REPLACE_TYPE",
+    "htmlPathType": "REPLACE_TYPE",
+    "jsPathType": "RELATIVE_FILESDIR",
+    "minJsPathType": "RELATIVE_FILESDIR",
+    "htmlTypes": "jade, haml, slim, markdown, md",
+    "cssTypes": "less, sass, stylus, scss, styl",
+    "jsTypes": "coffee, coffeescript, coffeescripts, ls, livescript, livescripts",
+    "cssPreprocessorPath": "",
+    "htmlPreprocessorPath": "",
+    "jsPreprocessorPath": "@dev-js/",
+    "minJsPreprocessorPath": "@dev-js/",
+    "autoprefixerBrowsers": "",
+    "ftpHost": "",
+    "ftpPort": "21",
+    "ftpRemotePath": "",
+    "ftpIgnorePreprocessorFiles": true,
+    "ftpType": "FTP",
+    "ftpExcludePatterns": "",
+    "ftpSecure": false,
+    "ftpPassword": "",
+    "ftpUsername": ""
+  }
+}

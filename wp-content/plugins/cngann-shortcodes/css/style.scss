@@ -1,0 +1,44 @@
+	@mixin 		round			($r : $round_px) 		{ @include round-top($r); @include round-bottom($r); }
+	@mixin 		round-left		($r : $round_px) 		{ @include round-top-left($r); @include round-bottom-left($r); }
+	@mixin 		round-right		($r : $round_px) 		{ @include round-bottom-right($r); @include round-top-right($r); }
+	@mixin 		round-top		($r : $round_px) 		{ @include round-top-left($r); @include round-top-right($r); }
+	@mixin 		round-bottom		($r : $round_px) 		{ @include round-bottom-left($r); @include round-bottom-right($r); }
+	@mixin 		round-top-left		($r : $round_px) 		{ -webkit-border-top-left-radius: $r; -moz-border-radius-topleft: $r; border-top-left-radius: $r; }
+	@mixin 		round-top-right		($r : $round_px) 		{ -webkit-border-top-right-radius: $r; -moz-border-radius-topright: $r; border-top-right-radius: $r; }
+	@mixin 		round-bottom-right	($r : $round_px) 		{ -webkit-border-bottom-right-radius: $r; -moz-border-radius-bottomright: $r; border-bottom-right-radius: $r; }
+	@mixin 		round-bottom-left	($r : $round_px) 		{ -webkit-border-bottom-left-radius: $r; -moz-border-radius-bottomleft: $r; border-bottom-left-radius: $r; }
+	@mixin 		boxit							{ -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+	@mixin 		position-full-screen					{ position: fixed; top: 0; left: 0; right: 0; bottom: 0; }
+	@mixin 		centerize		( $width : $content_width )	{ position: absolute; display: block; left: 50%; margin-left: -1 * $width / 2; width: $width; }
+	@mixin 		placeholder-color	( $fg)				{ &::-webkit-input-placeholder { color: $fg; } &:-moz-placeholder { color: $fg; } &::-moz-placeholder { color: $fg; } &:-ms-input-placeholder {  color: $fg; } }
+	@mixin 		titleSize		( $sz : 24px)			{ font-size: $sz; line-height: $sz + ($sz/2); }
+
+	@mixin cross-browser-perspective($px){ -webkit-perspective: $px; -moz-perspective: $px; -o-perspective: $px; perspective: $px; }
+	@mixin cross-browser-transition($s){ -webkit-transition: -webkit-transform $s; -moz-transition: -moz-transform $s; -o-transition: -o-transform $s; transition: transform $s;}
+	@mixin cross-browser-transform($s){-webkit-transform: $s; -moz-transform: $s; -o-transform: $s; transform: $s;}
+	@mixin cross-browser-transform-style($style){ -webkit-transform-style: $style; -moz-transform-style: $style; -o-transform-style: $style; transform-style: $style; }
+	@mixin cross-browser-transform-origin($origin){ -webkit-transform-origin: $origin; -moz-transform-origin: $origin; -o-transform-origin: $origin; transform-origin: $origin; }
+	@mixin cross-browser-backface-visibility($visibility){ -webkit-backface-visibility: $visibility; -moz-backface-visibility: $visibility; -o-backface-visibility: $visibility; backface-visibility: $visibility; }
+
+
+$content_spacing 		: 20px;
+$content_padding 		: 50px;
+$lgrey				: #dfdfdf;
+$grey		 		: #ccc;
+$dgrey		 		: #888;
+$offwhite 			: #f7f7f7;
+$highlight	 		: #244778;
+$round_px 	 		: 10px;
+@import 			"hover",
+				"more",
+				"person",
+				"slider",
+				"splits",
+				"tabs",
+				"background",
+				"link_map",
+				"flashcard",
+				"email_form",
+				"button",
+				"fake_footer"
+				;

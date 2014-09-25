@@ -1,0 +1,10 @@
+.wpsp_container {width:100%;}
+.wpsp_container li {padding: 5px 0 5px 0;}
+.wpsp_container h3 a{font-size: 14px; text-decoration: none;}
+.wpsp_container h3 a:hover{color: #000;}
+.wpsp_container span{font-size: 12px;}
+.wpsp_container p{font-size: 12px;}
+.wpsp_container .wpsp_img_box {float: left;}  
+.wpsp_img_box a img{width: 100px; height:100px;}
+.wpsp_detail img {width: 100px; height:100px;}
+.wpsp_readmore {color:#000; font-size: 12px; text-decoration: none;}

@@ -1,0 +1,38 @@
+.tabs{
+	@include boxit;
+	width: 100%;
+	display:none;
+	border:1px solid $grey;
+	.ttls{
+		@include boxit;
+		width: 100%;
+		height: 30px;
+		background: white;
+		padding: 0px;
+		margin: 0px;
+		position: relative;
+		& > div{
+			@include boxit;
+			display: inline-block;
+			vertical-align: middle;
+			height: 30px;
+			line-height: 30px;
+			background: $offwhite;
+			color: $grey;
+			font-weight: bold;
+			text-align: center;
+			position: absolute;
+			top: 0px;
+			bottom: 0px;
+			margin: 0px;
+			&.current {
+				background: $highlight;
+			}
+		}
+	}
+	.cngann_contents{
+		padding: $content_padding;
+		padding-top: $content_spacing;
+		padding-bottom: $content_spacing;
+	}
+}
