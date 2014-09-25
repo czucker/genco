@@ -7,9 +7,8 @@
 <!DOCTYPE HTML>
 <html <?php language_attributes(); ?>>
 
-	<!-- START head -->
+	
 	<head>
-
 	<title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<?php if ( hb_options('hb_responsive') ) { ?>
